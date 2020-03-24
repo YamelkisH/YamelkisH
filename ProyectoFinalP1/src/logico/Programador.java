@@ -10,11 +10,13 @@ public class Programador extends Trabajadores {
 			int edad, String celular, String correo, float SalarioHoras, ArrayList<String> Proyectos,
 			ArrayList<String> lenguajesProgramacion) {
 		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo, SalarioHoras, Proyectos);
-		this.lenguajesProgramacion = lenguajesProgramacion;
+		this.lenguajesProgramacion = new ArrayList<>();
 	}
+
 	public ArrayList<String> getLenguajesProgramacion() {
 		return lenguajesProgramacion;
 	}
+
 	public void setLenguajesProgramacion(ArrayList<String> lenguajesProgramacion) {
 		this.lenguajesProgramacion = lenguajesProgramacion;
 	}
