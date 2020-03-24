@@ -2,7 +2,7 @@ package logico;
 
 import java.util.ArrayList;
 
-public class Trabajadores extends Persona {
+public abstract class Trabajadores extends Persona {
 	
 	protected float SalarioHoras;
 	protected ArrayList<String> Proyectos;
