@@ -1,6 +1,9 @@
 package logico;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
+//import com.toedter.calendar.JDateChooser;
 
 public class Sistema {
 	private ArrayList<Trabajadores> trabajadores;
@@ -211,6 +214,36 @@ public class Sistema {
 	}
 	
 
+	//FUNCIONES PARA CALCULAR PRECIO 
+	/*public float calcAmountOfMoney(int days,String codeCont) {
+		float amount=0;
+		float aux=0;
+		for (int i = 0; i < searchContractByCode(codeCont).getProject().getWorkers().size(); i++) {
+			amount=searchContractByCode(codeCont).getProject().getWorkers().get(i).getSalary()*8*days;
+			aux+=amount;
+			amount=0;
+		}
+		return aux;
+	}
 	
 	
+	*/
+	/*public int calculoDias(JDateChooser dateBegin, JDateChooser dateEnd) {
+		int days = 0;
+		
+		if (dateBegin.getDate()!=null && dateEnd.getDate()!=null) {
+			Calendar init=dateBegin.getCalendar();
+			Calendar end=dateEnd.getCalendar();
+		
+			while(init.before(end) || init.equals(end)) {
+				days++;
+				init.add(Calendar.DATE, 1);
+			}
+			
+		}
+		return days;	
+	}
+	
+	
+	*/
 }
