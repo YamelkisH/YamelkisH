@@ -182,6 +182,7 @@ public class Sistema {
 		return aux;
 	}
 	
+	
 	public Contratos contratoById(String id) { //funcion para buscar contrato 
 		Contratos aux = null;
 		for (Contratos contrat : contrato) {
@@ -212,22 +213,27 @@ public class Sistema {
 		}
 		return aux;
 	}
-	
 
+	
+	
+	
+	
+	
 	//FUNCIONES PARA CALCULAR PRECIO 
-	/*public float calcAmountOfMoney(int days,String codeCont) {
-		float amount=0;
-		float aux=0;
-		for (int i = 0; i < searchContractByCode(codeCont).getProject().getWorkers().size(); i++) {
-			amount=searchContractByCode(codeCont).getProject().getWorkers().get(i).getSalary()*8*days;
-			aux+=amount;
-			amount=0;
-		}
-		return aux;
+	public float precioPorProyecto(int dias,String idParaBuscar) {
+		float montoAux=0;
+		float monto=0;
+		float jornadaDiaCompleto = 8*dias; //8 de 8 horas por dia
+		for (int contador = 0; contador < contratoById(idParaBuscar).getProyecto().getTrabajadores().size(); contador++) {
+			montoAux = contratoById(idParaBuscar).getProyecto().getTrabajadores().get(contador).getSalarioHoras()*jornadaDiaCompleto;
+			monto += montoAux;
+			montoAux = 0;
+		}  return monto;
+		
 	}
 	
 	
-	*/
+	
 	/*public int calculoDias(JDateChooser dateBegin, JDateChooser dateEnd) {
 		int days = 0;
 		
