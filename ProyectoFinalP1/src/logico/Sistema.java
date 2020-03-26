@@ -2,7 +2,6 @@ package logico;
 
 import java.util.ArrayList;
 
-
 public class Sistema {
 	private ArrayList<Trabajadores> trabajadores;
 	private ArrayList<Proyectos> proyectos;
@@ -73,36 +72,7 @@ public class Sistema {
 	}
 	
 
-	public void insertarCliente(Cliente cliente_1) { //funcion para añadir cliente 
-		clientes.add(cliente_1);
-		codigoCliente++;
-	}
-	
-	public void insertarContrato(Contratos contrato_1) { // insertar contratos
-		contrato.add(contrato_1);
-		codigoContratos++;
-	}
-	
-	public void intertarTrabajador(Trabajadores trabajador_1) {//intertar trabajador
-		trabajadores.add(trabajador_1);
-		codigoTrabajadores++;
-	}
-	
-	public void insertarProyecto(Proyectos proyecto_1) { //insertar proyecto
-		proyectos.add(proyecto_1);
-		codigoProyectos++;
-	}
-	
-	public Trabajadores trabajadorById(String id) { //buscar trabajador por id
-		Trabajadores aux = null;
-		for (Trabajadores trabajador : trabajadores) {
-			if (trabajador.getId().equalsIgnoreCase(id)) {
-				aux = trabajador;
-			}
-		}
-		return aux;
-	}
-	
+
 	
 	public String Calificacion(String id) {
 		String Calificacion = "EXCELENTE";
@@ -165,6 +135,79 @@ public class Sistema {
 
 	public static void setCodigoContratos(int codigoContratos) {
 		Sistema.codigoContratos = codigoContratos;
+	}
+	
+	
+	
+	
+	
+	//FUNCIONES PARA INSERTAR
+	public void insertarCliente(Cliente cliente_1) { //funcion para añadir cliente 
+		clientes.add(cliente_1);
+		codigoCliente++;
+	}
+	
+	public void insertarContrato(Contratos contrato_1) { // insertar contratos
+		contrato.add(contrato_1);
+		codigoContratos++;
+	}
+	
+	public void intertarTrabajador(Trabajadores trabajador_1) {//intertar trabajador
+		trabajadores.add(trabajador_1);
+		codigoTrabajadores++;
+	}
+	
+	public void insertarProyecto(Proyectos proyecto_1) { //insertar proyecto
+		proyectos.add(proyecto_1);
+		codigoProyectos++;
+	}
+
+	
+	
+	
+	
+	
+	
+	//FUNCIONES PARA BUSCAR BY ID
+	public Cliente clienteById(String id) {//funcion para buscar cliente 
+		Cliente aux = null;
+		for (Cliente client : clientes) {
+			if (client.getId().equalsIgnoreCase(id)) {
+				aux = client;
+			}
+		}
+		return aux;
+	}
+	
+	public Contratos contratoById(String id) { //funcion para buscar contrato 
+		Contratos aux = null;
+		for (Contratos contrat : contrato) {
+			if (contrat.getId().equalsIgnoreCase(id)) {
+				aux = contrat;
+			}
+		}
+		return aux;
+	}
+	
+	public Proyectos proyectoById(String id) {//funcion para buscar proyecto 
+		Proyectos aux = null;
+		for (Proyectos proyect : proyectos) {
+			if (proyect.getId().equalsIgnoreCase(id)) {
+				aux = proyect;
+			}
+		}
+		return aux;
+	}
+	
+	
+	public Trabajadores trabajadorById(String id) { //funcion para buscar trabajador 
+		Trabajadores aux = null;
+		for (Trabajadores trabajador : trabajadores) {
+			if (trabajador.getId().equalsIgnoreCase(id)) {
+				aux = trabajador;
+			}
+		}
+		return aux;
 	}
 	
 
