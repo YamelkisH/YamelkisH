@@ -8,28 +8,37 @@ public class Sistema {
 	private ArrayList<Proyectos> proyectos;
 	private ArrayList<Cliente> clientes;
 	private ArrayList<Contratos> contrato;
-	private static Sistema sistemaAux; //ojo
+	private static Sistema sistema = null; 
 	public static int codigoCliente = 0;
 	public static int codigoTrabajadores = 0;
 	public static int codigoProyectos = 0;
 	public static int codigoContratos = 0;
 	
-	public Sistema(ArrayList<Trabajadores> trabajadores, ArrayList<Proyectos> proyectos, ArrayList<Cliente> clientes,
-			ArrayList<Contratos> contrato, Sistema sistemaAux) {
+	public Sistema() {
 		super();
 		this.trabajadores = new ArrayList<Trabajadores>();
 		this.proyectos = new ArrayList<Proyectos>();
 		this.clientes = new ArrayList<Cliente>();
 		this.contrato = new ArrayList<Contratos>();
-		this.sistemaAux = null;
 	}
 	
-	/*public static Sistema getInstance() {
-		if (sistemaAux == null) {
-			sistemaAux = new Sistema();
+	public static Sistema getInstance() {
+		if (sistema == null) {
+			sistema = new Sistema();
+			return sistema;
+		}else {
+		return sistema;
 		}
-		return sistemaAux;
-	}*/
+	}
+	
+	public static Sistema getSistema() {
+		return sistema;
+	}
+
+	public static void setSistema(Sistema sistema) {
+		Sistema.sistema = sistema;
+	}
+	
 
 	public ArrayList<Trabajadores> getTrabajadores() {
 		return trabajadores;
@@ -63,18 +72,7 @@ public class Sistema {
 		this.contrato = contrato;
 	}
 	
-	/*public static Sistema getSistema() {
-		return sistemaAux;
-	}
 
-	public static void setSistema(sistema sistemaAux) {
-		Sistema.sistemaAux = sistemaAux;
-	}*/
-	
-	/*
-	 * 
-	 * 
-*/
 	public void insertarCliente(Cliente cliente_1) { //funcion para añadir cliente 
 		clientes.add(cliente_1);
 		codigoCliente++;
@@ -106,36 +104,69 @@ public class Sistema {
 	}
 	
 	
-	/*public String Calificacion(String id) {
+	public String Calificacion(String id) {
 		String Calificacion = "EXCELENTE";
-		int total = 0;
-		int good = 0;
+		int totalProyectos = 0;
+		int totalProyectosEntregadosATiempo = 0;
 		Trabajadores aux = trabajadorById(id);
 		if (aux != null) {
 			for (Contratos contratos : contrato) {
-				for (Trabajadores contratoTrabajador : contratos.getproyectos().getTrabajadores()) {
-					if (contraWorker.getId().equalsIgnoreCase(id)) {
-						total++;
-						if (!contract.getFinalDate().after(contract.getDueDate())) {
-							good++;
+				for (Trabajadores contratoTrabajador : contratos.getProyecto().getTrabajadores()) {
+					if (contratoTrabajador.getId().equalsIgnoreCase(id)) {
+						totalProyectos++;
+						if (!contratos.getFechaFinal().after(contratos.getFechaFinal())){
+							totalProyectosEntregadosATiempo++;
 						}
 					}
 				}
 			}
 		}
 		
-		if (total > 0) {
-			float percentage = (float) good/total;
-			if (percentage >= 1) {
-				calification = "EXCELENTE";
-			} else if (percentage < 1 && percentage >= 0.8) {
-				calification = "BUENO";
+		if (totalProyectos > 0) {
+			float porcentaje = (float) totalProyectosEntregadosATiempo/totalProyectos;
+			if (porcentaje >= 1) {
+				Calificacion = "EXCELENTE";
+			} else if (porcentaje < 1 && porcentaje >= 0.8) {
+				Calificacion = "BUENO";
 			} else {
-				calification = "DEFICIENTE";
+				Calificacion = "POBRE";
 			}
 		}
-		return calification;
-	}*/
+		return Calificacion;
+	}
+
+	public static int getCodigoCliente() {
+		return codigoCliente;
+	}
+
+	public static void setCodigoCliente(int codigoCliente) {
+		Sistema.codigoCliente = codigoCliente;
+	}
+
+	public static int getCodigoTrabajadores() {
+		return codigoTrabajadores;
+	}
+
+	public static void setCodigoTrabajadores(int codigoTrabajadores) {
+		Sistema.codigoTrabajadores = codigoTrabajadores;
+	}
+
+	public static int getCodigoProyectos() {
+		return codigoProyectos;
+	}
+
+	public static void setCodigoProyectos(int codigoProyectos) {
+		Sistema.codigoProyectos = codigoProyectos;
+	}
+
+	public static int getCodigoContratos() {
+		return codigoContratos;
+	}
+
+	public static void setCodigoContratos(int codigoContratos) {
+		Sistema.codigoContratos = codigoContratos;
+	}
+	
 
 	
 	
