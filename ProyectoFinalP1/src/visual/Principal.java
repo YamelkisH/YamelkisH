@@ -105,17 +105,49 @@ public class Principal extends JFrame {
 				BtnRegistrartra.setBounds(0, 85, 156, 34);
 				BtnListartra.setVisible(true);
 				BtnListartra.setBounds(0, 119, 156, 34);
-				
+				btnListarpro.setVisible(false);
+				btnFinalizarPosponer.setVisible(false);
 			}
 		});
 		BtnTrabajadores.setBounds(0, 0, 156, 85);
 		panel_1.add(BtnTrabajadores);
 		
+		BtnProyectos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			
+				BtnTrabajadores.setBounds(0, 0, 156, 85);
+				BtnProyectos.setBounds(0, 170, 156, 85);
+				BtnClientes.setBounds(0, 85, 156, 85);
+				BtnRegistrarpro.setVisible(true);
+				BtnRegistrarpro.setBounds(0, 255, 156, 34);
+				btnListarpro.setVisible(true);
+				btnListarpro.setBounds(0, 289, 156, 34);
+				btnFinalizarPosponer.setVisible(true);
+				btnFinalizarPosponer.setBounds(0, 323, 156, 34);
+			
+			}
+		});
 		
 		BtnProyectos.setBounds(0, 170, 156, 85);
 		panel_1.add(BtnProyectos);
 		
-	
+		BtnClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				BtnTrabajadores.setBounds(0, 0, 156, 85);
+				BtnProyectos.setBounds(0, 239, 156, 85);
+				BtnClientes.setBounds(0, 85, 156, 85);
+				BtnRegistrarcli.setVisible(true);
+				BtnRegistrarcli.setBounds(0, 170, 156, 34);
+				btnListarcli.setVisible(true);
+				btnListarcli.setBounds(0, 203, 156, 34);
+				btnListarpro.setVisible(false);
+				btnFinalizarPosponer.setVisible(false);
+			}
+		});
+		
+		//posiciones originales
 		BtnClientes.setBounds(0, 85, 156, 85);
 		panel_1.add(BtnClientes);
 		
