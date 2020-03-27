@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
-import javax.swing.JToolBar;
 
 
 
@@ -28,6 +27,7 @@ public class Principal extends JFrame {
 	private JButton BtnRegistrarpro = new JButton("Registrar");
 	private JButton btnListarpro = new JButton("Listar");
 	private JButton btnFinalizarPosponer = new JButton("Finalizar/posponer");
+	private JButton btnSalir = new JButton("Salir");
 	private JPanel panel_1;
 
 	/**
@@ -51,7 +51,7 @@ public class Principal extends JFrame {
 	 */
 	public Principal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 818, 491);
+		setBounds(100, 100, 1218, 618);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -80,103 +80,108 @@ public class Principal extends JFrame {
 		panel.setLayout(null);
 		
 		panel_1 = new JPanel();
-		panel_1.setBounds(0, 0, 156, 420);
+		panel_1.setBounds(0, 0, 180, 650);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-	//menu vertical
-		//poniendo en falso botones emergentes
-		BtnRegistrartra.setVisible(false);
-		BtnListartra.setVisible(false);
-		BtnRegistrarcli.setVisible(false);
-		btnListarcli.setVisible(false);
-		BtnRegistrarpro.setVisible(false);
-		btnListarpro.setVisible(false);
-		btnFinalizarPosponer.setVisible(false);
+		//menu vertical
 		
-	//botones principales
-		BtnTrabajadores.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				BtnTrabajadores.setBounds(0, 0, 156, 85);
-				BtnClientes.setBounds(0, 153, 156, 85);		
-				BtnProyectos.setBounds(0, 239, 156, 85);
-				BtnRegistrartra.setVisible(true);
-				BtnRegistrartra.setBounds(0, 85, 156, 34);
-				BtnListartra.setVisible(true);
-				BtnListartra.setBounds(0, 119, 156, 34);
-				btnListarpro.setVisible(false);
+		//poniendo en falso botones emergentes 
+				BtnRegistrartra.setVisible(false);
 				btnFinalizarPosponer.setVisible(false);
-			}
-		});
-		BtnTrabajadores.setBounds(0, 0, 156, 85);
+				btnListarpro.setVisible(false);
+				BtnRegistrarpro.setVisible(false);
+				btnListarcli.setVisible(false);
+				BtnRegistrarcli.setVisible(false);
+				BtnListartra.setVisible(false);
+		
+		//botones principales acciones
+				BtnTrabajadores.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					
+						BtnTrabajadores.setBounds(0, 0, 180, 129);
+						BtnClientes.setBounds(0, 192, 180, 129);
+						BtnProyectos.setBounds(0, 321, 180, 129);
+						btnSalir.setBounds(0, 450, 180, 129);
+						BtnRegistrartra.setVisible(true);
+						BtnRegistrartra.setBounds(0, 126, 180, 34);
+						BtnListartra.setVisible(true);
+						BtnListartra.setBounds(0, 158, 180, 34);
+						btnListarpro.setVisible(false);
+						btnFinalizarPosponer.setVisible(false);
+						
+					}
+				});
+				
+		BtnTrabajadores.setBounds(0, 0, 180, 129);
 		panel_1.add(BtnTrabajadores);
+		
 		
 		BtnProyectos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 			
-				BtnTrabajadores.setBounds(0, 0, 156, 85);
-				BtnProyectos.setBounds(0, 170, 156, 85);
-				BtnClientes.setBounds(0, 85, 156, 85);
+				BtnTrabajadores.setBounds(0, 0, 180, 129);
+				BtnProyectos.setBounds(0, 253, 180, 129);
+				BtnClientes.setBounds(0, 126, 180, 129);
+				btnSalir.setBounds(0, 476, 180, 129);
 				BtnRegistrarpro.setVisible(true);
-				BtnRegistrarpro.setBounds(0, 255, 156, 34);
+				BtnRegistrarpro.setBounds(0, 380, 180, 34);
 				btnListarpro.setVisible(true);
-				btnListarpro.setBounds(0, 289, 156, 34);
+				btnListarpro.setBounds(0, 412, 180, 34);
 				btnFinalizarPosponer.setVisible(true);
-				btnFinalizarPosponer.setBounds(0, 323, 156, 34);
+				btnFinalizarPosponer.setBounds(0, 442, 180, 34);
 			
 			}
 		});
 		
-		BtnProyectos.setBounds(0, 170, 156, 85);
+		BtnProyectos.setBounds(0, 253, 180, 129);
 		panel_1.add(BtnProyectos);
+		
+		
 		
 		BtnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				BtnTrabajadores.setBounds(0, 0, 156, 85);
-				BtnProyectos.setBounds(0, 239, 156, 85);
-				BtnClientes.setBounds(0, 85, 156, 85);
+				BtnTrabajadores.setBounds(0, 0, 180, 129);
+				BtnProyectos.setBounds(0, 321, 180, 129);
+				BtnClientes.setBounds(0, 126, 180, 129);
+				btnSalir.setBounds(0, 450, 180, 129);
 				BtnRegistrarcli.setVisible(true);
-				BtnRegistrarcli.setBounds(0, 170, 156, 34);
+				BtnRegistrarcli.setBounds(0, 255, 180, 34);
 				btnListarcli.setVisible(true);
-				btnListarcli.setBounds(0, 203, 156, 34);
+				btnListarcli.setBounds(0, 287, 180, 34);
 				btnListarpro.setVisible(false);
 				btnFinalizarPosponer.setVisible(false);
 			}
 		});
-		
-		//posiciones originales
-		BtnClientes.setBounds(0, 85, 156, 85);
+		BtnClientes.setBounds(0, 126, 180, 129);
 		panel_1.add(BtnClientes);
 		
 		
-		BtnRegistrartra.setBounds(0, 85, 156, 34);
+		//posicion original botones
+		BtnRegistrartra.setBounds(0, 126, 180, 34);
 		panel_1.add(BtnRegistrartra);
-		
-		
-		BtnListartra.setBounds(0, 119, 156, 34);
+		BtnListartra.setBounds(0, 158, 180, 34);
 		panel_1.add(BtnListartra);
-		
-		
-		BtnRegistrarcli.setBounds(0, 170, 156, 34);
+		BtnRegistrarcli.setBounds(0, 253, 180, 34);
 		panel_1.add(BtnRegistrarcli);
-		
-		
-		btnListarcli.setBounds(0, 203, 156, 34);
+		btnListarcli.setBounds(0, 284, 180, 34);
 		panel_1.add(btnListarcli);
-		
-		
-		BtnRegistrarpro.setBounds(0, 255, 156, 34);
+		BtnRegistrarpro.setBounds(0, 380, 180, 34);
 		panel_1.add(BtnRegistrarpro);
-		
-		
-		btnListarpro.setBounds(0, 289, 156, 34);
+		btnListarpro.setBounds(0, 412, 180, 34);
 		panel_1.add(btnListarpro);
-		
-		
-		btnFinalizarPosponer.setBounds(0, 323, 156, 34);
+		btnFinalizarPosponer.setBounds(0, 442, 180, 34);
 		panel_1.add(btnFinalizarPosponer);
+		btnSalir.setBounds(0, 380, 180, 129);
+		panel_1.add(btnSalir);
+		
+		
+	
+		
+		
+		
+	
 	}
 }
