@@ -2,10 +2,13 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -28,6 +31,8 @@ public class Principal extends JFrame {
 	private JButton btnListarpro = new JButton("Listar");
 	private JButton btnFinalizarPosponer = new JButton("Finalizar/posponer");
 	private JButton btnSalir = new JButton("Salir");
+	private ImageIcon imagen;
+	private Icon icono;
 	private JPanel panel_1;
 
 	/**
@@ -112,11 +117,14 @@ public class Principal extends JFrame {
 						
 					}
 				});
-				
 		BtnTrabajadores.setBounds(0, 0, 180, 129);
+		imagen = new ImageIcon(Principal.class.getResource("/img/images.png"));
+		icono = new ImageIcon(imagen.getImage().getScaledInstance(BtnTrabajadores.getWidth(), BtnTrabajadores.getHeight(), Image.SCALE_DEFAULT));
+		
+		BtnTrabajadores.setIcon((icono));
+
+		
 		panel_1.add(BtnTrabajadores);
-		
-		
 		BtnProyectos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
