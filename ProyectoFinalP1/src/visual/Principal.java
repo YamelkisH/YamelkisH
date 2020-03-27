@@ -23,6 +23,11 @@ public class Principal extends JFrame {
 	private JButton BtnRegistrartra = new JButton("Registrar");
 	private JButton BtnListartra = new JButton("Listar");
 	private JButton BtnTrabajadores = new JButton("Trabajadores\r\n");
+	private JButton BtnRegistrarcli = new JButton("Registrar");
+	private JButton btnListarcli = new JButton("Listar");
+	private JButton BtnRegistrarpro = new JButton("Registrar");
+	private JButton btnListarpro = new JButton("Listar");
+	private JButton btnFinalizarPosponer = new JButton("Finalizar/posponer");
 	private JPanel panel_1;
 
 	/**
@@ -79,15 +84,28 @@ public class Principal extends JFrame {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
+	//menu vertical
+		//poniendo en falso botones emergentes
+		BtnRegistrartra.setVisible(false);
+		BtnListartra.setVisible(false);
+		BtnRegistrarcli.setVisible(false);
+		btnListarcli.setVisible(false);
+		BtnRegistrarpro.setVisible(false);
+		btnListarpro.setVisible(false);
+		btnFinalizarPosponer.setVisible(false);
 		
+	//botones principales
 		BtnTrabajadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				BtnTrabajadores.setBounds(0, 0, 156, 85);
 				BtnClientes.setBounds(0, 153, 156, 85);		
 				BtnProyectos.setBounds(0, 239, 156, 85);
+				BtnRegistrartra.setVisible(true);
 				BtnRegistrartra.setBounds(0, 85, 156, 34);
+				BtnListartra.setVisible(true);
 				BtnListartra.setBounds(0, 119, 156, 34);
+				
 			}
 		});
 		BtnTrabajadores.setBounds(0, 0, 156, 85);
@@ -109,23 +127,23 @@ public class Principal extends JFrame {
 		BtnListartra.setBounds(0, 119, 156, 34);
 		panel_1.add(BtnListartra);
 		
-		JButton BtnRegistrarcli = new JButton("Registrar");
+		
 		BtnRegistrarcli.setBounds(0, 170, 156, 34);
 		panel_1.add(BtnRegistrarcli);
 		
-		JButton btnListarcli = new JButton("Listar");
+		
 		btnListarcli.setBounds(0, 203, 156, 34);
 		panel_1.add(btnListarcli);
 		
-		JButton BtnRegistrarpro = new JButton("Registrar");
+		
 		BtnRegistrarpro.setBounds(0, 255, 156, 34);
 		panel_1.add(BtnRegistrarpro);
 		
-		JButton btnListarpro = new JButton("Listar");
+		
 		btnListarpro.setBounds(0, 289, 156, 34);
 		panel_1.add(btnListarpro);
 		
-		JButton btnFinalizarPosponer = new JButton("Finalizar/posponer");
+		
 		btnFinalizarPosponer.setBounds(0, 323, 156, 34);
 		panel_1.add(btnFinalizarPosponer);
 	}
