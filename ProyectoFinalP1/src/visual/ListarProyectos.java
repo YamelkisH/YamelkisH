@@ -4,15 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Label;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -30,6 +30,7 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+
 import logico.Cliente;
 import logico.Sistema;
 
@@ -42,7 +43,7 @@ public class ListarProyectos extends JDialog {
 	public static String codContractTable;
 	private JTextField txtfiltrer;
 	private TableRowSorter<TableModel> sorter;
-	private String[] headers = {"ID Contrato", "ID Clientee", "Nombre Clientee", "ID Proyecto", "Tipo Proyecto", "Firma Contrato", "Fecha Inicio","Fecha de Entrega","Total a pagar","Estado","Fecha Prorrogado","Cant Trabajadores"};
+	private String[] headers = {"ID Contrato", "ID Cliente", "Nombre Cliente", "ID Proyecto", "Tipo Proyecto", "Firma Contrato", "Fecha Inicio","Fecha de Entrega","Total a pagar","Estado","Fecha Prorrogado","Cant Trabajadores"};
 	private static int cont;
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 	private static ListarProyectos listPro=null;
@@ -54,9 +55,18 @@ public class ListarProyectos extends JDialog {
 		return listPro;
 	}
 	
+	/*public static Sistema getInstance() {
+		if (Sistema == null) {
+			Sistema = new Sistema();
+		}
+		return Sistema;
+	}*/
+	 
+
 
 	
-	 //Launch the application.
+	// * Launch the application.
+	 
 	public static void main(String[] args) {
 		try {
 			ListarProyectos dialog = new ListarProyectos();
@@ -67,9 +77,9 @@ public class ListarProyectos extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
-	 */
+	
+	// * Create the dialog.
+	 
 	public ListarProyectos() {
 		setResizable(false);
 		setTitle("Listar Proyectos");
@@ -94,25 +104,25 @@ public class ListarProyectos extends JDialog {
 		tableProjects = new JTable();
 		
 		//tableProjects.setDefaultRenderer(Object.class, render);
-		/*tableProjects.addMouseListener(new MouseAdapter() {
+		tableProjects.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				   int row=tableProjects.getSelectedRow();
 			        codContractTable= String.valueOf(model.getValueAt(row, 0));	
 			        System.out.println(codContractTable);
-			    	WindowCheckContract newWindowCont=new WindowCheckContract();
+			    	/*WindowCheckContract newWindowCont=new WindowCheckContract();
 					newWindowCont.setModal(true);
 					newWindowCont.setSize(1240, 520);
 					newWindowCont.setResizable(false);
 					newWindowCont.setLocationRelativeTo(null);
 					newWindowCont.setVisible(true);
-					loadUser();
+					loadUser();*/
 					
 				
 			}
-		});*/
+		});
 		
-		String [] header = {"ID Contrato", "ID Clientee", "Nombre Clientee", "ID Proyecto", "Tipo Proyecto","Firma Contrato", "Fecha Inicio", "Fecha de entrega", "Total a pagar","Estado","Fecha Prorrogado","Trabajadores"};
+		String [] header = {"ID Contrato", "ID Cliente", "Nombre Cliente", "ID Proyecto", "Tipo Proyecto","Firma Contrato", "Fecha Inicio", "Fecha de entrega", "Total a pagar","Estado","Fecha Prorrogado","Trabajadores"};
 		
 		model.setColumnIdentifiers(header);
 		tableProjects.setModel(model);
@@ -131,6 +141,12 @@ public class ListarProyectos extends JDialog {
 		 columnModel.getColumn(11).setPreferredWidth(40);
 		 tableProjects.setRowSorter(sorter);
 		
+		/*
+		 * 
+		 TableColumnModel columnModel = tabla.getColumnModel();
+columnModel.getColumn(2).setPreferredWidth(200);
+		 * */
+		
 		
 		loadUser();
 		scrollPane.setViewportView(tableProjects);
@@ -146,7 +162,63 @@ public class ListarProyectos extends JDialog {
 		label.setBounds(10, 29, 86, 22);
 		panel_1.add(label);
 		
+		final JComboBox comboBoxFiltrer = new JComboBox();
 		
+		comboBoxFiltrer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (comboBoxFiltrer.getSelectedIndex() > 0) {
+					txtfiltrer.setEnabled(true);
+					txtfiltrer.requestFocus();
+				} else {
+					txtfiltrer.setText("");
+					txtfiltrer.setEnabled(false);
+					sorter.setRowFilter(null);
+				}
+				
+				
+			}
+		});
+		comboBoxFiltrer.setBounds(102, 31, 183, 20);
+		panel_1.add(comboBoxFiltrer);
+		
+		ArrayList<String> combo = new ArrayList<>();
+		combo.add("<Seleccione>");
+		for (String string : headers ) {
+			combo.add(string);
+		}
+		
+		comboBoxFiltrer.setModel(new DefaultComboBoxModel(combo.toArray()));
+		
+		
+		Label label_1 = new Label("Filtro:");
+		label_1.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		label_1.setBounds(291, 29, 62, 22);
+		panel_1.add(label_1);
+		
+		txtfiltrer = new JTextField();
+		
+		txtfiltrer.setEnabled(false);
+		try {
+			txtfiltrer.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyReleased(KeyEvent e) {
+					if (!txtfiltrer.isEnabled()) {
+						return;
+					}
+					for (int i = 0; i < model.getColumnCount(); i++) {
+						if (model.getColumnName(i).equalsIgnoreCase(comboBoxFiltrer.getSelectedItem().toString())) {
+							tableFilter(txtfiltrer.getText(), i);
+						}
+					}
+				}
+			});
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		txtfiltrer.setBounds(359, 31, 203, 20);
+		panel_1.add(txtfiltrer);
+		txtfiltrer.setColumns(10);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
@@ -170,7 +242,7 @@ public class ListarProyectos extends JDialog {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 	
-		//"ID Contrato", "ID Clientee", "Nombre Clientee", "ID Proyecto", "Tipo Proyecto", "Fecha Inicio", "Fecha de entrega", "Total a pagar"};
+		//"ID Contrato", "ID Cliente", "Nombre Cliente", "ID Proyecto", "Tipo Proyecto", "Fecha Inicio", "Fecha de entrega", "Total a pagar"};
 		
 		
 		for (int i = 0; i <Sistema.getInstance().getContrato().size(); i++) {
@@ -180,13 +252,13 @@ public class ListarProyectos extends JDialog {
 			fila[2]=aux.getNombre();
 			fila[3]=Sistema.getInstance().getContrato().get(i).getProyecto().getId();
 			fila[4]=Sistema.getInstance().getContrato().get(i).getProyecto().getTipo();
-			fila[5]=Sistema.getInstance().getContrato().get(i).getFechaFinal();
+			fila[5]=Sistema.getInstance().getContrato().get(i).getDiaCierre();
 			fila[6]=dateFormat.format(Sistema.getInstance().getContrato().get(i).getFechaInicio());
 			fila[7]=dateFormat.format(Sistema.getInstance().getContrato().get(i).getFechaEntrega());
 			fila[8]="$"+Sistema.getInstance().getContrato().get(i).getPrecio();
 			fila[9]=Sistema.getInstance().getContrato().get(i).getProyecto().getEstado();
 			if (Sistema.getInstance().getContrato().get(i).getProyecto().getEstado().equalsIgnoreCase("Prorrogado")) {
-				fila[10]=dateFormat.format(Sistema.getInstance().getContrato().get(i).getDiaCierre());
+				fila[10]=dateFormat.format(Sistema.getInstance().getContrato().get(i).getFechaFinal());
 			}else {
 				fila[10]="N/A";
 			}
@@ -199,7 +271,15 @@ public class ListarProyectos extends JDialog {
 		
 	}
 	
-	
+	private void tableFilter(String text, int column_index) {
+	    RowFilter<TableModel, Object> filter = null;
+	    try {
+	    	filter = RowFilter.regexFilter("(?i)" + text, column_index);
+	    } catch (java.util.regex.PatternSyntaxException e) {
+	        return;
+	    }
+	    sorter.setRowFilter(filter);
+	}
 	public JTable getTableProjects() {
 		return tableProjects;
 	}
