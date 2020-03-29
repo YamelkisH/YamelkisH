@@ -54,6 +54,16 @@ public class ListarTrabajadores extends JDialog {
 	private String code = "";
 	private JButton btnModificar;
 	private JButton btnEliminar;
+	
+	public static void main(String[] args) {
+		try {
+			ListarTrabajadores dialog = new ListarTrabajadores();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public ListarTrabajadores() {
 		setResizable(false);
@@ -76,7 +86,7 @@ public class ListarTrabajadores extends JDialog {
 		lblNewLabel.setBounds(10, 21, 73, 14);
 		panel.add(lblNewLabel);
 		
-		cbxColumnChooser.addActionListener(new ActionListener() {
+		/*cbxColumnChooser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (cbxColumnChooser.getSelectedIndex() > 0) {
 					txtFiltro.setEnabled(true);
@@ -87,14 +97,14 @@ public class ListarTrabajadores extends JDialog {
 					sorter.setRowFilter(null);
 				}
 			}
-		});
+		});*/
 		ArrayList<String> combo = new ArrayList<>();
 		combo.add("<Seleccione>");
 		for (String string : headers) {
 			combo.add(string);
 		}
-		cbxColumnChooser.setBounds(93, 20, 199, 20);
-		panel.add(cbxColumnChooser);
+		/*cbxColumnChooser.setBounds(93, 20, 199, 20);
+		panel.add(cbxColumnChooser);*/
 		
 		JLabel lblFiltro = new JLabel("Filtro:");
 		lblFiltro.setFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -118,10 +128,10 @@ public class ListarTrabajadores extends JDialog {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		txtFiltro.setEnabled(false);
+		/*txtFiltro.setEnabled(false);
 		txtFiltro.setBounds(357, 20, 339, 20);
 		panel.add(txtFiltro);
-		txtFiltro.setColumns(10);
+		txtFiltro.setColumns(10);*/
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, null, null), "Trabajadores", TitledBorder.LEADING, TitledBorder.TOP, null, null));

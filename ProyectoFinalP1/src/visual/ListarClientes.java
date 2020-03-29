@@ -51,11 +51,20 @@ public class ListarClientes extends JDialog {
 	private String[] headers = {"Código", "Cedula", "Nombre", "Dirección", "Teléfono", "P. Activos", "Registro"};
 	private JButton btnModificar;
 	private JButton btnEliminar;
+	
+	public static void main(String[] args) {
+		try {
+			ListarClientes dialog = new ListarClientes();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public ListarClientes() {
 		setResizable(false);
 		setTitle("Lista de Clientes");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarClientes.class.getResource("/Imgs/list30px.png")));
 		setBounds(100, 100, 1038, 437);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
@@ -76,7 +85,7 @@ public class ListarClientes extends JDialog {
 		
 		
 		
-		cbxColumnChooser.addActionListener(new ActionListener() {
+	/*	cbxColumnChooser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (cbxColumnChooser.getSelectedIndex() > 0) {
 					txtFiltro.setEnabled(true);
@@ -87,15 +96,15 @@ public class ListarClientes extends JDialog {
 					sorter.setRowFilter(null);
 				}
 			}
-		});
+		});*/
 		ArrayList<String> combo = new ArrayList<>();
 		combo.add("<Seleccione>");
 		for (String string : headers ) {
 			combo.add(string);
 		}
-		cbxColumnChooser.setModel(new DefaultComboBoxModel(combo.toArray()));
-		cbxColumnChooser.setBounds(93, 20, 199, 20);
-		panel.add(cbxColumnChooser);
+		//cbxColumnChooser.setModel(new DefaultComboBoxModel(combo.toArray()));
+		//cbxColumnChooser.setBounds(93, 20, 199, 20);
+		//panel.add(cbxColumnChooser);
 		
 		JLabel lblFiltro = new JLabel("Filtro:");
 		lblFiltro.setFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -119,10 +128,10 @@ public class ListarClientes extends JDialog {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		txtFiltro.setEnabled(false);
+		/*txtFiltro.setEnabled(false);
 		txtFiltro.setBounds(357, 20, 256, 20);
 		panel.add(txtFiltro);
-		txtFiltro.setColumns(10);
+		txtFiltro.setColumns(10);*/
 		{
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, null, null), "Clientes", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -196,7 +205,7 @@ public class ListarClientes extends JDialog {
 					}
 				});
 		
-				buttonPane.add(btnEliminar);
+			//	buttonPane.add(btnEliminar);
 				btnModificar.setEnabled(false);
 				btnModificar.setFont(new Font("SansSerif", Font.PLAIN, 14));
 				btnModificar.setActionCommand("OK");

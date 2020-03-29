@@ -131,12 +131,6 @@ public class ListarProyectos extends JDialog {
 		 columnModel.getColumn(11).setPreferredWidth(40);
 		 tableProjects.setRowSorter(sorter);
 		
-		/*
-		 * 
-		 TableColumnModel columnModel = tabla.getColumnModel();
-columnModel.getColumn(2).setPreferredWidth(200);
-		 * */
-		
 		
 		loadUser();
 		scrollPane.setViewportView(tableProjects);
@@ -152,62 +146,7 @@ columnModel.getColumn(2).setPreferredWidth(200);
 		label.setBounds(10, 29, 86, 22);
 		panel_1.add(label);
 		
-		final JComboBox comboBoxFiltrer = new JComboBox();
 		
-		comboBoxFiltrer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				if (comboBoxFiltrer.getSelectedIndex() > 0) {
-					txtfiltrer.setEnabled(true);
-					txtfiltrer.requestFocus();
-				} else {
-					txtfiltrer.setText("");
-					txtfiltrer.setEnabled(false);
-					sorter.setRowFilter(null);
-				}
-				
-				
-			}
-		});
-		comboBoxFiltrer.setBounds(102, 31, 183, 20);
-		panel_1.add(comboBoxFiltrer);
-		
-		ArrayList<String> combo = new ArrayList<>();
-		combo.add("<Seleccione>");
-		for (String string : headers ) {
-			combo.add(string);
-		}
-		
-		comboBoxFiltrer.setModel(new DefaultComboBoxModel(combo.toArray()));
-		
-		
-		Label label_1 = new Label("Filtro:");
-		label_1.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		label_1.setBounds(291, 29, 62, 22);
-		panel_1.add(label_1);
-		
-		
-		//txtfiltrer.setEnabled(false);
-		try {
-			txtfiltrer.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyReleased(KeyEvent e) {
-					if (!txtfiltrer.isEnabled()) {
-						return;
-					}
-					for (int i = 0; i < model.getColumnCount(); i++) {
-						if (model.getColumnName(i).equalsIgnoreCase(comboBoxFiltrer.getSelectedItem().toString())) {
-							tableFilter(txtfiltrer.getText(), i);
-						}
-					}
-				}
-			});
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-	//	txtfiltrer.setBounds(359, 31, 203, 20);
-		//panel_1.add(txtfiltrer);
-		//txtfiltrer.setColumns(10);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
@@ -260,15 +199,7 @@ columnModel.getColumn(2).setPreferredWidth(200);
 		
 	}
 	
-	private void tableFilter(String text, int column_index) {
-	    RowFilter<TableModel, Object> filter = null;
-	    try {
-	    	filter = RowFilter.regexFilter("(?i)" + text, column_index);
-	    } catch (java.util.regex.PatternSyntaxException e) {
-	        return;
-	    }
-	    sorter.setRowFilter(filter);
-	}
+	
 	public JTable getTableProjects() {
 		return tableProjects;
 	}
