@@ -36,9 +36,6 @@ public class RegistrarProyecto extends JDialog {
 	private JTextField textDireccion;
 	private JTextField textCodigo;
 	private JTextField txtFechaInicio;
-	private JButton BtnTrabajadores = new JButton("Trabajadores\r\n");
-	private JButton BtnClientes = new JButton("Clientes");
-	private JButton BtnProyectos = new JButton("Proyectos");
 	private JLabel lblRegistro;
 	private JTextField txtFechaFin;
 	private JTextField textField;
@@ -50,7 +47,7 @@ public class RegistrarProyecto extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			RegistrarTrabajadores dialog = new RegistrarTrabajadores();
+			RegistrarProyecto dialog = new RegistrarProyecto();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -65,7 +62,7 @@ public class RegistrarProyecto extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarProyecto.class.getResource("/img/icons8_new_copy_40px.png")));
 		setResizable(false);
 		setTitle("Registrar proyecto");
-		setBounds(100, 100, 545, 615);
+		setBounds(100, 100, 545, 630);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.LIGHT_GRAY);
@@ -83,7 +80,7 @@ public class RegistrarProyecto extends JDialog {
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel_4.setBounds(10, 11, 517, 578);
+		panel_4.setBounds(10, 11, 512, 578);
 		panel_1.add(panel_4);
 		panel_4.setLayout(null);
 		
@@ -378,13 +375,13 @@ public class RegistrarProyecto extends JDialog {
 		label_1.setBounds(9, 103, 132, 22);
 		panel_2.add(label_1);
 		
-		JComboBox comboBox = new JComboBox();
+	/*	JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		comboBox.setEditable(true);
 		comboBox.setBackground(SystemColor.menu);
 		comboBox.setBounds(118, 103, 109, 22);
 		panel_2.add(comboBox);
-		
+		*/
 		JButton btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.setBounds(158, 544, 108, 23);
 		panel_4.add(btnLimpiar);

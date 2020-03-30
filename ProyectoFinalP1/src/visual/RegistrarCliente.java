@@ -53,7 +53,7 @@ public class RegistrarCliente extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			RegistrarTrabajadores dialog = new RegistrarTrabajadores();
+			RegistrarCliente dialog = new RegistrarCliente();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
