@@ -61,7 +61,6 @@ public class ListarClientes extends JDialog {
 			}
 		}
 
-
 		public ListarClientes() {
 			setResizable(false);
 			setTitle("Lista de Clientees");
@@ -206,8 +205,6 @@ public class ListarClientes extends JDialog {
 							}
 						}
 					});
-					
-					
 					
 					btnModificar.setEnabled(false);
 					btnModificar.setFont(new Font("SansSerif", Font.PLAIN, 14));

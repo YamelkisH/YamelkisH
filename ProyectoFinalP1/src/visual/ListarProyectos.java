@@ -48,12 +48,12 @@ public class ListarProyectos extends JDialog {
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 	private static ListarProyectos listPro=null;
 	
-	public static ListarProyectos getInstance() {
+	/*public static ListarProyectos getInstance() {
 		if (listPro==null) {
 			listPro=new ListarProyectos();
 		}
 		return listPro;
-	}
+	}*/
 	
 	/*public static Sistema getInstance() {
 		if (Sistema == null) {

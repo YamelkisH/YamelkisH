@@ -118,10 +118,10 @@ public class Principal extends JFrame {
 					}
 				});
 		BtnTrabajadores.setBounds(0, 0, 180, 129);
-		imagen = new ImageIcon(Principal.class.getResource("/img/images.png"));
-		icono = new ImageIcon(imagen.getImage().getScaledInstance(BtnTrabajadores.getWidth(), BtnTrabajadores.getHeight(), Image.SCALE_DEFAULT));
+		//imagen = new ImageIcon(Principal.class.getResource("/img/images.png"));
+		//icono = new ImageIcon(imagen.getImage().getScaledInstance(BtnTrabajadores.getWidth(), BtnTrabajadores.getHeight(), Image.SCALE_DEFAULT));
 		
-		BtnTrabajadores.setIcon((icono));
+		//BtnTrabajadores.setIcon((icono));
 
 		
 		panel_1.add(BtnTrabajadores);
