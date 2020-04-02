@@ -63,7 +63,7 @@ public class ListarClientes extends JDialog {
 
 		public ListarClientes() {
 			setResizable(false);
-			setTitle("Lista de Clientees");
+			setTitle("Lista de Clientes");
 			setBounds(100, 100, 1038, 437);
 			setLocationRelativeTo(null);
 			getContentPane().setLayout(new BorderLayout());
