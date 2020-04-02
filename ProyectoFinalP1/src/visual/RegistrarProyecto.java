@@ -86,7 +86,7 @@ public class RegistrarProyecto extends JDialog {
 		
 		JButton btnRegistrarTrabajador = new JButton("Registrar ");
 		btnRegistrarTrabajador.setHorizontalAlignment(SwingConstants.LEFT);
-		btnRegistrarTrabajador.setBounds(276, 544, 111, 23);
+		btnRegistrarTrabajador.setBounds(265, 544, 132, 23);
 		panel_4.add(btnRegistrarTrabajador);
 		btnRegistrarTrabajador.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_checkmark_16px.png")));
 		btnRegistrarTrabajador.setFont(new Font("Times New Roman", Font.PLAIN, 15));
@@ -324,7 +324,7 @@ public class RegistrarProyecto extends JDialog {
 		btnNewButton_1.setIcon(new ImageIcon(RegistrarProyecto.class.getResource("/img/icons8_agreement_16px.png")));
 		btnNewButton_1.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNewButton_1.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		btnNewButton_1.setBounds(160, 109, 153, 23);
+		btnNewButton_1.setBounds(160, 109, 167, 23);
 		panel.add(btnNewButton_1);
 		
 		txtCodigocontrato = new JTextField();

@@ -68,10 +68,10 @@ public class RegistrarCliente extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarCliente.class.getResource("/img/icons8_add_user_male_64px.png")));
 		setResizable(false);
 		setTitle("Registrar cliente");
-		setBounds(100, 100, 545, 580);
+		setBounds(100, 100, 610, 580);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(Color.LIGHT_GRAY);
+		contentPanel.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -80,13 +80,13 @@ public class RegistrarCliente extends JDialog {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(SystemColor.control);
 		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel_1.setBounds(0, 0, 532, 543);
+		panel_1.setBounds(0, 0, 604, 551);
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, null, null), "Datos personales", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel.setBounds(181, 63, 346, 342);
+			panel.setBounds(233, 63, 346, 342);
 			panel_1.add(panel);
 			panel.setLayout(null);
 			
@@ -94,12 +94,12 @@ public class RegistrarCliente extends JDialog {
 			
 			JLabel lblNewLabel = new JLabel("Nombres:");
 			lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblNewLabel.setBounds(10, 144, 71, 22);
+			lblNewLabel.setBounds(24, 144, 71, 22);
 			panel.add(lblNewLabel);
 			
 			JLabel lblApellidos = new JLabel("Apellidos:");
 			lblApellidos.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblApellidos.setBounds(10, 177, 71, 22);
+			lblApellidos.setBounds(24, 177, 71, 22);
 			panel.add(lblApellidos);
 			
 			JLabel lblCelular = new JLabel("Celular:");
@@ -109,13 +109,13 @@ public class RegistrarCliente extends JDialog {
 			
 			JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
 			lblDireccin.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblDireccin.setBounds(10, 210, 71, 22);
+			lblDireccin.setBounds(24, 210, 71, 22);
 			panel.add(lblDireccin);
 			
 			textNombres = new JTextField();
 			textNombres.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 			textNombres.setBackground(SystemColor.menu);
-			textNombres.setBounds(76, 146, 224, 20);
+			textNombres.setBounds(92, 146, 224, 20);
 			panel.add(textNombres);
 			textNombres.setColumns(10);
 			
@@ -123,58 +123,58 @@ public class RegistrarCliente extends JDialog {
 			textApellidos.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 			textApellidos.setColumns(10);
 			textApellidos.setBackground(SystemColor.menu);
-			textApellidos.setBounds(76, 179, 224, 20);
+			textApellidos.setBounds(92, 179, 224, 20);
 			panel.add(textApellidos);
 			
 			textDireccion = new JTextField();
 			textDireccion.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 			textDireccion.setColumns(10);
 			textDireccion.setBackground(SystemColor.menu);
-			textDireccion.setBounds(76, 212, 224, 20);
+			textDireccion.setBounds(92, 212, 224, 20);
 			panel.add(textDireccion);
 			
 			JFormattedTextField txtCelular = new JFormattedTextField();
 			txtCelular.setBackground(SystemColor.menu);
-			txtCelular.setBounds(224, 245, 76, 20);
+			txtCelular.setBounds(240, 245, 76, 20);
 			panel.add(txtCelular);
 			
 			JLabel lblGnero = new JLabel("G\u00E9nero:");
 			lblGnero.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblGnero.setBounds(10, 243, 71, 22);
+			lblGnero.setBounds(24, 243, 71, 22);
 			panel.add(lblGnero);
 			
 			JLabel lblEdad = new JLabel("Edad:");
 			lblEdad.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblEdad.setBounds(10, 309, 71, 22);
+			lblEdad.setBounds(24, 309, 71, 22);
 			panel.add(lblEdad);
 			
 			JLabel lblCdula = new JLabel("C\u00E9dula:");
 			lblCdula.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblCdula.setBounds(139, 92, 71, 22);
+			lblCdula.setBounds(154, 92, 71, 22);
 			panel.add(lblCdula);
 			
 			JLabel lblCdigo = new JLabel("C\u00F3digo:");
 			lblCdigo.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblCdigo.setBounds(139, 59, 71, 22);
+			lblCdigo.setBounds(154, 59, 71, 22);
 			panel.add(lblCdigo);
 			
 			JLabel lblCorreo = new JLabel("Correo:");
 			lblCorreo.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblCorreo.setBounds(10, 276, 71, 22);
+			lblCorreo.setBounds(24, 276, 71, 22);
 			panel.add(lblCorreo);
 			
 			textCorreo = new JTextField();
 			textCorreo.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 			textCorreo.setColumns(10);
 			textCorreo.setBackground(SystemColor.menu);
-			textCorreo.setBounds(76, 278, 224, 20);
+			textCorreo.setBounds(92, 278, 224, 20);
 			panel.add(textCorreo);
 			
 			textCodigo = new JTextField();
 			textCodigo.setText("Cliente_1");
 			textCodigo.setEditable(false);
 			textCodigo.setBackground(SystemColor.menu);
-			textCodigo.setBounds(192, 61, 107, 20);
+			textCodigo.setBounds(209, 61, 107, 20);
 			panel.add(textCodigo);
 			textCodigo.setColumns(10);
 			
@@ -193,7 +193,7 @@ public class RegistrarCliente extends JDialog {
 			
 			JFormattedTextField formattedTextField = new JFormattedTextField();
 			formattedTextField.setBackground(SystemColor.menu);
-			formattedTextField.setBounds(192, 94, 108, 20);
+			formattedTextField.setBounds(209, 94, 108, 20);
 			panel.add(formattedTextField);
 			
 			JLabel lblNewLabel_1 = new JLabel("");
@@ -203,49 +203,49 @@ public class RegistrarCliente extends JDialog {
 			
 			JLabel label = new JLabel("");
 			label.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
-			label.setBounds(300, 67, 46, 14);
+			label.setBounds(315, 67, 46, 14);
 			panel.add(label);
 			
 			JLabel label_1 = new JLabel("");
 			label_1.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
-			label_1.setBounds(300, 95, 46, 14);
+			label_1.setBounds(315, 92, 46, 14);
 			panel.add(label_1);
 			
 			JLabel label_2 = new JLabel("");
 			label_2.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
-			label_2.setBounds(300, 152, 46, 14);
+			label_2.setBounds(315, 152, 46, 14);
 			panel.add(label_2);
 			
 			JLabel label_3 = new JLabel("");
 			label_3.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
-			label_3.setBounds(300, 185, 46, 14);
+			label_3.setBounds(315, 185, 46, 14);
 			panel.add(label_3);
 			
 			JLabel label_4 = new JLabel("");
 			label_4.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
-			label_4.setBounds(300, 218, 46, 14);
+			label_4.setBounds(315, 218, 46, 14);
 			panel.add(label_4);
 			
 			JLabel label_5 = new JLabel("");
 			label_5.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
-			label_5.setBounds(300, 251, 46, 14);
+			label_5.setBounds(315, 251, 46, 14);
 			panel.add(label_5);
 			
 			JLabel lblRegistro = new JLabel("Registro\r\n");
-			lblRegistro.setBounds(170, 309, 55, 22);
+			lblRegistro.setBounds(178, 309, 55, 22);
 			panel.add(lblRegistro);
 			lblRegistro.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 			
 			txtRegistro = new JTextField();
 			txtRegistro.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 			txtRegistro.setEditable(false);
-			txtRegistro.setBounds(226, 311, 76, 20);
+			txtRegistro.setBounds(240, 310, 76, 20);
 			txtRegistro.setText((new SimpleDateFormat("yyyy/MM/dd")).format(new Date()));
 			panel.add(txtRegistro);
 			txtRegistro.setColumns(10);
 			
 			JLabel label_6 = new JLabel("");
-			label_6.setBounds(300, 276, 46, 14);
+			label_6.setBounds(315, 284, 46, 14);
 			panel.add(label_6);
 			label_6.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
 			
@@ -254,7 +254,7 @@ public class RegistrarCliente extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Proyectos", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(181, 407, 346, 104);
+		panel.setBounds(233, 410, 346, 90);
 		panel_1.add(panel);
 		panel.setLayout(null);
 		
@@ -272,85 +272,95 @@ public class RegistrarCliente extends JDialog {
 		JLabel labelCantidadProyectos = new JLabel("Cantidad de proyectos\r\n");
 		labelCantidadProyectos.setHorizontalAlignment(SwingConstants.CENTER);
 		labelCantidadProyectos.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		labelCantidadProyectos.setBounds(9, 29, 153, 22);
+		labelCantidadProyectos.setBounds(20, 29, 153, 22);
 		panel.add(labelCantidadProyectos);
 		
 		JLabel labelCantidadContratos = new JLabel("Cantidad de contratos\r\n\r\n");
 		labelCantidadContratos.setHorizontalAlignment(SwingConstants.CENTER);
 		labelCantidadContratos.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		labelCantidadContratos.setBounds(172, 29, 153, 22);
+		labelCantidadContratos.setBounds(183, 29, 153, 22);
 		panel.add(labelCantidadContratos);
 		
 		JSpinner spnCantidadProyectos = new JSpinner();
 		spnCantidadProyectos.setModel(new SpinnerNumberModel(0, null, 5, 1));
-		spnCantidadProyectos.setBounds(76, 56, 30, 20);
+		spnCantidadProyectos.setBounds(85, 56, 30, 20);
 		panel.add(spnCantidadProyectos);
 		
 		JSpinner spnCantidadContratos = new JSpinner();
 		spnCantidadContratos.setModel(new SpinnerNumberModel(0, null, 5, 1));
-		spnCantidadContratos.setBounds(240, 56, 30, 20);
+		spnCantidadContratos.setBounds(250, 56, 30, 20);
 		panel.add(spnCantidadContratos);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel_3.setBounds(10, 63, 161, 473);
+		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Principal", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_3.setBounds(10, 73, 208, 463);
 		panel_1.add(panel_3);
 		panel_3.setLayout(null);
 		
-		JButton btnTrabajadores = new JButton("\r\n\r\n\r\n\r\nTrabajadores");
-		btnTrabajadores.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		btnTrabajadores.setEnabled(false);
-		btnTrabajadores.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnTrabajadores.setBounds(0, 115, 161, 92);
-		panel_3.add(btnTrabajadores);
+		JButton btnTrabajadoresRegCliente = new JButton("Trabajadores\r\n");
+		btnTrabajadoresRegCliente.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_client_company_48px_1.png")));
+		btnTrabajadoresRegCliente.setEnabled(false);
+		btnTrabajadoresRegCliente.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		btnTrabajadoresRegCliente.setBounds(10, 70, 189, 89);
+		panel_3.add(btnTrabajadoresRegCliente);
 		
-		JButton btnClientes = new JButton("Clientes\r\n");
-		btnClientes.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		btnClientes.setEnabled(false);
-		btnClientes.setBounds(0, 207, 161, 92);
-		panel_3.add(btnClientes);
+		JButton btnClientesRegCliente = new JButton("Clientes");
+		btnClientesRegCliente.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_user_group_man_woman_48px.png")));
+		btnClientesRegCliente.setEnabled(false);
+		btnClientesRegCliente.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		btnClientesRegCliente.setBounds(10, 157, 189, 89);
+		panel_3.add(btnClientesRegCliente);
 		
-		JButton btnProyectos = new JButton("Proyectos");
-		btnProyectos.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		btnProyectos.setEnabled(false);
-		btnProyectos.setBounds(0, 298, 161, 92);
-		panel_3.add(btnProyectos);
+		JButton btnProyectosRegCliente = new JButton("Proyectos");
+		btnProyectosRegCliente.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_group_of_projects_48px.png")));
+		btnProyectosRegCliente.setEnabled(false);
+		btnProyectosRegCliente.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		btnProyectosRegCliente.setBounds(10, 241, 189, 89);
+		panel_3.add(btnProyectosRegCliente);
+		
+		JButton btnSalirRegCliente = new JButton("Salir");
+		btnSalirRegCliente.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_iMac_Exit_24px.png")));
+		btnSalirRegCliente.setEnabled(false);
+		btnSalirRegCliente.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		btnSalirRegCliente.setBounds(10, 329, 189, 89);
+		panel_3.add(btnSalirRegCliente);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel_4.setBounds(10, 11, 512, 41);
+		panel_4.setBounds(10, 11, 569, 41);
 		panel_1.add(panel_4);
 		panel_4.setLayout(null);
 		
-		JButton btnSalir = new JButton("Salir\r\n");
-		btnSalir.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_multiply_16px.png")));
-		btnSalir.setHorizontalAlignment(SwingConstants.RIGHT);
-		btnSalir.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		btnSalir.setBounds(420, 11, 82, 23);
-		panel_4.add(btnSalir);
+		JButton btnVolver = new JButton("Volver a la principal");
+		btnVolver.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_back_16px.png")));
+		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		btnVolver.setBounds(343, 11, 216, 23);
+		panel_4.add(btnVolver);
+		
+		JLabel lbliconoprincipal = new JLabel("");
+		lbliconoprincipal.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_link_company_child_16px.png")));
+		lbliconoprincipal.setBounds(10, 11, 76, 23);
+		panel_4.add(lbliconoprincipal);
 		
 		JButton btnCancelar = new JButton("Cancelar\r\n");
 		btnCancelar.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_delete_sign_16px.png")));
 		btnCancelar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnCancelar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		btnCancelar.setBounds(407, 513, 115, 23);
+		btnCancelar.setBounds(464, 513, 115, 23);
 		panel_1.add(btnCancelar);
 		
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_checkmark_16px.png")));
 		btnGuardar.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnGuardar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		btnGuardar.setBounds(299, 513, 103, 23);
+		btnGuardar.setBounds(356, 513, 103, 23);
 		panel_1.add(btnGuardar);
 		
 		JButton btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_broom_16px_1.png")));
 		btnLimpiar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		btnLimpiar.setHorizontalAlignment(SwingConstants.LEFT);
-		btnLimpiar.setBounds(191, 513, 103, 23);
+		btnLimpiar.setBounds(243, 513, 103, 23);
 		panel_1.add(btnLimpiar);
 		
 				
