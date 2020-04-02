@@ -37,7 +37,7 @@ import logico.Trabajadores;
 
 public class ListarTrabajadores extends JDialog {
 
-	//private Validation validation = new Validation();
+	
 		private final JPanel contentPanel = new JPanel();
 		private JTable tableTrabajadores;
 		private TableRowSorter<TableModel> sorter;
