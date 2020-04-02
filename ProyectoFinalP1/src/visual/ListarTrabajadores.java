@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -160,7 +161,7 @@ public class ListarTrabajadores extends JDialog {
 						btnModificar.setText("Modificar " + code);
 						btnEliminar.setText("Eliminar " + code);
 					} else {
-						Clear();
+						Clean();
 					}
 				}
 			});
@@ -189,10 +190,10 @@ public class ListarTrabajadores extends JDialog {
 							if (!code.equalsIgnoreCase("") && index >= 0) {
 								Trabajadores Trabajadores = Sistema.getInstance().trabajadorById(code);
 								if (Trabajadores != null) {
-									//TrabajadoresRegistration TrabajadoresRegistration = new TrabajadoresRegistration(Trabajadores);
-									//TrabajadoresRegistration.setModal(true);
-									//TrabajadoresRegistration.setVisible(true);
-									Clear();
+									RegistrarTrabajadores TrabajadoresRe = new RegistrarTrabajadores();
+									TrabajadoresRe.setModal(true);
+									TrabajadoresRe.setVisible(true);
+									Clean();
 								}
 							}
 						}
@@ -200,6 +201,8 @@ public class ListarTrabajadores extends JDialog {
 					
 					
 					btnModificar.setFont(new Font("SansSerif", Font.PLAIN, 14));
+					btnModificar.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
+
 					btnModificar.setActionCommand("OK");
 					buttonPane.add(btnModificar);
 					getRootPane().setDefaultButton(btnModificar);
@@ -212,6 +215,7 @@ public class ListarTrabajadores extends JDialog {
 						}
 					});
 					btnSalir.setFont(new Font("SansSerif", Font.PLAIN, 14));
+					btnSalir.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_multiply_16px.png")));
 					btnSalir.setActionCommand("Cancel");
 					buttonPane.add(btnSalir);
 				}
@@ -257,7 +261,7 @@ public class ListarTrabajadores extends JDialog {
 		    sorter.setRowFilter(filter);
 		}
 		
-		private void Clear() {
+		private void Clean() {
 			code = "";
 			index = -1;
 			btnModificar.setEnabled(false);

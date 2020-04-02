@@ -48,12 +48,12 @@ public class ListarProyectos extends JDialog {
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 	private static ListarProyectos listPro=null;
 	
-	/*public static ListarProyectos getInstance() {
+	public static ListarProyectos getInstance() {
 		if (listPro==null) {
 			listPro=new ListarProyectos();
 		}
 		return listPro;
-	}*/
+	}
 	
 	/*public static Sistema getInstance() {
 		if (Sistema == null) {
@@ -103,20 +103,13 @@ public class ListarProyectos extends JDialog {
 		
 		tableProjects = new JTable();
 		
-		//tableProjects.setDefaultRenderer(Object.class, render);
 		tableProjects.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				   int row=tableProjects.getSelectedRow();
 			        codContractTable= String.valueOf(model.getValueAt(row, 0));	
 			        System.out.println(codContractTable);
-			    	/*WindowCheckContract newWindowCont=new WindowCheckContract();
-					newWindowCont.setModal(true);
-					newWindowCont.setSize(1240, 520);
-					newWindowCont.setResizable(false);
-					newWindowCont.setLocationRelativeTo(null);
-					newWindowCont.setVisible(true);
-					loadUser();*/
+			    	
 					
 				
 			}
@@ -143,8 +136,7 @@ public class ListarProyectos extends JDialog {
 		
 		/*
 		 * 
-		 TableColumnModel columnModel = tabla.getColumnModel();
-columnModel.getColumn(2).setPreferredWidth(200);
+		
 		 * */
 		
 		

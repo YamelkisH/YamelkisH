@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -37,7 +38,6 @@ import logico.Sistema;
 
 public class ListarClientes extends JDialog {
 
-	//private Validation validation = new Validation();
 		private final JPanel contentPanel = new JPanel();
 		private JComboBox cbxColumnChooser;
 		private JTextField txtFiltro;
@@ -197,10 +197,10 @@ public class ListarClientes extends JDialog {
 							if (!code.equalsIgnoreCase("") && index >= 0) {
 								Cliente Cliente = Sistema.getInstance().clienteById(code);
 								if (Cliente != null) {
-								//	ClienteRegistration ClienteRegistration = new ClienteRegistration(Cliente);
-								//	ClienteRegistration.setModal(true);
-								//	ClienteRegistration.setVisible(true);
-									normalState();
+									RegistrarCliente Client= new RegistrarCliente();
+									Client.setModal(true);
+									Client.setVisible(true);
+									Clean();
 								}
 							}
 						}
@@ -208,20 +208,22 @@ public class ListarClientes extends JDialog {
 					
 					btnModificar.setEnabled(false);
 					btnModificar.setFont(new Font("SansSerif", Font.PLAIN, 14));
+					btnModificar.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
 					btnModificar.setActionCommand("OK");
 					buttonPane.add(btnModificar);
 					getRootPane().setDefaultButton(btnModificar);
 				}
 				{
-					JButton cancelButton = new JButton("Salir");
-					cancelButton.addActionListener(new ActionListener() {
+					JButton btnSalir = new JButton("Salir");
+					btnSalir.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
 							dispose();
 						}
 					});
-					cancelButton.setFont(new Font("SansSerif", Font.PLAIN, 14));
-					cancelButton.setActionCommand("Cancel");
-					buttonPane.add(cancelButton);
+					btnSalir.setFont(new Font("SansSerif", Font.PLAIN, 14));
+					btnSalir.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_multiply_16px.png")));
+					btnSalir.setActionCommand("Cancel");
+					buttonPane.add(btnSalir);
 				}
 			}
 		}
@@ -255,7 +257,7 @@ public class ListarClientes extends JDialog {
 			model.addRow(rows);
 		}
 		
-		private void normalState() {
+		private void Clean() {
 			code = "";
 			index = -1;
 			btnModificar.setEnabled(false);
