@@ -3,6 +3,7 @@ package visual;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -66,6 +67,7 @@ public class ListarTrabajadores extends JDialog {
 		public ListarTrabajadores() {
 			setResizable(false);
 			setTitle("Lista de Trabajadores");
+			setIconImage(Toolkit.getDefaultToolkit().getImage(ListarTrabajadores.class.getResource("/img/icons8_add_user_male_64px.png")));
 			setBounds(100, 100, 1038, 472);
 			setLocationRelativeTo(null);
 			getContentPane().setLayout(new BorderLayout());
@@ -132,9 +134,19 @@ public class ListarTrabajadores extends JDialog {
 				// TODO: handle exception
 			}
 			txtFiltro.setEnabled(false);
-			txtFiltro.setBounds(357, 20, 339, 20);
+			txtFiltro.setBounds(357, 20, 264, 20);
 			panel.add(txtFiltro);
 			txtFiltro.setColumns(10);
+			
+			JButton btnVolver = new JButton("Volver a la principal");
+			btnVolver.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			btnVolver.setIcon(new ImageIcon(ListarTrabajadores.class.getResource("/img/icons8_back_16px.png")));
+			btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+			btnVolver.setBounds(780, 19, 210, 23);
+			panel.add(btnVolver);
 			
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, null, null), "Trabajadores", TitledBorder.LEADING, TitledBorder.TOP, null, null));

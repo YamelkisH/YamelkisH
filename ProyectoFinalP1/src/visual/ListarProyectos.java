@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Label;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -13,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -83,6 +85,8 @@ public class ListarProyectos extends JDialog {
 	public ListarProyectos() {
 		setResizable(false);
 		setTitle("Listar Proyectos");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarProyecto.class.getResource("/img/icons8_new_copy_40px.png")));
+
 		setBounds(100, 100, 1269, 545);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
@@ -212,7 +216,19 @@ public class ListarProyectos extends JDialog {
 		panel_1.add(txtfiltrer);
 		txtfiltrer.setColumns(10);
 		{
-			JPanel buttonPane = new JPanel();
+
+		JButton btnVolver = new JButton("Volver a la principal");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnVolver.setIcon(new ImageIcon(ListarProyectos.class.getResource("/img/icons8_back_16px.png")));
+		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		btnVolver.setBounds(1013, 28, 210, 23);
+		panel_1.add(btnVolver);
+		
+					JPanel buttonPane = new JPanel();
 			buttonPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);

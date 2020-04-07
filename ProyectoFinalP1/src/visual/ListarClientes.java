@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -64,6 +65,8 @@ public class ListarClientes extends JDialog {
 		public ListarClientes() {
 			setResizable(false);
 			setTitle("Lista de Clientes");
+			setIconImage(Toolkit.getDefaultToolkit().getImage(ListarClientes.class.getResource("/img/icons8_add_user_male_64px.png")));
+
 			setBounds(100, 100, 1038, 437);
 			setLocationRelativeTo(null);
 			getContentPane().setLayout(new BorderLayout());
@@ -133,6 +136,17 @@ public class ListarClientes extends JDialog {
 			txtFiltro.setBounds(357, 20, 256, 20);
 			panel.add(txtFiltro);
 			txtFiltro.setColumns(10);
+			
+			JButton btnVolver = new JButton("Volver a la principal");
+			btnVolver.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
+			btnVolver.setBounds(792, 19, 210, 23);
+			btnVolver.setIcon(new ImageIcon(ListarClientes.class.getResource("/img/icons8_back_16px.png")));
+			btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+			panel.add(btnVolver);
 			{
 				JPanel panel_1 = new JPanel();
 				panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, null, null), "Clientees", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
