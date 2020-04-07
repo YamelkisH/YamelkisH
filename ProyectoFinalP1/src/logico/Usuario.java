@@ -11,18 +11,18 @@ public class Usuario extends Persona implements Serializable {
 	private String usuario;
 	private String contrasena;
 	private String tipo;
-	private String code;
+	private String codigoDeCreacion;
 	private Date ultimaEntrada;
 	private boolean estado;
 	
 	public Usuario(String id, String cedula, String nombre, String apellido, String direccion, String genero, int edad,
-			String celular, String correo, String usuario, String contrasena, String tipo, String code,
+			String celular, String correo, String usuario, String contrasena, String tipo, String codigoDeCreacion,
 			Date ultimaEntrada, boolean estado) {
 		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo);
 		this.usuario = usuario;
 		this.contrasena = contrasena;
 		this.tipo = tipo;
-		this.code = code;
+		this.codigoDeCreacion = codigoDeCreacion;
 		this.ultimaEntrada = ultimaEntrada;
 		this.estado = estado;
 	}
@@ -51,12 +51,12 @@ public class Usuario extends Persona implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public String getCode() {
-		return code;
+	public String getcodigoDeCreacion() {
+		return codigoDeCreacion;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setcodigoDeCreacion(String codigoDeCreacion) {
+		this.codigoDeCreacion = codigoDeCreacion;
 	}
 
 	public Date getUltimaEntrada() {
