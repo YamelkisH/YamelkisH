@@ -141,6 +141,7 @@ public class ListarTrabajadores extends JDialog {
 			JButton btnVolver = new JButton("Volver a la principal");
 			btnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					dispose();
 				}
 			});
 			btnVolver.setIcon(new ImageIcon(ListarTrabajadores.class.getResource("/img/icons8_back_16px.png")));

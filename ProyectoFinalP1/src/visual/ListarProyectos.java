@@ -220,6 +220,7 @@ public class ListarProyectos extends JDialog {
 		JButton btnVolver = new JButton("Volver a la principal");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				
 			}
 		});

@@ -357,6 +357,11 @@ public class RegistrarTrabajadores extends JDialog {
 		panel_4.setLayout(null);
 		
 		JButton button = new JButton("Volver a la principal");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		button.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_back_16px.png")));
 		button.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		button.setBounds(339, 11, 216, 23);
@@ -368,6 +373,11 @@ public class RegistrarTrabajadores extends JDialog {
 		panel_4.add(label_1);
 		
 		JButton btnSalir = new JButton("Salir\r\n");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnSalir.setBounds(479, 547, 96, 23);
 		panel_1.add(btnSalir);
 		btnSalir.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_multiply_16px.png")));
@@ -383,7 +393,7 @@ public class RegistrarTrabajadores extends JDialog {
 		btnLimpiar.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_broom_16px_1.png")));
 		btnLimpiar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		btnLimpiar.setHorizontalAlignment(SwingConstants.LEFT);
-		btnLimpiar.setBounds(239, 547, 102, 23);
+		btnLimpiar.setBounds(249, 547, 102, 23);
 		panel_1.add(btnLimpiar);
 		
 		

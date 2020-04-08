@@ -7,10 +7,12 @@ public class Cliente extends Persona {
 	private Date FechaRegistro;
 	
 	public Cliente(String id, String cedula, String nombre, String apellido, String direccion, String genero, int edad,
-			String celular, String correo, int cantProyectos, Date fechaRegistro) {
+			String celular, String correo) {
 		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo);
-		this.cantProyectos = cantProyectos;
-		FechaRegistro = fechaRegistro;
+		
+		
+		this.cantProyectos = 0;
+		FechaRegistro = new Date();
 	}
 
 	public int getCantProyectos() {

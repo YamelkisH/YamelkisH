@@ -18,6 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -26,7 +27,17 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+
+import com.toedter.calendar.JDateChooser;
+
+import logico.Cliente;
+import logico.Sistema;
+
 import javax.swing.SwingConstants;
+import com.toedter.calendar.JDayChooser;
+
+
+
 
 public class RegistrarProyecto extends JDialog {
 
@@ -35,12 +46,13 @@ public class RegistrarProyecto extends JDialog {
 	private JTextField textApellidos;
 	private JTextField textDireccion;
 	private JTextField textCodigo;
-	private JTextField txtFechaInicio;
 	private JLabel lblRegistro;
-	private JTextField txtFechaFin;
-	private JTextField textField;
+	private JTextField textTotal;
 	private JTextField txtCodigo;
 	private JTextField txtCodigocontrato;
+	private Date fecha = new Date();
+	private JDateChooser fechaFin;
+	private JDateChooser fechaInicio;
 
 	/**
 	 * Launch the application.
@@ -85,6 +97,13 @@ public class RegistrarProyecto extends JDialog {
 		panel_4.setLayout(null);
 		
 		JButton btnRegistrarTrabajador = new JButton("Registrar ");
+		btnRegistrarTrabajador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			//	if(!txtQueryNombreCliente.getText().equalsIgnoreCase("") && SoftwareCompany.getInstance().calcDays(dateBegin, dateEnd)>1 ))
+				
+			}
+		});
 		btnRegistrarTrabajador.setHorizontalAlignment(SwingConstants.LEFT);
 		btnRegistrarTrabajador.setBounds(265, 544, 132, 23);
 		panel_4.add(btnRegistrarTrabajador);
@@ -92,6 +111,11 @@ public class RegistrarProyecto extends JDialog {
 		btnRegistrarTrabajador.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		
 		JButton btnSalir = new JButton("Salir\r\n");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnSalir.setBounds(397, 544, 102, 23);
 		panel_4.add(btnSalir);
 		btnSalir.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_multiply_16px.png")));
@@ -227,11 +251,70 @@ public class RegistrarProyecto extends JDialog {
 			lblimagen.setBounds(408, 11, 71, 64);
 			panel_3.add(lblimagen);
 			
-			JButton btnNewButton = new JButton("Buscar");
-			btnNewButton.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			btnNewButton.setIcon(new ImageIcon(RegistrarProyecto.class.getResource("/img/icons8_search_16px.png")));
-			btnNewButton.setBounds(274, 28, 107, 23);
-			panel_3.add(btnNewButton);
+			JButton btnBuscarClienteByCedula = new JButton("Buscar");
+			btnBuscarClienteByCedula.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					String cedulaInsertada = txtCedula.getText();
+					Cliente cliente = Sistema.getInstance().clienteByCedula(cedulaInsertada);
+					if(cliente!= null) {
+					
+
+					}
+					
+					
+					
+					
+					/*
+					
+					String auxCodQuery=txtQueryCodClient.getText();
+				Client client=SoftwareCompany.getInstance().clientById(auxCodQuery);
+				if (client!=null) {
+					dateBegin.setEnabled(true);
+					dateEnd.setEnabled(true);
+					btnGenerar.setEnabled(true);
+					txtQueryNameClient.setText(SoftwareCompany.getInstance().clientById(auxCodQuery).getName()+" "+SoftwareCompany.getInstance().clientById(auxCodQuery).getLast_name());
+					//txt.setText(SoftwareCompany.getInstance().clientById(auxCodQuery).getLast_name());
+					txtQueryAddress.setText(SoftwareCompany.getInstance().clientById(auxCodQuery).getAddress());
+					txtQueryTel.setText(SoftwareCompany.getInstance().clientById(auxCodQuery).getPhone());
+					
+					
+					if (client.getPicture() == null) {
+						lblimg.setIcon(new ImageIcon(ProjectRegistration.class.getResource("/com/sun/java/swing/plaf/windows/icons/UpFolder.gif")));
+						lblimg.setText("<Imagen>");
+					} else {
+						lblimg.setIcon(client.getPicture());
+						lblimg.setText("");
+					}
+					
+					//BigTxtContract.setText("Yo "+SoftwareCompany.getInstance().clientById(auxCodQuery).getName()+" "+SoftwareCompany.getInstance().clientById(auxCodQuery).getLast_name()+" en virtud de esta prueba"+SoftwareCompany.getInstance().clientById(auxCodQuery).getId());
+					
+					
+				}else {
+					 Object[] options = {"Si!","No"};
+					int x=JOptionPane.showOptionDialog(null, "Cliente no Existe,¿Desea registrarlo?", "Error", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+				
+					if (x==0) {
+						ClientRegistration registration = new ClientRegistration(null);
+						registration.setModal(true);
+						registration.setVisible(true);
+					}
+				}
+				
+				
+			}
+		});
+					
+					
+					
+					
+					*/
+				}
+			});
+			btnBuscarClienteByCedula.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+			btnBuscarClienteByCedula.setIcon(new ImageIcon(RegistrarProyecto.class.getResource("/img/icons8_search_16px.png")));
+			btnBuscarClienteByCedula.setBounds(274, 28, 107, 23);
+			panel_3.add(btnBuscarClienteByCedula);
 			
 			JLabel lblCdigo = new JLabel("C\u00F3digo:");
 			lblCdigo.setFont(new Font("Times New Roman", Font.PLAIN, 15));
@@ -264,16 +347,29 @@ public class RegistrarProyecto extends JDialog {
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Informacion del proyecto", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setLayout(null);
 		
-		txtFechaInicio = new JTextField();
-		txtFechaInicio.setBackground(SystemColor.menu);
-		txtFechaInicio.setBounds(118, 40, 132, 20);
-		panel.add(txtFechaInicio);
-		txtFechaInicio.setColumns(10);
 		
 		JLabel lblFechaInicio = new JLabel("Fecha de inicio:");
 		lblFechaInicio.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		lblFechaInicio.setBounds(9, 38, 99, 22);
 		panel.add(lblFechaInicio);
+		
+		fechaInicio = new JDateChooser();
+		fechaInicio.getCalendarButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		fechaInicio.setBounds(118, 40, 132, 20);
+	     panel.add(fechaInicio);
+	     fechaInicio.setMinSelectableDate(fecha);
+	     
+	     fechaFin = new JDateChooser();
+	     fechaFin.getCalendarButton().addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+	     fechaFin.setBounds(330, 40, 132, 20);
+		     panel.add(fechaFin);
+		     fechaFin.setMinSelectableDate(fecha);
 		
 		JLabel lblTipodeProyecto = new JLabel("Tipo de software");
 		lblTipodeProyecto.setFont(new Font("Times New Roman", Font.PLAIN, 15));
@@ -293,11 +389,7 @@ public class RegistrarProyecto extends JDialog {
 		lblFechaFin.setBounds(273, 38, 99, 22);
 		panel.add(lblFechaFin);
 		
-		txtFechaFin = new JTextField();
-		txtFechaFin.setColumns(10);
-		txtFechaFin.setBackground(SystemColor.menu);
-		txtFechaFin.setBounds(334, 40, 128, 20);
-		panel.add(txtFechaFin);
+		
 		
 		JLabel labelCodigo = new JLabel("C\u00F3digo de proyecto:");
 		labelCodigo.setFont(new Font("Times New Roman", Font.PLAIN, 15));
@@ -320,12 +412,20 @@ public class RegistrarProyecto extends JDialog {
 		labelCodigoContrato.setBounds(9, 157, 132, 22);
 		panel.add(labelCodigoContrato);
 		
-		JButton btnNewButton_1 = new JButton("Generar contrato");
-		btnNewButton_1.setIcon(new ImageIcon(RegistrarProyecto.class.getResource("/img/icons8_agreement_16px.png")));
-		btnNewButton_1.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton_1.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		btnNewButton_1.setBounds(160, 109, 167, 23);
-		panel.add(btnNewButton_1);
+		JButton btnGenerarContrato = new JButton("Generar contrato");
+		btnGenerarContrato.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int diasCalculados=Sistema.getInstance().calculoDias(fechaInicio, fechaFin);
+				if (diasCalculados>0) {
+					textTotal.setText(Float.toString(precioProyecto(diasCalculados)));
+					textTotal.setBackground(new Color(255, 255, 204));
+			}
+		}});
+		btnGenerarContrato.setIcon(new ImageIcon(RegistrarProyecto.class.getResource("/img/icons8_agreement_16px.png")));
+		btnGenerarContrato.setHorizontalAlignment(SwingConstants.LEFT);
+		btnGenerarContrato.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		btnGenerarContrato.setBounds(160, 109, 167, 23);
+		panel.add(btnGenerarContrato);
 		
 		txtCodigocontrato = new JTextField();
 		txtCodigocontrato.setEnabled(false);
@@ -357,13 +457,13 @@ public class RegistrarProyecto extends JDialog {
 		panel_2.setBounds(10, 471, 489, 60);
 		panel_4.add(panel_2);
 		
-		textField = new JTextField();
-		textField.setEnabled(false);
-		textField.setEditable(false);
-		textField.setColumns(10);
-		textField.setBackground(Color.WHITE);
-		textField.setBounds(347, 23, 132, 20);
-		panel_2.add(textField);
+		textTotal = new JTextField();
+		textTotal.setEnabled(false);
+		textTotal.setEditable(false);
+		textTotal.setColumns(10);
+		textTotal.setBackground(Color.WHITE);
+		textTotal.setBounds(347, 23, 132, 20);
+		panel_2.add(textTotal);
 		
 		JLabel labelTotal = new JLabel("Total");
 		labelTotal.setFont(new Font("Times New Roman", Font.PLAIN, 15));
@@ -389,5 +489,32 @@ public class RegistrarProyecto extends JDialog {
 		btnLimpiar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		btnLimpiar.setHorizontalAlignment(SwingConstants.LEFT);
 
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//PRECIO POR PROYECTO
+	public float precioProyecto(int dias) {
+		float aux=0;
+		float amount=0;
+		float percent=0;
+		
+		/*for (int i = 0; i < DLMWorkersSelected.size(); i++) {
+			String[] codSplit=DLMWorkersSelected.getElementAt(i).toString().split(" ");
+			aux=SoftwareCompany.getInstance().searchWorkerByCode(codSplit[0]).getSalary()*8*days;
+			amount+=aux;
+			aux=0;
+		}
+		percent=(float) (amount*0.25);
+		amount+=percent;*/
+		return amount;
+		
 	}
 }

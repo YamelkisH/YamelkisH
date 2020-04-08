@@ -140,7 +140,7 @@ public class ListarClientes extends JDialog {
 			JButton btnVolver = new JButton("Volver a la principal");
 			btnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+					dispose();
 				}
 			});
 			btnVolver.setBounds(792, 19, 210, 23);
@@ -149,7 +149,7 @@ public class ListarClientes extends JDialog {
 			panel.add(btnVolver);
 			{
 				JPanel panel_1 = new JPanel();
-				panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, null, null), "Clientees", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, null, null), "Clientes", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 				panel_1.setBounds(10, 79, 1012, 277);
 				contentPanel.add(panel_1);
 				panel_1.setLayout(new BorderLayout(0, 0));

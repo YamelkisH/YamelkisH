@@ -11,6 +11,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -19,6 +21,15 @@ import javax.swing.JMenuItem;
 import java.awt.Font;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
+
+import logico.Sistema;
+
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
@@ -62,6 +73,9 @@ public class Principal extends JFrame {
 	private final JMenuItem mntmNewMenuItem_3 = new JMenuItem("Registrar");
 	private final JMenuBar menuBarProyectos = new JMenuBar();
 	private final JMenuItem mntmNewMenuItem_4 = new JMenuItem("Listar");
+	private final JPanel panelProyectosAnuales = new JPanel();
+	private final JPanel panel_proyectosActivos = new JPanel();
+	private final JPanel panel_Ingresos = new JPanel();
 
 	/**
 	 * Launch the application.
@@ -164,6 +178,17 @@ public class Principal extends JFrame {
 		
 		panel.add(panel_2);
 		panel_2.setLayout(null);
+		panelProyectosAnuales.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Proyectos anuales", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelProyectosAnuales.setBounds(398, 21, 359, 179);
+		
+		panel_2.add(panelProyectosAnuales);
+		panel_Ingresos.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ingresos mensuales", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_Ingresos.setBounds(72, 211, 604, 179);
+		
+		panel_2.add(panel_Ingresos);
+		panel_proyectosActivos.setBounds(18, 21, 365, 179);
+		panel_2.add(panel_proyectosActivos);
+		panel_proyectosActivos.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Proyectos activos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_3.setBackground(SystemColor.menu);
 		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Acceso r\u00E1pido", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_3.setBounds(239, 429, 780, 86);
@@ -274,4 +299,99 @@ public class Principal extends JFrame {
 		
 	
 	}
+	
+	
+	public void graphPie() {
+		
+		
+		
+		 DefaultPieDataset data = new DefaultPieDataset();
+		 int proFin=0;
+		 int proInProces=0;
+		 int proProrrogado=0;
+		 int nuevo=0;
+		 
+		 for (int i = 0; i < Sistema.getInstance().getProyectos().size(); i++) {
+			 if (Sistema.getInstance().getProyectos().get(i).getEstado().equalsIgnoreCase("Terminado")) {
+				 proFin++;
+			}else if(Sistema.getInstance().getProyectos().get(i).getEstado().equalsIgnoreCase("En Proceso")) {
+				proInProces++;
+			}else if(Sistema.getInstance().getProyectos().get(i).getEstado().equalsIgnoreCase("Prorrogado")) {
+				proProrrogado++;
+			}else if(Sistema.getInstance().getProyectos().get(i).getEstado().equalsIgnoreCase("Nuevo")) {
+				nuevo++;
+			}
+			
+		}
+		 
+		/* data.setValue(key, value);
+		 data.setValue("Proyectos Terminados", proFin);
+	        data.setValue("Proyectos En Proceso", proInProces);
+	        data.setValue("Proyectos Prorrogados", proProrrogado);
+	        data.setValue("Proyectos Nuevo", nuevo);
+	 
+	        
+	         chart = ChartFactory.createPieChart3D(
+	         "Grafica Status Proyectos", 
+	         data, 
+	         true, 
+	         true, 
+	         false);
+	       //chart.setBackgroundPaint(new Color(222, 222, 255));
+	      // chart.setBorderPaint(Color.WHITE);
+	      
+	       PiePlot plot = (PiePlot) chart.getPlot();
+	       plot.setSectionPaint("Proyectos Terminados", new Color( 130, 224, 170 ));
+	       plot.setSectionPaint("Proyectos Prorrogados", new Color( 236, 112, 99 ));
+	       plot.setSectionPaint("Proyectos En Proceso", new Color( 247, 220, 111 ));
+	       plot.setSectionPaint("Proyectos Nuevo", new Color( 133, 193, 233 ));
+	       plot.setBackgroundPaint(Color.WHITE);
+	       
+	       try {
+				ChartUtilities.saveChartAsJPEG(new File("graficopie.jpg"), chart, 500, 500);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	       
+*/
+	        
+	}
+	
+	
+		   
+
+		  /* private static PieDataset createDataset( ) {
+		      DefaultPieDataset dataset = new DefaultPieDataset( );
+		      dataset.setValue(5, 2);
+		      dataset.setValue( "IPhone 5s" , new Double( 20 ) );  
+		      dataset.setValue( "SamSung Grand" , new Double( 20 ) );   
+		      dataset.setValue( "MotoG" , new Double( 40 ) );    
+		      dataset.setValue( "Nokia Lumia" , new Double( 10 ) );  
+		      return dataset;         
+		   }
+		   
+		   private static JFreeChart createChart( PieDataset dataset ) {
+		      JFreeChart chart = ChartFactory.createPieChart(      
+		         "Mobile Sales",   // chart title 
+		         dataset,          // data    
+		         true,             // include legend   
+		         true, 
+		         false);
+
+		      return chart;
+		   }
+		   
+		   public static JPanel createDemoPanel( ) {
+		      JFreeChart chart = createChart(createDataset( ) );  
+		      return new ChartPanel( chart ); 
+		   }
+
+		   public static void main( String[ ] args ) {
+		      PieChart_AWT demo = new PieChart_AWT( "Mobile Sales" );  
+		      demo.setSize( 560 , 367 );    
+		      RefineryUtilities.centerFrameOnScreen( demo );    
+		      demo.setVisible( true ); 
+		   }
+		}*/
 }

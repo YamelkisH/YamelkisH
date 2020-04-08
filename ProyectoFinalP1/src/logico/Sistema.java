@@ -3,6 +3,8 @@ package logico;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import com.toedter.calendar.JDateChooser;
+
 //import com.toedter.calendar.JDateChooser;
 
 public class Sistema {
@@ -182,6 +184,18 @@ public class Sistema {
 		return aux;
 	}
 	
+	public Cliente clienteByCedula(String cedula) {//funcion para buscar cliente por cedula
+		Cliente aux = null;
+		for (Cliente client : clientes) {
+			if (client.getCedula().equalsIgnoreCase(cedula)) {
+				aux = client;
+			}
+		}
+		return aux;
+	}
+	
+	
+	
 	
 	public Contratos contratoById(String id) { //funcion para buscar contrato 
 		Contratos aux = null;
@@ -233,23 +247,22 @@ public class Sistema {
 	}
 	
 	
+//FUNCION PARA CALCULAR FECHA 
 	
-	/*public int calculoDias(JDateChooser dateBegin, JDateChooser dateEnd) {
-		int days = 0;
+	
+	public int calculoDias(JDateChooser fechaInicio, JDateChooser fechaFin) {
+		int dias = 0;
 		
-		if (dateBegin.getDate()!=null && dateEnd.getDate()!=null) {
-			Calendar init=dateBegin.getCalendar();
-			Calendar end=dateEnd.getCalendar();
+		if (fechaInicio.getDate()!=null && fechaFin.getDate()!=null) {
+			Calendar init=fechaInicio.getCalendar();
+			Calendar end=fechaFin.getCalendar();
 		
 			while(init.before(end) || init.equals(end)) {
-				days++;
+				dias++;
 				init.add(Calendar.DATE, 1);
 			}
 			
 		}
-		return days;	
+		return dias;	
 	}
-	
-	
-	*/
 }

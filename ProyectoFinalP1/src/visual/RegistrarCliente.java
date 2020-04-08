@@ -13,11 +13,17 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+
+import logico.Cliente;
+import logico.Sistema;
+
 import javax.swing.UIManager;
 import java.awt.Window.Type;
 import java.awt.SystemColor;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
@@ -34,6 +40,36 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Toolkit;
+
+import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.MaskFormatter;
+
+
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+
+
+
 public class RegistrarCliente extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -41,12 +77,19 @@ public class RegistrarCliente extends JDialog {
 	private JTextField textApellidos;
 	private JTextField textDireccion;
 	private JTextField textCorreo;
+	private JTextField txtCelular;
 	private JTextField textCodigo;
+	private JTextField textCedula;
 	private JTextField textSalario;
 	private JButton BtnTrabajadores = new JButton("Trabajadores\r\n");
 	private JButton BtnClientes = new JButton("Clientes");
 	private JButton BtnProyectos = new JButton("Proyectos");
 	private JTextField txtRegistro;
+	private JComboBox cbxGenero;
+	private JSpinner spnEdad;
+	private Cliente cliente;
+	private boolean flagModifying = false;
+
 
 	/**
 	 * Launch the application.
@@ -65,6 +108,7 @@ public class RegistrarCliente extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistrarCliente() {
+		//this.cliente = cliente;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarCliente.class.getResource("/img/icons8_add_user_male_64px.png")));
 		setResizable(false);
 		setTitle("Registrar cliente");
@@ -77,6 +121,7 @@ public class RegistrarCliente extends JDialog {
 		contentPanel.setLayout(null);
 		contentPanel.setLayout(null);
 		
+		//PANEL
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(SystemColor.control);
 		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -84,18 +129,19 @@ public class RegistrarCliente extends JDialog {
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
 		{
+			//PANEL
 			JPanel panel = new JPanel();
 			panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, null, null), "Datos personales", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panel.setBounds(233, 63, 346, 342);
 			panel_1.add(panel);
 			panel.setLayout(null);
 			
+			//JLABEL
 			
-			
-			JLabel lblNewLabel = new JLabel("Nombres:");
-			lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblNewLabel.setBounds(24, 144, 71, 22);
-			panel.add(lblNewLabel);
+			JLabel lblNombres = new JLabel("Nombres:");
+			lblNombres.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+			lblNombres.setBounds(24, 144, 71, 22);
+			panel.add(lblNombres);
 			
 			JLabel lblApellidos = new JLabel("Apellidos:");
 			lblApellidos.setFont(new Font("Times New Roman", Font.PLAIN, 15));
@@ -104,14 +150,16 @@ public class RegistrarCliente extends JDialog {
 			
 			JLabel lblCelular = new JLabel("Celular:");
 			lblCelular.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblCelular.setBounds(178, 243, 71, 22);
+			lblCelular.setBounds(191, 243, 71, 22);
 			panel.add(lblCelular);
 			
-			JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
-			lblDireccin.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblDireccin.setBounds(24, 210, 71, 22);
-			panel.add(lblDireccin);
+			JLabel lblDireccion = new JLabel("Direcci\u00F3n:");
+			lblDireccion.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+			lblDireccion.setBounds(24, 210, 71, 22);
+			panel.add(lblDireccion);
 			
+			
+			//TXT
 			textNombres = new JTextField();
 			textNombres.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 			textNombres.setBackground(SystemColor.menu);
@@ -138,6 +186,8 @@ public class RegistrarCliente extends JDialog {
 			txtCelular.setBounds(240, 245, 76, 20);
 			panel.add(txtCelular);
 			
+			
+			//JLABEL
 			JLabel lblGnero = new JLabel("G\u00E9nero:");
 			lblGnero.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 			lblGnero.setBounds(24, 243, 71, 22);
@@ -163,6 +213,7 @@ public class RegistrarCliente extends JDialog {
 			lblCorreo.setBounds(24, 276, 71, 22);
 			panel.add(lblCorreo);
 			
+			//TXT
 			textCorreo = new JTextField();
 			textCorreo.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 			textCorreo.setColumns(10);
@@ -178,28 +229,34 @@ public class RegistrarCliente extends JDialog {
 			panel.add(textCodigo);
 			textCodigo.setColumns(10);
 			
+			//CBX
 			JComboBox cbxGenero = new JComboBox();
 			cbxGenero.setBackground(SystemColor.menu);
 			cbxGenero.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Masculino", "Femenino"}));
 			cbxGenero.setEditable(true);
-			cbxGenero.setBounds(76, 244, 92, 22);
+			cbxGenero.setBounds(92, 244, 92, 22);
 			panel.add(cbxGenero);
 			
+			//SPN
 			JSpinner spnEdad = new JSpinner();
 			spnEdad.setBackground(SystemColor.menu);
 			spnEdad.setModel(new SpinnerNumberModel(18, 18, 60, 1));
-			spnEdad.setBounds(76, 311, 92, 20);
+			spnEdad.setBounds(92, 311, 76, 20);
 			panel.add(spnEdad);
 			
-			JFormattedTextField formattedTextField = new JFormattedTextField();
-			formattedTextField.setBackground(SystemColor.menu);
-			formattedTextField.setBounds(209, 94, 108, 20);
-			panel.add(formattedTextField);
+			JFormattedTextField textCedula = new JFormattedTextField();
+			textCedula.setBackground(SystemColor.menu);
+			textCedula.setBounds(209, 94, 108, 20);
+			panel.add(textCedula);
 			
+			
+			//JLABEL
 			JLabel lblNewLabel_1 = new JLabel("");
 			lblNewLabel_1.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_add_image_64px_1.png")));
 			lblNewLabel_1.setBounds(28, 33, 92, 78);
 			panel.add(lblNewLabel_1);
+			
+			
 			
 			JLabel label = new JLabel("");
 			label.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
@@ -236,6 +293,7 @@ public class RegistrarCliente extends JDialog {
 			panel.add(lblRegistro);
 			lblRegistro.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 			
+			//TXT
 			txtRegistro = new JTextField();
 			txtRegistro.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 			txtRegistro.setEditable(false);
@@ -282,12 +340,12 @@ public class RegistrarCliente extends JDialog {
 		panel.add(labelCantidadContratos);
 		
 		JSpinner spnCantidadProyectos = new JSpinner();
-		spnCantidadProyectos.setModel(new SpinnerNumberModel(0, null, 5, 1));
+		spnCantidadProyectos.setModel(new SpinnerNumberModel(0, 0, 5, 1));
 		spnCantidadProyectos.setBounds(85, 56, 30, 20);
 		panel.add(spnCantidadProyectos);
 		
 		JSpinner spnCantidadContratos = new JSpinner();
-		spnCantidadContratos.setModel(new SpinnerNumberModel(0, null, 5, 1));
+		spnCantidadContratos.setModel(new SpinnerNumberModel(0, 0, 5, 1));
 		spnCantidadContratos.setBounds(250, 56, 30, 20);
 		panel.add(spnCantidadContratos);
 		
@@ -297,13 +355,15 @@ public class RegistrarCliente extends JDialog {
 		panel_1.add(panel_3);
 		panel_3.setLayout(null);
 		
+		
+		//BTN VOLVER A TRABAJADORES
 		JButton btnTrabajadoresRegCliente = new JButton("Trabajadores\r\n");
 		btnTrabajadoresRegCliente.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_client_company_48px_1.png")));
 		btnTrabajadoresRegCliente.setEnabled(false);
 		btnTrabajadoresRegCliente.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		btnTrabajadoresRegCliente.setBounds(10, 70, 189, 89);
 		panel_3.add(btnTrabajadoresRegCliente);
-		
+		//BTN VOLVER A CLIENTES
 		JButton btnClientesRegCliente = new JButton("Clientes");
 		btnClientesRegCliente.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_user_group_man_woman_48px.png")));
 		btnClientesRegCliente.setEnabled(false);
@@ -311,6 +371,7 @@ public class RegistrarCliente extends JDialog {
 		btnClientesRegCliente.setBounds(10, 157, 189, 89);
 		panel_3.add(btnClientesRegCliente);
 		
+		//BTN VOLVER A PROYECTOS
 		JButton btnProyectosRegCliente = new JButton("Proyectos");
 		btnProyectosRegCliente.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_group_of_projects_48px.png")));
 		btnProyectosRegCliente.setEnabled(false);
@@ -318,6 +379,8 @@ public class RegistrarCliente extends JDialog {
 		btnProyectosRegCliente.setBounds(10, 241, 189, 89);
 		panel_3.add(btnProyectosRegCliente);
 		
+		
+//BTN SALIR
 		JButton btnSalirRegCliente = new JButton("Salir");
 		btnSalirRegCliente.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_iMac_Exit_24px.png")));
 		btnSalirRegCliente.setEnabled(false);
@@ -331,7 +394,13 @@ public class RegistrarCliente extends JDialog {
 		panel_1.add(panel_4);
 		panel_4.setLayout(null);
 		
+//BTN VOLVER
 		JButton btnVolver = new JButton("Volver a la principal");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnVolver.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_back_16px.png")));
 		btnVolver.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		btnVolver.setBounds(343, 11, 216, 23);
@@ -342,28 +411,240 @@ public class RegistrarCliente extends JDialog {
 		lbliconoprincipal.setBounds(10, 11, 76, 23);
 		panel_4.add(lbliconoprincipal);
 		
+//BTN CANCELAR
 		JButton btnCancelar = new JButton("Cancelar\r\n");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnCancelar.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_delete_sign_16px.png")));
 		btnCancelar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnCancelar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		btnCancelar.setBounds(464, 513, 115, 23);
 		panel_1.add(btnCancelar);
 		
+//BTN GUARDAR
+		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if ((verificarInfo())) {
+				{	boolean registrado = false;
+					String cedula = textCedula.getText();
+					String celular = txtCelular.getText();
+					String nombre = textNombres.getText();
+					String apellido = textApellidos.getText();
+					String direccion = textDireccion.getText();
+					String correo = textCorreo.getText();
+				    int edad = Integer.parseInt(spnEdad.getValue().toString());
+					String genero = cbxGenero.getSelectedItem().toString();
+					String id = textCodigo.getText();
+					
+					if(cliente == null){
+						cliente = new Cliente(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo);
+
+						//cliente.setMail(correo);
+						//storePicture();
+						Sistema.getInstance().insertarCliente(cliente);					
+						registrado = true;
+						JOptionPane.showMessageDialog(null, "Operación sactisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
+
+			}
+					else {
+						cliente.setNombre(nombre);     
+						cliente.setApellido(apellido);
+						cliente.setCorreo(correo);
+						cliente.setCelular(celular);
+						cliente.setDireccion(direccion);
+						cliente.setEdad(edad);
+					//	storePicture();
+						registrado = true;
+						Sistema.getInstance().insertarCliente(cliente);
+						JOptionPane.showMessageDialog(null, "Operación sactisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
+					}
+					
+					if (registrado && !flagModifying) {
+						JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Clientes", JOptionPane.INFORMATION_MESSAGE);
+						clear();
+					} else if (flagModifying) {
+						dispose();
+
+			}
+					
+
+		}}
+				
+				//GUARDAR IMAGEN
+				/*private void storePicture() {
+					if (lblImagen.getIcon() != (new ImageIcon(ClientRegistration.class.getResource("/com/sun/java/swing/plaf/windows/icons/UpFolder.gif")))) {
+						client.setPicture((ImageIcon) lblImagen.getIcon());
+					} else {
+						client.setPicture(null);
+					}
+				}*/
+			
+			}});
+		
+		
+		 
+
 		btnGuardar.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_checkmark_16px.png")));
 		btnGuardar.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnGuardar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		btnGuardar.setBounds(356, 513, 103, 23);
 		panel_1.add(btnGuardar);
+	
+//BTN LIMPIAR
 		
 		JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clear();
+			}
+		});
 		btnLimpiar.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_broom_16px_1.png")));
 		btnLimpiar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		btnLimpiar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnLimpiar.setBounds(243, 513, 103, 23);
 		panel_1.add(btnLimpiar);
 		
+		/*if (aux != null) {
+			client = aux;
+			completeInfo();
+			flagModifying  = true;
+			txtCedula.setText(aux.getId());
+		}*/
 				
 		
-	}
 }
+
+	
+	
+	//FUNCIONES
+
+
+	//FUNCION PARA COMPROBAR LOS DATOS
+
+	private boolean verificarInfo() {
+		boolean infoCorrecta = false;
+	if(textCedula.getText().contains("_") && !textNombres.getText().equalsIgnoreCase("") && !textApellidos.getText().equalsIgnoreCase("") && !txtCelular.getText().contains("_") && !textDireccion.getText().equalsIgnoreCase("") && cbxGenero.getSelectedIndex() > 0 && Integer.parseInt(spnEdad.getValue().toString()) > 0) {
+		infoCorrecta = true;
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Revise los campos", "Clientes", JOptionPane.INFORMATION_MESSAGE);
+
+	}
+
+	return infoCorrecta; }
+
+
+
+//FUNCION PARA LIMPIAR
+
+
+private void clear() {
+	textCodigo.setText("CL-" + (Sistema.codigoCliente + 1));
+	textCedula.setText("");
+	txtCelular.setText("");
+	textNombres.setText("");
+	textApellidos.setText("");
+	textDireccion.setText("");
+	textCorreo.setText("");
+	cbxGenero.setSelectedIndex(0);
+	spnEdad.setValue(18);
+	txtRegistro.setText((new SimpleDateFormat("yyyy/MM/dd")).format(new Date()));
+
+	
+	/*
+	 * 
+	 * 
+	 private void clear() {
+		txtCodigo.setText("CL-" + (SoftwareCompany.codClients + 1));
+
+		txtCantProyectos.setText("0");
+		txtFechaRegistro.setText((new SimpleDateFormat("yyyy/MM/dd")).format(new Date()));
+		lblImagen.setIcon(new ImageIcon(ClientRegistration.class.getResource("/com/sun/java/swing/plaf/windows/icons/UpFolder.gif")));
+		lblImagen.setText("<Imagen>");
+		stateOfCampos(false);
+		btnGuardar.setText("Guardar");
+		btnGuardar.setEnabled(false);
+		setTitle("Registrar Clientes");
+		btnEditCedula.setEnabled(false);
+		txtCedula.setEditable(true);
+		txtCedula.requestFocus();
+	 */
+
+}
+
+//FUNCION PARA AJUSTAR IMAGEN
+
+/*
+ * 
+ private ImageIcon ResizeImage(String ImagePath) {
+        ImageIcon MyImage = new ImageIcon(ImagePath);
+        Image img = MyImage.getImage();
+        Image newImg = img.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImg);
+        return image;
+    }
+ * 
+ * 
+ */
+
+//FUNCION PARA VERIFICAR LA INFO DE LOS CAMPOS
+
+
+ private void stateOfCampos(boolean b) {
+		txtCelular.setEditable(b);
+		textNombres.setEditable(b);
+		textApellidos.setEditable(b);
+		textCorreo.setEditable(b);
+		textDireccion.setEditable(b);
+	//	lblImagen.setEnabled(b);
+		cbxGenero.setEnabled(b);
+		spnEdad.setEnabled(b);
+	}
+	
+ 
+
+//INFO COMPLETA
+
+
+private void informacionCompleta() {
+	stateOfCampos(true);
+	/*if (client.getPicture() == null) {
+		lblImagen.setIcon(new ImageIcon(ClientRegistration.class.getResource("/com/sun/java/swing/plaf/windows/icons/UpFolder.gif")));
+		lblImagen.setText("<Imagen>");
+	} else {
+		lblImagen.setIcon(client.getPicture());
+	}*/
+	textCodigo.setText(cliente.getId());
+	txtCelular.setText(cliente.getCelular());
+	textNombres.setText(cliente.getNombre());
+	textApellidos.setText(cliente.getApellido());
+	textDireccion.setText(cliente.getDireccion());
+	textCorreo.setText(cliente.getCorreo());
+	cbxGenero.setSelectedItem(cliente.getGenero());
+	spnEdad.setValue(cliente.getEdad());
+	/*txtCantProyectos.setText(client.getCant_projects() + "");
+	txtFechaRegistro.setText((new SimpleDateFormat("yyyy/MM/dd")).format(client.getRegistration_date()));
+	btnGuardar.setText("Modificar");
+	setTitle("Modificar Cliente: " + client.getId());
+	btnEditCedula.setEnabled(false);
+	txtCedula.setEditable(false);
+	cbxGenero.setEnabled(false);
+	txtNombres.setEditable(false);
+	txtApellidos.setEditable(false);
+	btnGuardar.setEnabled(true);*/
+}
+}
+
+
+
+
+
+
+
+
