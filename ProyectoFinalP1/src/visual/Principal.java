@@ -46,7 +46,7 @@ public class Principal extends JFrame {
 	private Icon icono;
 	private Usuario user;
 	private final JMenu mnCerrarSesin = new JMenu("Usuarios");
-	private final JMenuItem mntmNewMenuItem = new JMenuItem("Cerrar sesi\u00F3n");
+	private final JMenuItem mntmCerrarSesion = new JMenuItem("Cerrar sesi\u00F3n");
 	private final JMenuItem mntmRegistrarProyecto = new JMenuItem("Registrar proyecto");
 	private final JMenuItem mntmRegistrarCliente = new JMenuItem("Registrar cliente");
 	private final JMenuItem mntmModificarCliente = new JMenuItem("Modificar cliente");
@@ -79,6 +79,7 @@ public class Principal extends JFrame {
 	private final JPanel panelProyectosAnuales = new JPanel();
 	private final JPanel panel_proyectosActivos = new JPanel();
 	private final JPanel panel_Ingresos = new JPanel();
+	private final JMenuItem mntmListarUsuario = new JMenuItem("Listar usuario");
 
 	/**
 	 * Launch the application.
@@ -179,21 +180,25 @@ public class Principal extends JFrame {
 		
 		menuBar.add(mnCerrarSesin);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Registrar usuario");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+		JMenuItem mntmRegistrarUsuario = new JMenuItem("Registrar usuario");
+		mntmRegistrarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegistrarUsuario RegUsu = new RegistrarUsuario(user, null);
 				RegUsu.setModal(true);
 				RegUsu.setVisible(true);
 			}
 		});
-		mntmNewMenuItem_1.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_add_user_male_24px.png")));
-		mntmNewMenuItem_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-		mnCerrarSesin.add(mntmNewMenuItem_1);
-		mntmNewMenuItem.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_logout_rounded_16px.png")));
-		mntmNewMenuItem.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		mntmRegistrarUsuario.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_add_user_male_24px.png")));
+		mntmRegistrarUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		mnCerrarSesin.add(mntmRegistrarUsuario);
+		mntmListarUsuario.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_bulleted_list_16px.png")));
+		mntmListarUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		
-		mnCerrarSesin.add(mntmNewMenuItem);
+		mnCerrarSesin.add(mntmListarUsuario);
+		mntmCerrarSesion.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_logout_rounded_16px.png")));
+		mntmCerrarSesion.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		
+		mnCerrarSesin.add(mntmCerrarSesion);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

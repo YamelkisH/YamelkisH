@@ -24,6 +24,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -66,9 +68,12 @@ public class UserLogin extends JFrame {
 					catch (Exception e) {
 						try {
 							outputStream = new FileOutputStream("SistemaGestionSoftware.dat");
-							//Usuario usuario = new Usuario("USER-" + (Sistema.codigoUsuarios + 1), "000-0000000-0", "ADMINISTRADOR", "", "", "", 1, "", "admin", "admin", "ADMINISTRADOR", "USER-" + (Sistema.codigoUsuarios + 1));
-							//new Usuario("USER-" + (Sistema.codigoUsuarios + 1), "000-0000000-0", "ADMINISTRADOR", "", "", "", 1, "", "admin", "admin", "ADMINISTRADOR", "USER-" + (Sistema.codigoUsuarios + 1));
-							//Sistema.getInstance().insertarUsuario(usuario);
+						//	Usuario usuario = new Usuario((Sistema.codigoUsuarios + 1), "000-0000000-0", "ADMINISTRADOR", "", "", "", 18, "", "admin", "admin", "ADMINISTRADOR", "USER-" + (Sistema.codigoUsuarios + 1)););				
+		// 		super(id, cedula, nombre, apellido, direccion, genero, edad, celular);
+					
+		//		super(code, id, name, last_name, address, gender, age, phone);
+
+		//Sistema.getInstance().insertarUsuario(usuario);
 							outputStream.close();
 						} catch (Exception e2) {
 							System.out.println("Error al crear fichero!");
@@ -92,6 +97,23 @@ public class UserLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public UserLogin() {
+		try {
+			getContentPane().addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					Salir(e);
+				}
+			});
+			addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					Salir(e);
+				}
+			});
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		setTitle("UserLogin");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(UserLogin.class.getResource("/img/icons8_link_company_child_16px.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 511, 324);
@@ -144,6 +166,7 @@ public class UserLogin extends JFrame {
 		panel_3.add(label_4);
 		
 		txtContrasena = new JTextField();
+		
 		txtContrasena.setColumns(10);
 		txtContrasena.setBackground(new Color(230, 230, 250));
 		txtContrasena.setBounds(39, 19, 177, 27);
@@ -156,6 +179,7 @@ public class UserLogin extends JFrame {
 		panel_3.add(label_5);
 		
 		JButton btnEntrar = new JButton("Entrar");
+		
 		btnEntrar.setIcon(new ImageIcon(UserLogin.class.getResource("/img/icons8_conference_call_16px.png")));
 		btnEntrar.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		btnEntrar.setBounds(10, 267, 99, 23);
@@ -217,5 +241,17 @@ public class UserLogin extends JFrame {
 		label_7.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		label_7.setBounds(141, 158, 54, 56);
 		panel_1.add(label_7);
+		
+
+
+
 	}
+	protected void Salir(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			dispose();
+		
+	}
+	
+	}
+	
 }
