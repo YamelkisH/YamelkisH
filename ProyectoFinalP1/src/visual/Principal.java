@@ -11,8 +11,12 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -39,7 +43,7 @@ import javax.swing.border.MatteBorder;
 
 
 
-public class Principal extends JFrame {
+public class Principal extends JFrame implements Runnable{
 
 	private JPanel contentPane;
 	private ImageIcon imagen;
@@ -102,6 +106,15 @@ public class Principal extends JFrame {
 	 */
 	public Principal(Usuario usuario) {
 		setResizable(false);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				guardarDatos();
+				System.exit(0);
+			}
+		});
+			
+			
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/img/icons8_link_company_child_16px.png")));
 		setTitle("Compa\u00F1\u00EDa de Software ");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -203,6 +216,14 @@ public class Principal extends JFrame {
 		mntmListarUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		
 		mnCerrarSesin.add(mntmListarUsuario);
+		mntmCerrarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				guardarDatos();
+				dispose();
+				System.exit(0);
+				
+			}
+		});
 		mntmCerrarSesion.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_logout_rounded_16px.png")));
 		mntmCerrarSesion.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		
@@ -392,7 +413,9 @@ public class Principal extends JFrame {
 		
 		
 		 DefaultPieDataset data = new DefaultPieDataset();
-		 int proFin=0;
+		// data.setValue("terminados", 20);
+		 
+		 /*int proFin=0;
 		 int proInProces=0;
 		 int proProrrogado=0;
 		 int nuevo=0;
@@ -408,7 +431,7 @@ public class Principal extends JFrame {
 				nuevo++;
 			}
 			
-		}
+		}*/
 		 
 		/* data.setValue(key, value);
 		 data.setValue("Proyectos Terminados", proFin);
@@ -444,40 +467,29 @@ public class Principal extends JFrame {
 	        
 	}
 	
-	
-		   
+	private void guardarDatos() {
+		FileOutputStream system;
+		ObjectOutputStream writer;
+		try {
+			system = new FileOutputStream("SistemaGestionSoftware.dat");
+			writer = new ObjectOutputStream(system);
+			writer.writeObject(Sistema.getInstance());
+			writer.writeInt(Sistema.codigoTrabajadores);
+			writer.writeInt(Sistema.codigoProyectos);
+			writer.writeInt(Sistema.codigoCliente);
+			writer.writeInt(Sistema.codigoUsuarios);
+			writer.writeInt(Sistema.codigoContratos);
+			writer.close();
+			system.close();
+		} catch (Exception e) {
+			System.out.println("Error al guardar los datos" + e.toString());
+		}
+	}
 
-		  /* private static PieDataset createDataset( ) {
-		      DefaultPieDataset dataset = new DefaultPieDataset( );
-		      dataset.setValue(5, 2);
-		      dataset.setValue( "IPhone 5s" , new Double( 20 ) );  
-		      dataset.setValue( "SamSung Grand" , new Double( 20 ) );   
-		      dataset.setValue( "MotoG" , new Double( 40 ) );    
-		      dataset.setValue( "Nokia Lumia" , new Double( 10 ) );  
-		      return dataset;         
-		   }
-		   
-		   private static JFreeChart createChart( PieDataset dataset ) {
-		      JFreeChart chart = ChartFactory.createPieChart(      
-		         "Mobile Sales",   // chart title 
-		         dataset,          // data    
-		         true,             // include legend   
-		         true, 
-		         false);
 
-		      return chart;
-		   }
-		   
-		   public static JPanel createDemoPanel( ) {
-		      JFreeChart chart = createChart(createDataset( ) );  
-		      return new ChartPanel( chart ); 
-		   }
-
-		   public static void main( String[ ] args ) {
-		      PieChart_AWT demo = new PieChart_AWT( "Mobile Sales" );  
-		      demo.setSize( 560 , 367 );    
-		      RefineryUtilities.centerFrameOnScreen( demo );    
-		      demo.setVisible( true ); 
-		   }
-		}*/
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
 }
