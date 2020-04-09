@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 import com.toedter.calendar.JDateChooser;
 
+
 import logico.Proyectos;
 import logico.Trabajadores;
 import logico.Cliente;
@@ -20,11 +21,13 @@ public class Sistema implements Serializable{
 	private ArrayList<Proyectos> proyectos;
 	private ArrayList<Cliente> clientes;
 	private ArrayList<Contratos> contrato;
+	private ArrayList<Usuario> usuarios;
 	private static Sistema sistema = null; 
 	public static int codigoCliente = 0;
 	public static int codigoTrabajadores = 0;
 	public static int codigoProyectos = 0;
 	public static int codigoContratos = 0;
+	public static int codigoUsuarios = 0;
 	
 	public Sistema() {
 		super();
@@ -32,6 +35,7 @@ public class Sistema implements Serializable{
 		this.proyectos = new ArrayList<Proyectos>();
 		this.clientes = new ArrayList<Cliente>();
 		this.contrato = new ArrayList<Contratos>();
+		this.usuarios = new ArrayList<Usuario>();
 	}
 	
 	public static Sistema getInstance() {
@@ -175,9 +179,12 @@ public class Sistema implements Serializable{
 		codigoProyectos++;
 	}
 
+	public void insertarUsuario(Usuario usuario) {//insertar usuario
+		usuarios.add(usuario);
+		codigoUsuarios++;
+	}
 	
-	
-	
+
 	
 	
 	
