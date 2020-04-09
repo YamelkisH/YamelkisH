@@ -80,7 +80,7 @@ public class RegistrarProyecto extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarProyecto.class.getResource("/img/icons8_new_copy_40px.png")));
 		setResizable(false);
 		setTitle("Registrar proyecto");
-		setBounds(100, 100, 545, 630);
+		setBounds(100, 100, 545, 750);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.LIGHT_GRAY);
@@ -92,13 +92,13 @@ public class RegistrarProyecto extends JDialog {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(SystemColor.control);
 		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel_1.setBounds(0, 0, 532, 600);
+		panel_1.setBounds(0, 0, 532, 731);
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel_4.setBounds(10, 11, 512, 578);
+		panel_4.setBounds(10, 11, 512, 709);
 		panel_1.add(panel_4);
 		panel_4.setLayout(null);
 		
@@ -193,7 +193,7 @@ public class RegistrarProyecto extends JDialog {
 	    });				
 		
 		btnRegistrarTrabajador.setHorizontalAlignment(SwingConstants.LEFT);
-		btnRegistrarTrabajador.setBounds(265, 544, 132, 23);
+		btnRegistrarTrabajador.setBounds(261, 675, 132, 23);
 		panel_4.add(btnRegistrarTrabajador);
 		btnRegistrarTrabajador.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_checkmark_16px.png")));
 		btnRegistrarTrabajador.setFont(new Font("Times New Roman", Font.PLAIN, 15));
@@ -204,7 +204,7 @@ public class RegistrarProyecto extends JDialog {
 				dispose();
 			}
 		});
-		btnSalir.setBounds(397, 544, 102, 23);
+		btnSalir.setBounds(397, 675, 102, 23);
 		panel_4.add(btnSalir);
 		btnSalir.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_multiply_16px.png")));
 		btnSalir.setFont(new Font("Times New Roman", Font.PLAIN, 15));
@@ -353,50 +353,8 @@ public class RegistrarProyecto extends JDialog {
 					
 					
 					
-					/*
-					
-					String auxCodQuery=txtQueryCodClient.getText();
-				Client client=Sistema.getInstance().clientById(auxCodQuery);
-				if (client!=null) {
-					dateBegin.setEnabled(true);
-					dateEnd.setEnabled(true);
-					btnGenerar.setEnabled(true);
-					txtQueryNameClient.setText(Sistema.getInstance().clientById(auxCodQuery).getName()+" "+Sistema.getInstance().clientById(auxCodQuery).getLast_name());
-					//txt.setText(Sistema.getInstance().clientById(auxCodQuery).getLast_name());
-					txtQueryAddress.setText(Sistema.getInstance().clientById(auxCodQuery).getAddress());
-					txtQueryTel.setText(Sistema.getInstance().clientById(auxCodQuery).getPhone());
 					
 					
-					if (client.getPicture() == null) {
-						lblimg.setIcon(new ImageIcon(ProjectRegistration.class.getResource("/com/sun/java/swing/plaf/windows/icons/UpFolder.gif")));
-						lblimg.setText("<Imagen>");
-					} else {
-						lblimg.setIcon(client.getPicture());
-						lblimg.setText("");
-					}
-					
-					//BigTxtContract.setText("Yo "+Sistema.getInstance().clientById(auxCodQuery).getName()+" "+Sistema.getInstance().clientById(auxCodQuery).getLast_name()+" en virtud de esta prueba"+Sistema.getInstance().clientById(auxCodQuery).getId());
-					
-					
-				}else {
-					 Object[] options = {"Si!","No"};
-					int x=JOptionPane.showOptionDialog(null, "Cliente no Existe,¿Desea registrarlo?", "Error", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-				
-					if (x==0) {
-						ClientRegistration registration = new ClientRegistration(null);
-						registration.setModal(true);
-						registration.setVisible(true);
-					}
-				}
-				
-				
-			}
-		});
-					
-					
-					
-					
-					*/
 				}
 			});
 			btnBuscarClienteByCedula.setFont(new Font("Times New Roman", Font.PLAIN, 15));
@@ -542,7 +500,7 @@ public class RegistrarProyecto extends JDialog {
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Cargos", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_2.setBounds(10, 471, 489, 60);
+		panel_2.setBounds(10, 604, 489, 60);
 		panel_4.add(panel_2);
 		
 		textTotal = new JTextField();
@@ -571,11 +529,45 @@ public class RegistrarProyecto extends JDialog {
 		panel_2.add(comboBox);
 		*/
 		JButton btnLimpiar = new JButton("Limpiar");
-		btnLimpiar.setBounds(158, 544, 108, 23);
+		btnLimpiar.setBounds(153, 675, 108, 23);
 		panel_4.add(btnLimpiar);
 		btnLimpiar.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_broom_16px_1.png")));
 		btnLimpiar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		btnLimpiar.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Trabajadores", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_3.setBounds(10, 482, 489, 124);
+		panel_4.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("Filtro");
+		lblNewLabel_1.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		lblNewLabel_1.setBounds(10, 22, 46, 14);
+		panel_3.add(lblNewLabel_1);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
+		comboBox.setEnabled(false);
+		comboBox.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		comboBox.setBackground(SystemColor.menu);
+		comboBox.setBounds(48, 18, 164, 22);
+		panel_3.add(comboBox);
+		
+		JLabel lblSeleccionados = new JLabel("Seleccionados:");
+		lblSeleccionados.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		lblSeleccionados.setBounds(288, 22, 103, 14);
+		panel_3.add(lblSeleccionados);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBackground(Color.WHITE);
+		panel_5.setBounds(47, 47, 165, 66);
+		panel_3.add(panel_5);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBackground(Color.WHITE);
+		panel_6.setBounds(288, 47, 185, 66);
+		panel_3.add(panel_6);
 
 	}
 	
