@@ -439,11 +439,11 @@ public class Principal extends JFrame implements Runnable{
 		fechaActual.setDate(new Date());
 		int progressDays = Sistema.getInstance().calculoDias(fechaInicio, fechaActual);
 		int totalDays = Sistema.getInstance().calculoDias(fechaInicio, fechaFinal);
-		int porcentage = (int) (((float) progressDays)/((float) totalDays) * 100);
-		if (porcentage >= 100) {
-			porcentage = 100;
+		int porcentaje = (int) (((float) progressDays)/((float) totalDays) * 100);
+		if (porcentaje >= 100) {
+			porcentaje = 100;
 		}
-		return porcentage;
+		return porcentaje;
 	}
 
 	@Override
