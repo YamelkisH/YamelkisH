@@ -117,7 +117,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnNewMenu_1);
 		mntmRegistrarTrabajador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegistrarTrabajadores RegTra = new RegistrarTrabajadores();
+				RegistrarTrabajadores RegTra = new RegistrarTrabajadores(null);
 				RegTra.setModal(true);
 				RegTra.setVisible(true);
 			}
@@ -287,7 +287,7 @@ public class Principal extends JFrame {
 		TrabajadoresMenuBar.add(mnTrabajadores);
 		mntReg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegistrarTrabajadores RegTra = new RegistrarTrabajadores();
+				RegistrarTrabajadores RegTra = new RegistrarTrabajadores(null);
 				RegTra.setModal(true);
 				RegTra.setVisible(true);
 			}

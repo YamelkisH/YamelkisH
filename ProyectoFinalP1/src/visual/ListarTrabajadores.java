@@ -203,7 +203,7 @@ public class ListarTrabajadores extends JDialog {
 							if (!code.equalsIgnoreCase("") && index >= 0) {
 								Trabajadores Trabajadores = Sistema.getInstance().trabajadorById(code);
 								if (Trabajadores != null) {
-									RegistrarTrabajadores TrabajadoresRe = new RegistrarTrabajadores();
+									RegistrarTrabajadores TrabajadoresRe = new RegistrarTrabajadores(null);
 									TrabajadoresRe.setModal(true);
 									TrabajadoresRe.setVisible(true);
 									Clean();

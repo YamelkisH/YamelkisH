@@ -13,21 +13,33 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+
+
+import logico.Cliente;
+import logico.Jefe;
+import logico.Sistema;
+import logico.Trabajadores;
+
 import javax.swing.UIManager;
 import java.awt.Window.Type;
 import java.awt.SystemColor;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import javax.swing.SpinnerNumberModel;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
@@ -43,29 +55,44 @@ public class RegistrarTrabajadores extends JDialog {
 	private JTextField textCorreo;
 	private JTextField textCodigo;
 	private JTextField textSalario;
+	private JTextField txtCelular;
+	private JTextField textCedula;
 	private JButton BtnTrabajadores = new JButton("Trabajadores\r\n");
 	private JButton BtnClientes = new JButton("Clientes");
 	private JButton BtnProyectos = new JButton("Proyectos");
+	private Trabajadores trabajador;
+	private JComboBox cbxGenero;
+	private JSpinner spnEdad;
+	private JSpinner spnExperiencia;
+	private int seleccion = 0;
+	public static String[] languajesDisponibles = {"C", "C++", "C#", "Java", "JavaScript", "Python", "Visual Basic", "Go", "Angular JS", "PHP", "HTML", "CSS", "Verilog"};
+	public static String[] especialidades = {"<Seleccione>", "App. Escritorio", "Paginas WEB", "Movil"};
+	private String[] lenguajesDominados = {"<Lenguajes Dominados>"};
+	private DefaultListModel modelListDisponibles;
+	private DefaultListModel modelListDominados;
+	private JList listLengDisponibles;
+	private JList listLengDominados;
+	private boolean flagModifying = false;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			RegistrarTrabajadores dialog = new RegistrarTrabajadores();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	/**
 	 * Create the dialog.
 	 */
-	public RegistrarTrabajadores() {
+	public RegistrarTrabajadores(Trabajadores aux) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarTrabajadores.class.getResource("/img/add_user_group_woman_man_48px.png")));
 		setResizable(false);
+		
+		if (aux != null) {
+			setTitle("Modificar Trabajador: " + aux.getId());
+			trabajador = aux;
+			flagModifying = true;
+		} else {
+			setTitle("Registro de Trabajadores");
+		}
 		setTitle("Registrar trabajador");
 		setBounds(100, 100, 597, 615);
 		//100, 100, 610, 580
@@ -191,10 +218,10 @@ public class RegistrarTrabajadores extends JDialog {
 			spnEdad.setBounds(76, 222, 101, 20);
 			panel.add(spnEdad);
 			
-			JFormattedTextField formattedTextField = new JFormattedTextField();
-			formattedTextField.setBackground(SystemColor.menu);
-			formattedTextField.setBounds(226, 222, 74, 20);
-			panel.add(formattedTextField);
+			JFormattedTextField textCedula = new JFormattedTextField();
+			textCedula.setBackground(SystemColor.menu);
+			textCedula.setBounds(226, 222, 74, 20);
+			panel.add(textCedula);
 			
 			JLabel lblNewLabel_1 = new JLabel("");
 			lblNewLabel_1.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_add_image_64px_1.png")));
@@ -304,11 +331,11 @@ public class RegistrarTrabajadores extends JDialog {
 		lblAosDeExperiencia.setBounds(171, 27, 149, 22);
 		panel_2.add(lblAosDeExperiencia);
 		
-		JSpinner spnAnnosExperiencia = new JSpinner();
-		spnAnnosExperiencia.setBackground(SystemColor.menu);
-		spnAnnosExperiencia.setModel(new SpinnerNumberModel(1, 1, 35, 1));
-		spnAnnosExperiencia.setBounds(217, 57, 39, 20);
-		panel_2.add(spnAnnosExperiencia);
+		JSpinner spnExperiencia = new JSpinner();
+		spnExperiencia.setBackground(SystemColor.menu);
+		spnExperiencia.setModel(new SpinnerNumberModel(1, 1, 35, 1));
+		spnExperiencia.setBounds(217, 57, 39, 20);
+		panel_2.add(spnExperiencia);
 		
 		JSpinner spnDependientes = new JSpinner();
 		spnDependientes.setBackground(SystemColor.menu);
@@ -386,10 +413,164 @@ public class RegistrarTrabajadores extends JDialog {
 		JButton btnRegistrarTrabajador = new JButton("Registrar ");
 		btnRegistrarTrabajador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(validos()) {
+					String id = textCodigo.getText();
+					String cedula = textCedula.getText();
+					String nombres = textNombres.getText();
+					String apellidos = textApellidos.getText();
+					String direccion = textDireccion.getText();
+					String genero = cbxGenero.getSelectedItem().toString(); 
+					String celular = txtCelular.getText().toString(); 
+					String correo = textCorreo.getText();
 				
+				
+					int edad = Integer.parseInt(spnEdad.getValue().toString());
+					float salarioHoras = (textSalario.getText().equalsIgnoreCase(""))?0:Float.parseFloat(textSalario.getText());
+					Trabajadores trabajador = null;
+					
+					switch (seleccion) {
+					case 0:
+						if (Integer.parseInt(spnExperiencia.getValue().toString()) >= 0) {
+							int experiencia = Integer.parseInt(spnExperiencia.getValue().toString());
+
+								trabajador = new Jefe(id, cedula, nombres, apellidos, direccion, genero, edad, celular, correo, salarioHoras);
+						} else {
+							JOptionPane.showMessageDialog(null, "Revise los años de experencia del jefe de proyecto", "Trabajadores", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						break;
+						
+					case 1:
+						if (modelListDominados.getSize() > 1) {
+							ArrayList<String> lenguajes = new ArrayList<>();
+							for (int i = 1; i < modelListDominados.getSize() ; i++) {
+								lenguajes.add((String) modelListDominados.get(i));
+							}
+							/*aux = new Programmer(cod, cedula, nombres, apellidos, direccion, genero, edad, telefono, salario);
+							for (String string : lenguajes) {
+								((Programmer) aux).insertLanguages(string);
+							}
+						} else {
+							JOptionPane.showMessageDialog(null, "Debe elegir, por lo menos, un lenguaje de programación", "Trabajadores", JOptionPane.ERROR_MESSAGE);
+							return;
+						}*/
+						break;
+						
+						
+					}
+				}
+				
+				/*
+				 * 
+				 * 
+
+							
+							case 2:
+								if (cbxEspecialidad.getSelectedIndex() >= 0) {
+									String especilidad = cbxEspecialidad.getSelectedItem().toString();
+									aux = new Designer(cod, cedula, nombres, apellidos, direccion, genero, edad, telefono, salario, especilidad);
+								} else {
+									JOptionPane.showMessageDialog(null, "Seleccione la especialidad del diseñador", "Trabajadores", JOptionPane.ERROR_MESSAGE);
+									return;
+								}
+								break;
+							case 3:
+								if (Integer.parseInt(spnFrecPlani.getValue().toString()) >= 1) {
+									int frecPlani = Integer.parseInt(spnFrecPlani.getValue().toString());
+									aux = new Planner(cod, cedula, nombres, apellidos, direccion, genero, edad, telefono, salario, frecPlani);
+								} else {
+									JOptionPane.showMessageDialog(null, "Revise la frecuencia de planificación de los proyectos", "Trabajadores", JOptionPane.ERROR_MESSAGE);
+									return;
+								}
+								break;
+							}
+							aux.setPicture((ImageIcon) lblImage.getIcon());
+							aux.setMail(txtCorreo.getText());
+							if (worker == null) {
+								SoftwareCompany.getInstance().insertWorker(aux);
+							} else {
+								worker.setPicture(aux.getPicture());
+								worker.setAddress(aux.getAddress());
+								worker.setPhone(aux.getPhone());
+								worker.setAge(aux.getAge());
+								worker.setSalary(aux.getSalary());
+								worker.setMail(aux.getMail());
+								
+								if (aux instanceof Boss) {
+									((Boss) worker).setExperience_years(((Boss) aux).getExperience_years());
+								} else if (aux instanceof Programmer) {
+									((Programmer) worker).setLanguages(((Programmer) aux).getLanguages());
+								} else if (aux instanceof Designer) {
+									((Designer) worker).setMaster(((Designer) aux).getMaster());
+								} else {
+									((Planner) worker).setCant_days(((Planner) aux).getCant_days());
+								}
+							}
+							if (flagModifying) {
+								dispose();
+							} else {
+								JOptionPane.showMessageDialog(null, "Operación Exitosa", "Trabajadores", JOptionPane.INFORMATION_MESSAGE);
+								clearCamps();
+								disableAllCamps();
+								disableTipos();
+								btnModificarCedula.setEnabled(false);
+								btnGuardar.setEnabled(false);
+								txtCedula.setText("");
+								txtCedula.setEditable(true);
+								txtCedula.requestFocus();
+							}
+						}
+					}
+				});
+				 * 
+				 * 
+				 public void actionPerformed(ActionEvent e) {
+				cliente = null;
+				if (checkCampos()) {
+					boolean registrado = false;
+					String codigo = textCodigo.getText();
+					String cedula = textCedula.getText();
+					String telefono = txtCelular.getText();
+					String nombre = textNombres.getText();
+					String apellidos = textApellidos.getText();
+					String direccion = textDireccion.getText();
+					String genero = cbxGenero.getSelectedItem().toString();//problemas aqui
+					String correo = textCorreo.getText();
+					int edad = Integer.valueOf(spnEdad.getValue().toString());
+				
+					if (cliente == null) {
+						cliente = new Cliente(codigo,cedula,nombre,apellidos,direccion,genero,edad,telefono);
+						cliente.setCorreo(correo);
+	//storePicture();
+						Sistema.getInstance().insertarCliente(cliente);
+						registrado = true;
+					} else {
+						cliente.setNombre(nombre);
+						cliente.setApellido(apellidos);
+						cliente.setCorreo(correo);
+						cliente.setCelular(telefono);
+						cliente.setDireccion(direccion);
+						cliente.setEdad(44);
+						//storePicture();
+						registrado = true;
+					}
+					
+					if (registrado && !flagModifying) {
+						JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Clientes", JOptionPane.INFORMATION_MESSAGE);
+						clear();
+					} else if (flagModifying) {
+						dispose();
+					}
+				}
+			}
+		}
+				);
+
+				 * 
+				 */
 				
 			}
-		});
+		}});
 		btnRegistrarTrabajador.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_checkmark_16px.png")));
 		btnRegistrarTrabajador.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		btnRegistrarTrabajador.setBounds(351, 547, 125, 23);
@@ -405,5 +586,28 @@ public class RegistrarTrabajadores extends JDialog {
 		
 				
 		
+	}
+	
+	
+	
+	
+	//FUNCIONES
+	
+	
+	
+	
+	private boolean validos() {
+		boolean validate = false;
+		/*String cod = txtCodigo.getText(), cedula = txtCedula.getText(), nombres = txtNombres.getText(), apellidos = txtApellidos.getText(), direccion = txtDireccion.getText(), genero = cbxGenero.getSelectedItem().toString(), telefono = txtTelefono.getText(); 
+		int edad = Integer.parseInt(spnEdad.getValue().toString());
+		float salario = (txtSalario.getText().equalsIgnoreCase(""))?0:Float.parseFloat(txtSalario.getText());
+		if (!cod.equalsIgnoreCase("") && !cedula.equalsIgnoreCase("") && !cedula.contains("_") && !nombres.equalsIgnoreCase("") && !apellidos.equalsIgnoreCase("") && !direccion.equalsIgnoreCase("") && !genero.equalsIgnoreCase("") && cbxGenero.getSelectedIndex() > 0 && !telefono.equalsIgnoreCase("") && !telefono.contains("_") && edad > 0 && salario > 0) {
+			validate = true;
+		} else if(cedula.equalsIgnoreCase("") && cedula.contains("_")) {
+			JOptionPane.showMessageDialog(null, "Cedula Incorrecta", "Trabajadores", JOptionPane.ERROR_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, "Revise los campos", "Trabajadores", JOptionPane.ERROR_MESSAGE);
+		}*/
+		return validate;
 	}
 }

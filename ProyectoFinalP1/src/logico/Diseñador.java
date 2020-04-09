@@ -10,7 +10,7 @@ public class Diseñador extends Trabajadores implements Serializable {
 
 	public Diseñador(String id, String cedula, String nombre, String apellido, String direccion, String genero,
 			int edad, String celular, String correo, float SalarioHoras, ArrayList<String> Proyectos, String maestro) {
-		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo, SalarioHoras, Proyectos);
+		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo, SalarioHoras);
 		Maestro = maestro;
 	}
 

@@ -11,7 +11,7 @@ public class Programador extends Trabajadores implements Serializable {
 	public Programador(String id, String cedula, String nombre, String apellido, String direccion, String genero,
 			int edad, String celular, String correo, float SalarioHoras, ArrayList<String> Proyectos,
 			ArrayList<String> lenguajesProgramacion) {
-		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo, SalarioHoras, Proyectos);
+		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo, SalarioHoras);
 		this.lenguajesProgramacion = new ArrayList<>();
 	}
 
