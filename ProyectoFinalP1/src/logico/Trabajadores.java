@@ -10,7 +10,7 @@ public abstract class Trabajadores extends Persona implements Serializable {
 	protected ArrayList<String> proyectos;
 	
 	public Trabajadores(String id, String cedula, String nombre, String apellido, String direccion, String genero,
-			int edad, String celular, String correo, float salarioHoras) {
+			int edad, String celular, float salarioHoras) {
 		super(id, cedula, nombre, apellido, direccion, genero, edad, celular);
 		
 		SalarioHoras = salarioHoras;

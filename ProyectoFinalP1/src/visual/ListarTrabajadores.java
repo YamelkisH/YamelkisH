@@ -53,15 +53,6 @@ public class ListarTrabajadores extends JDialog {
 		private JButton btnModificar;
 		private JButton btnEliminar;
 		
-		public static void main(String[] args) {
-			try {
-				ListarTrabajadores dialog = new ListarTrabajadores();
-				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				dialog.setVisible(true);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
 
 
 		public ListarTrabajadores() {

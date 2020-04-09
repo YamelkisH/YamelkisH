@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -220,6 +221,26 @@ public class ListarClientes extends JDialog {
 						}
 					});
 					
+					btnEliminar = new JButton("Eliminar");
+					btnEliminar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							if (!code.equalsIgnoreCase("") && index >= 0) {
+								Cliente client = Sistema.getInstance().clienteById(code);
+								boolean eliminar = Sistema.getInstance().clienteEsRemovible(client.getId());
+								if (eliminar) {
+									if (JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar el cliente " + code + "?", "Clientes", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+										Sistema.getInstance().RemoverCliente(client);
+										//normalState();
+									}
+								} else {
+									JOptionPane.showMessageDialog(null, "Este cliente no puede ser eliminado", "Clientes", JOptionPane.ERROR_MESSAGE);
+								}
+							}
+						}
+					});
+					btnEliminar.setEnabled(false);
+					btnEliminar.setFont(new Font("SansSerif", Font.PLAIN, 14));
+					buttonPane.add(btnEliminar);
 					btnModificar.setEnabled(false);
 					btnModificar.setFont(new Font("SansSerif", Font.PLAIN, 14));
 					btnModificar.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));

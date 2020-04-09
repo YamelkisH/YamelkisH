@@ -9,8 +9,8 @@ public class Programador extends Trabajadores implements Serializable {
 	private ArrayList<String> lenguajesProgramacion;
 	
 	public Programador(String id, String cedula, String nombre, String apellido, String direccion, String genero,
-			int edad, String celular, String correo, float SalarioHoras) {
-		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo, SalarioHoras);
+			int edad, String celular, float SalarioHoras) {
+		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, SalarioHoras);
 		
 		this.lenguajesProgramacion = new ArrayList<>();
 	}
@@ -23,4 +23,7 @@ public class Programador extends Trabajadores implements Serializable {
 		this.lenguajesProgramacion = lenguajesProgramacion;
 	}
 
+	public void insertartLanguajes(String lenguajes) {
+		this.lenguajesProgramacion.add(lenguajes);
+	}
 }

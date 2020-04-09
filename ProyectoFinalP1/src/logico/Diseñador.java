@@ -8,8 +8,8 @@ public class Diseñador extends Trabajadores implements Serializable {
 	private String Maestro;
 
 	public Diseñador(String id, String cedula, String nombre, String apellido, String direccion, String genero,
-			int edad, String celular, String correo, float SalarioHoras, String maestro) {
-		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo, SalarioHoras);
+			int edad, String celular, float SalarioHoras, String maestro) {
+		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, SalarioHoras);
 		Maestro = maestro;
 	}
 

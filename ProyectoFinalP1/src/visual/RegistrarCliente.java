@@ -472,7 +472,7 @@ public class RegistrarCliente extends JDialog {
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cliente = null;
-				if (checkCampos()) {
+				if (verificarInfo()) {
 					boolean registrado = false;
 					String codigo = textCodigo.getText();
 					String cedula = textCedula.getText();
@@ -486,7 +486,7 @@ public class RegistrarCliente extends JDialog {
 				
 					if (cliente == null) {
 						cliente = new Cliente(codigo,cedula,nombre,apellidos,direccion,genero,edad,telefono);
-						cliente.setCorreo(correo);	//storePicture();
+						cliente.setCorreo(correo);	
 						Sistema.getInstance().insertarCliente(cliente);
 						registrado = true;
 					} else {
@@ -496,7 +496,7 @@ public class RegistrarCliente extends JDialog {
 						cliente.setCelular(telefono);
 						cliente.setDireccion(direccion);
 						cliente.setEdad(44);
-						//storePicture();
+						
 						registrado = true;
 					}
 					
@@ -545,7 +545,7 @@ public class RegistrarCliente extends JDialog {
 	
 	
 	//FUNCIONES
-	private boolean checkCampos() {
+	private boolean verificarInfo() {
 		boolean validos = false;
 		if (cbxGenero.getSelectedIndex() > 0 && Integer.parseInt(spnEdad.getValue().toString()) > 0 ) {
 			validos = true;
@@ -555,19 +555,6 @@ public class RegistrarCliente extends JDialog {
 		return validos;
 	}
 
-	//FUNCION PARA COMPROBAR LOS DATOS
-
-	/*private boolean verificarInfo() {
-		boolean infoCorrecta = false;
-	if(textCedula.getText().contains("_") && !textNombres.getText().equalsIgnoreCase("") && !textApellidos.getText().equalsIgnoreCase("") && !txtCelular.getText().contains("_") && !textDireccion.getText().equalsIgnoreCase("") && cbxGenero.getSelectedIndex() > 0 && Integer.parseInt(spnEdad.getValue().toString()) > 0) {
-		infoCorrecta = true;
-		}
-		else {
-			JOptionPane.showMessageDialog(null, "Revise los campos", "Clientes", JOptionPane.INFORMATION_MESSAGE);
-
-	}
-
-	return infoCorrecta; }*/
 
 
 
@@ -587,69 +574,12 @@ private void clear() {
 	txtRegistro.setText((new SimpleDateFormat("yyyy/MM/dd")).format(new Date()));
 
 	
-	/*
-	 * 
-	 * 
-	 private void clear() {
-		txtCodigo.setText("CL-" + (SoftwareCompany.codClients + 1));
-
-		txtCantProyectos.setText("0");
-		txtFechaRegistro.setText((new SimpleDateFormat("yyyy/MM/dd")).format(new Date()));
-		lblImagen.setIcon(new ImageIcon(ClientRegistration.class.getResource("/com/sun/java/swing/plaf/windows/icons/UpFolder.gif")));
-		lblImagen.setText("<Imagen>");
-		stateOfCampos(false);
-		btnGuardar.setText("Guardar");
-		btnGuardar.setEnabled(false);
-		setTitle("Registrar Clientes");
-		btnEditCedula.setEnabled(false);
-		txtCedula.setEditable(true);
-		txtCedula.requestFocus();
-	 */
-
 }
-
-//FUNCION PARA AJUSTAR IMAGEN
-
-/*
- * 
- private ImageIcon ResizeImage(String ImagePath) {
-        ImageIcon MyImage = new ImageIcon(ImagePath);
-        Image img = MyImage.getImage();
-        Image newImg = img.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon image = new ImageIcon(newImg);
-        return image;
-    }
- * 
- * 
- */
-
-//FUNCION PARA VERIFICAR LA INFO DE LOS CAMPOS
-
-
- /*private void stateOfCampos(boolean b) {
-		txtCelular.setEditable(b);
-		textNombres.setEditable(b);
-		textApellidos.setEditable(b);
-		textCorreo.setEditable(b);
-		textDireccion.setEditable(b);
-	//	lblImagen.setEnabled(b);
-		cbxGenero.setEnabled(b);
-		spnEdad.setEnabled(b);
-	}*/
 	
- 
-
-//INFO COMPLETA
 
 
 private void informacionCompleta() {
-	//stateOfCampos(true);
-	/*if (client.getPicture() == null) {
-		lblImagen.setIcon(new ImageIcon(ClientRegistration.class.getResource("/com/sun/java/swing/plaf/windows/icons/UpFolder.gif")));
-		lblImagen.setText("<Imagen>");
-	} else {
-		lblImagen.setIcon(client.getPicture());
-	}*/
+
 	textCodigo.setText(cliente.getId());
 	txtCelular.setText(cliente.getCelular());
 	textNombres.setText(cliente.getNombre());
@@ -658,16 +588,7 @@ private void informacionCompleta() {
 	textCorreo.setText(cliente.getCorreo());
 	cbxGenero.setSelectedItem(cliente.getGenero());
 	spnEdad.setValue(cliente.getEdad());
-	/*txtCantProyectos.setText(client.getCant_projects() + "");
-	txtFechaRegistro.setText((new SimpleDateFormat("yyyy/MM/dd")).format(client.getRegistration_date()));
-	btnGuardar.setText("Modificar");
-	setTitle("Modificar Cliente: " + client.getId());
-	btnEditCedula.setEnabled(false);
-	txtCedula.setEditable(false);
-	cbxGenero.setEnabled(false);
-	txtNombres.setEditable(false);
-	txtApellidos.setEditable(false);
-	btnGuardar.setEnabled(true);*/
+
 }
 }
 

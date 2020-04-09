@@ -11,8 +11,8 @@ public class Jefe extends Trabajadores implements Serializable {
 	private int annosExperiencia;
 
 	public Jefe(String id, String cedula, String nombre, String apellido, String direccion, String genero, int edad,
-			String celular, String correo, float salarioHoras,int cantidadTrabajadores, int annosExperiencia) {
-		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo, salarioHoras);
+			String celular, float salarioHoras,int cantidadTrabajadores, int annosExperiencia) {
+		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, salarioHoras);
 		this.cantidadTrabajadores = cantidadTrabajadores;
 		this.annosExperiencia = annosExperiencia;
 		// TODO Auto-generated constructor stub

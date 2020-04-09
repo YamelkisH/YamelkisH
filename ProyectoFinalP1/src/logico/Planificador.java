@@ -9,9 +9,9 @@ public class Planificador extends Trabajadores implements Serializable {
 	private int cantidadDias;
 	
 	public Planificador(String id, String cedula, String nombre, String apellido, String direccion, String genero,
-			int edad, String celular, String correo, float SalarioHoras, ArrayList<String> Proyectos,
+			int edad, String celular, float SalarioHoras, ArrayList<String> Proyectos,
 			int cantidadDias) {
-		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo, SalarioHoras);
+		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, SalarioHoras);
 		this.cantidadDias = cantidadDias;
 	}
 
