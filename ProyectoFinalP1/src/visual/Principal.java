@@ -26,6 +26,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import java.awt.Toolkit;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -49,6 +51,8 @@ import javax.swing.SwingConstants;
 import java.awt.SystemColor;
 import javax.swing.border.MatteBorder;
 import javax.swing.JLabel;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 
 
 
@@ -86,9 +90,9 @@ public class Principal extends JFrame implements Runnable{
 	private final JMenuItem mntRegCliente = new JMenuItem("Registrar");
 	private final JMenuItem mtnListarCliente = new JMenuItem("Listar");
 	private final JMenu mnNewMenu_3 = new JMenu("Proyectos");
-	private final JMenuItem mntmNewMenuItem_3 = new JMenuItem("Registrar");
+	private final JMenuItem mntmRegistrar = new JMenuItem("Registrar");
 	private final JMenuBar menuBarProyectos = new JMenuBar();
-	private final JMenuItem mntmNewMenuItem_4 = new JMenuItem("Listar");
+	private final JMenuItem mntmListar = new JMenuItem("Listar");
 	private final JPanel panelProyectosAnuales = new JPanel();
 	private final JPanel panel_proyectosActivos = new JPanel();
 	private final JPanel panel_Ingresos = new JPanel();
@@ -184,6 +188,11 @@ public class Principal extends JFrame implements Runnable{
 		mnNewMenu_2.add(mntmModificarCliente);
 		
 		JMenu mnNewMenu_4 = new JMenu("Proyectos");
+		mnNewMenu_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 		mnNewMenu_4.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		mnNewMenu_4.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_virtual_machine2_48px.png")));
 		menuBar.add(mnNewMenu_4);
@@ -191,9 +200,14 @@ public class Principal extends JFrame implements Runnable{
 			public void actionPerformed(ActionEvent e) {
 				RegistrarProyecto RegPro = new RegistrarProyecto();
 				RegPro.setModal(true);
+	
+				RegPro.setResizable(false);
+				RegPro.setLocationRelativeTo(null);
 				RegPro.setVisible(true);
 			}
 		});
+		
+
 		mntmRegistrarProyecto.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_add_16px_1.png")));
 		mntmRegistrarProyecto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		
@@ -233,10 +247,17 @@ public class Principal extends JFrame implements Runnable{
 		mnCerrarSesin.add(mntmListarUsuario);
 		mntmCerrarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guardarDatos();
-				dispose();
-				System.exit(0);
+				if (JOptionPane.showConfirmDialog(null, "Seguro que desea cerrar la sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+					UserLogin login = new UserLogin();
+					guardarDatos();
+					dispose();
+					
+					login.setVisible(true);
+				//guardarDatos();
+				//dispose();
+			//	System.exit(0);
 				
+				}
 			}
 		});
 		mntmCerrarSesion.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_logout_rounded_16px.png")));
@@ -266,7 +287,7 @@ public class Principal extends JFrame implements Runnable{
 		panel_Ingresos.setBounds(72, 211, 604, 179);
 		
 		panel_2.add(panel_Ingresos);
-		panel_proyectosActivos.setBounds(18, 21, 365, 179);
+		panel_proyectosActivos.setBounds(10, 11, 373, 189);
 		panel_2.add(panel_proyectosActivos);
 		
 		panel_proyectosActivos.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Proyectos activos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -311,21 +332,46 @@ public class Principal extends JFrame implements Runnable{
 		mnListar.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_bulleted_list_40px.png")));
 		
 		menuBar_1.add(mnListar);
+		mntClienteListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarTrabajadores LisTra = new ListarTrabajadores();
+				LisTra.setModal(true);
+				LisTra.setVisible(true);
+			}
+		});
 		mntClienteListar.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_bulleted_list_16px.png")));
 		mntClienteListar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		
 		mnListar.add(mntClienteListar);
+		mntTrabajadorListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarTrabajadores LisTra = new ListarTrabajadores();
+				LisTra.setModal(true);
+				LisTra.setVisible(true);
+			}
+		});
 		mntTrabajadorListar.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_bulleted_list_16px.png")));
 		mntTrabajadorListar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		
 		mnListar.add(mntTrabajadorListar);
 		
 		JMenuItem mntProyectolistar = new JMenuItem("Proyecto");
+		mntProyectolistar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarProyectos LisPro = new ListarProyectos();
+				LisPro.setModal(true);
+				LisPro.setVisible(true);
+			}
+		});
 		mntProyectolistar.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_bulleted_list_16px.png")));
 		mntProyectolistar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		mnListar.add(mntProyectolistar);
 		
 		JMenuItem mntContratoListar = new JMenuItem("Contrato");
+		mntContratoListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		mntContratoListar.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_bulleted_list_16px.png")));
 		mntContratoListar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		mnListar.add(mntContratoListar);
@@ -400,27 +446,29 @@ public class Principal extends JFrame implements Runnable{
 		menuBarProyectos.add(mnNewMenu_3);
 		mnNewMenu_3.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_group_of_projects_48px.png")));
 		mnNewMenu_3.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+		mntmRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegistrarProyecto RegPro = new RegistrarProyecto();
 				RegPro.setModal(true);
 				RegPro.setVisible(true);
+				graphPie();
 			}
 		});
-		mntmNewMenuItem_3.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_add_16px_1.png")));
+		mntmRegistrar.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_add_16px_1.png")));
 		
-		mnNewMenu_3.add(mntmNewMenuItem_3);
-		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+		mnNewMenu_3.add(mntmRegistrar);
+		mntmListar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListarProyectos LisPro = new ListarProyectos();
 				LisPro.setModal(true);
 				LisPro.setVisible(true);
+				graphPie();
 			}
 		});
-		mntmNewMenuItem_4.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_bulleted_list_16px.png")));
-		mntmNewMenuItem_4.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		mntmListar.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_bulleted_list_16px.png")));
+		mntmListar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		
-		mnNewMenu_3.add(mntmNewMenuItem_4);
+		mnNewMenu_3.add(mntmListar);
 		
 		
 	
@@ -559,4 +607,8 @@ public class Principal extends JFrame implements Runnable{
         mes=calendario.get(Calendar.MONTH) + 1;
         year=calendario.get(Calendar.YEAR);
     }
-}
+	}
+
+
+
+	
