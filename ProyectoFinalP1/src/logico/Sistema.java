@@ -6,7 +6,6 @@ import java.util.Calendar;
 
 import com.toedter.calendar.JDateChooser;
 
-
 import logico.Proyectos;
 import logico.Trabajadores;
 import logico.Cliente;
@@ -206,6 +205,18 @@ public class Sistema implements Serializable{
 		return aux;
 	}
 	
+	//FUNCION PARA BUSCAR USER BY USERNAME
+	
+	public Usuario userbyUsername(String username,String passw) {
+		Usuario aux = null;
+		for (Usuario userForEach : usuarios) {
+			if (userForEach.getUsuario().equalsIgnoreCase(username) && userForEach.getContrasena().equalsIgnoreCase(passw)){
+				aux = userForEach;
+			}
+		}
+		return aux;
+	}
+	
 	public Cliente clienteByCedula(String cedula) {//funcion para buscar cliente por cedula
 		Cliente aux = null;
 		for (Cliente client : clientes) {
@@ -343,4 +354,20 @@ public boolean VerificarUsuario(Usuario user) {
 	return validar;
 }
 
+
+public boolean verificarAdminExistente() {
+	boolean existe = false;
+	int i = 0;
+	for (Usuario usuarioAux : usuarios) {
+		if (usuarioAux.getTipo().equalsIgnoreCase("administrador") && usuarioAux.isEstado()) {  
+			i++;
+		}
+	}
+	
+	if (i > 1) {
+		existe = true;
+	}
+	return existe;
+
+}
 }

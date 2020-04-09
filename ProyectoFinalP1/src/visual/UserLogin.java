@@ -202,93 +202,37 @@ public class UserLogin extends JFrame {
 		panel_3.add(label_5);
 		
 		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				String username = txtUsuario.getText();
+				String contra = txtContrasena.getText();
+				
+				if (!username.equalsIgnoreCase("") && !contra.equalsIgnoreCase("")) {
+					Usuario aux = Sistema.getInstance().userbyUsername(username, contra);
+					if (aux != null) {
+						if (aux.isEstado()) {
+							aux.setUltimaEntrada(new Date());
+							Principal principal = new Principal(aux);
+							dispose();
+							principal.setVisible(true);
+						} else {
+							JOptionPane.showMessageDialog(null, "Este usuario no esta activo", "Login", JOptionPane.WARNING_MESSAGE);
+							txtContrasena.selectAll();
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Login", JOptionPane.ERROR_MESSAGE);
+						txtContrasena.selectAll();
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Complete los campos", "Login", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
 		btnEntrar.setIcon(new ImageIcon(UserLogin.class.getResource("/img/icons8_conference_call_16px.png")));
 		btnEntrar.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		btnEntrar.setActionCommand("OK");
 		//getRootPane().setDefaultButton(btnEntrar);
-		
-		/*btnEntrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String username = txtUsuario.getText();
-				char[] contrasenaChar = txtContrasena.getPassword();
-				
-				String password = "";
-				for (char c : passwordChar) {
-					password += c;
-				}
-				
-				if (!username.equalsIgnoreCase("") && !password.equalsIgnoreCase("")) {
-					User userAux = SoftwareCompany.getInstance().searchUserByUsername(username, password);
-					if (userAux != null) {
-						if (userAux.isState()) {
-							userAux.setLast_enter(new Date());
-							MainVisual mainVisual = new MainVisual(userAux);
-							dispose();
-							mainVisual.setVisible(true);
-						} else {
-							JOptionPane.showMessageDialog(null, "Este usuario no esta activo", "Login", JOptionPane.WARNING_MESSAGE);
-							txtPassword.selectAll();
-						}
-					} else {
-						JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Login", JOptionPane.ERROR_MESSAGE);
-						txtPassword.selectAll();
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "Complete los campos", "Login", JOptionPane.ERROR_MESSAGE);
-				}
-				
-			}
-		});
-			}
-		});
-		/*try {
-			btnEntrar.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyPressed(KeyEvent e) {
-					Salir(e);
-				}
-			});
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		*/
-		
-
-		/*
-		
-		
-		btnEntrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String username = txtUsername.getText();
-				char[] passwordChar = txtPassword.getPassword();
-				String password = "";
-				for (char c : passwordChar) {
-					password += c;
-				}
-				
-				if (!username.equalsIgnoreCase("") && !password.equalsIgnoreCase("")) {
-					User userAux = SoftwareCompany.getInstance().searchUserByUsername(username, password);
-					if (userAux != null) {
-						if (userAux.isState()) {
-							userAux.setLast_enter(new Date());
-							MainVisual mainVisual = new MainVisual(userAux);
-							dispose();
-							mainVisual.setVisible(true);
-						} else {
-							JOptionPane.showMessageDialog(null, "Este usuario no esta activo", "Login", JOptionPane.WARNING_MESSAGE);
-							txtPassword.selectAll();
-						}
-					} else {
-						JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Login", JOptionPane.ERROR_MESSAGE);
-						txtPassword.selectAll();
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "Complete los campos", "Login", JOptionPane.ERROR_MESSAGE);
-				}
-				
-			}
-		});
-		*/
 		
 		btnEntrar.setBounds(10, 267, 99, 23);
 		panel.add(btnEntrar);

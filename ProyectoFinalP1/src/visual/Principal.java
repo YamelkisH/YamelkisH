@@ -84,7 +84,7 @@ public class Principal extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -95,12 +95,12 @@ public class Principal extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public Principal() {
+	public Principal(Usuario usuario) {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/img/icons8_link_company_child_16px.png")));
 		setTitle("Compa\u00F1\u00EDa de Software ");
