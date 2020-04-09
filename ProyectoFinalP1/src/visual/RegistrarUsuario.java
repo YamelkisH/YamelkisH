@@ -459,27 +459,17 @@ public class RegistrarUsuario extends JDialog {
 
 				
 					if (usuario == null) {
-						usuario = new Usuario(codigo,cedula,nombre,apellidos,direccion,genero,edad,telefono,usuarios,password, Tipo, usuarioActivo.getId());
+						usuario = new Usuario(codigo,cedula,nombre,apellidos,direccion,genero,edad,telefono,usuarios,password, Tipo, "yo");
 						usuario.setCorreo(correo);
 	//storePicture();
-						//Sistema.getInstance().insertarCliente(cliente);
+						Sistema.getInstance().insertarUsuario(usuario);
 						registrado = true;
 					} else {
-						//cliente.setNombre(nombre);
-						//cliente.setApellido(apellidos);
-						//cliente.setCorreo(correo);
-						//cliente.setCelular(telefono);
-						//cliente.setDireccion(direccion);
-						//cliente.setEdad(44);
-						//storePicture();
-						registrado = true;				}
+						usuario = null;				
+						}
+					JOptionPane.showMessageDialog(null, "Operacion exitosa", "Usuarios", JOptionPane.INFORMATION_MESSAGE);
+					clear();
 					
-					if (registrado && !flagModifying) {
-						JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Clientes", JOptionPane.INFORMATION_MESSAGE);
-						clear();
-					} else if (flagModifying) {
-						dispose();
-					}
 				}
 			}
 		}

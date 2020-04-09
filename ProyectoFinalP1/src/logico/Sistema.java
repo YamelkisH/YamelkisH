@@ -88,6 +88,13 @@ public class Sistema implements Serializable{
 		this.contrato = contrato;
 	}
 	
+	public ArrayList<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsarios(ArrayList<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
 
 
 	
@@ -313,4 +320,27 @@ public boolean RemoverTrabajador(String id) {
 public void removeWorker(Trabajadores trabajador) {
 	trabajadores.remove(trabajador);
 }
+
+public Usuario usuarioById(String id) {
+	Usuario aux = null;
+	for (Usuario user : usuarios) {
+		if (user.getId().equalsIgnoreCase(id)) {
+			aux = user;
+			break;
+		}
+	}
+	return aux;
+}
+
+public boolean VerificarUsuario(Usuario user) {
+	boolean validar = true;
+	for (Usuario aux : usuarios) {
+		if (aux.getNombre().equals(user.getNombre()) && !aux.getId().equalsIgnoreCase(user.getId())) {
+			validar = false;
+			break;
+		}
+	}
+	return validar;
+}
+
 }

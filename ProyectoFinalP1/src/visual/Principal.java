@@ -191,6 +191,14 @@ public class Principal extends JFrame {
 		mntmRegistrarUsuario.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_add_user_male_24px.png")));
 		mntmRegistrarUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		mnCerrarSesin.add(mntmRegistrarUsuario);
+		mntmListarUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ListarUsuarios LisUsu = new ListarUsuarios();
+				LisUsu.setModal(true);
+				LisUsu.setVisible(true);
+			}
+		});
 		mntmListarUsuario.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_bulleted_list_16px.png")));
 		mntmListarUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		
