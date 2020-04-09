@@ -7,7 +7,7 @@ public class Jefe extends Trabajadores implements Serializable {
 	
 	
 
-	private static final long serialVersionUID = -6545106401838653375L;
+	private static final long serialVersionUID = 1L;
 
 	
 	private int cantidadTrabajadores;

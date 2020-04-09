@@ -15,7 +15,7 @@ import logico.Contratos;
 //import com.toedter.calendar.JDateChooser;
 
 public class Sistema implements Serializable{
-	private static final long serialVersionUID = -6545106401838653375L;
+	private static final long serialVersionUID = -2058297959693156912L;
 
 	private ArrayList<Trabajadores> trabajadores;
 	private ArrayList<Proyectos> proyectos;

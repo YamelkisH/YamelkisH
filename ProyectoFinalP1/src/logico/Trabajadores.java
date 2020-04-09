@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public abstract class Trabajadores extends Persona implements Serializable {
-	private static final long serialVersionUID = -6545106401838653375L;
+	private static final long serialVersionUID = 1L;
 
 	protected float SalarioHoras;
 	protected ArrayList<String> proyectos;

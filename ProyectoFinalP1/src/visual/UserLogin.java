@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
@@ -29,6 +30,7 @@ import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 
 public class UserLogin extends JFrame {
@@ -68,12 +70,11 @@ public class UserLogin extends JFrame {
 					catch (Exception e) {
 						try {
 							outputStream = new FileOutputStream("SistemaGestionSoftware.dat");
-						//	Usuario usuario = new Usuario((Sistema.codigoUsuarios + 1), "000-0000000-0", "ADMINISTRADOR", "", "", "", 18, "", "admin", "admin", "ADMINISTRADOR", "USER-" + (Sistema.codigoUsuarios + 1)););				
-		// 		super(id, cedula, nombre, apellido, direccion, genero, edad, celular);
-					
-		//		super(code, id, name, last_name, address, gender, age, phone);
+							Usuario usuario = new Usuario("USER-" + (Sistema.codigoUsuarios + 1), "000-0000000-0", "ADMINISTRADOR", "PRIMER", "", "", 18, "0000000000", "admin", "admin", "ADMINISTRADOR", "USER-" + (Sistema.codigoUsuarios + 1));				
+		// 	String id, String cedula, String nombre, String apellido, String direccion, String genero, int edad, String celular, String usuario, String contrasena, String tipo, String codigoDeCreacion
+					//		
 
-		//Sistema.getInstance().insertarUsuario(usuario);
+		Sistema.getInstance().insertarUsuario(usuario);
 							outputStream.close();
 						} catch (Exception e2) {
 							System.out.println("Error al crear fichero!");
@@ -81,7 +82,7 @@ public class UserLogin extends JFrame {
 					try {
 						UserLogin dialog = new UserLogin();
 						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-						dialog.setSize(300,330);
+						dialog.setSize(511,324);
 						dialog.setLocationRelativeTo(null);
 						dialog.setVisible(true);
 					} catch (Exception e) {
@@ -115,8 +116,10 @@ public class UserLogin extends JFrame {
 		}
 		setTitle("UserLogin");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(UserLogin.class.getResource("/img/icons8_link_company_child_16px.png")));
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 511, 324);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -148,6 +151,16 @@ public class UserLogin extends JFrame {
 		label_3.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		
 		txtUsuario = new JTextField();
+		/*try {
+			txtUsuario.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					Salir(e);
+				}
+			});
+		} catch (Exception e) {
+			// TODO: handle exception
+		}*/
 		txtUsuario.setBackground(new Color(230, 230, 250));
 		txtUsuario.setBounds(39, 19, 177, 27);
 		panel_2.add(txtUsuario);
@@ -166,7 +179,17 @@ public class UserLogin extends JFrame {
 		panel_3.add(label_4);
 		
 		txtContrasena = new JTextField();
-		
+		/*try {
+			txtContrasena.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					Salir(e);
+				}
+			});
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		*/
 		txtContrasena.setColumns(10);
 		txtContrasena.setBackground(new Color(230, 230, 250));
 		txtContrasena.setBounds(39, 19, 177, 27);
@@ -179,15 +202,107 @@ public class UserLogin extends JFrame {
 		panel_3.add(label_5);
 		
 		JButton btnEntrar = new JButton("Entrar");
-		
 		btnEntrar.setIcon(new ImageIcon(UserLogin.class.getResource("/img/icons8_conference_call_16px.png")));
 		btnEntrar.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		btnEntrar.setActionCommand("OK");
+		//getRootPane().setDefaultButton(btnEntrar);
+		
+		/*btnEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String username = txtUsuario.getText();
+				char[] contrasenaChar = txtContrasena.getPassword();
+				
+				String password = "";
+				for (char c : passwordChar) {
+					password += c;
+				}
+				
+				if (!username.equalsIgnoreCase("") && !password.equalsIgnoreCase("")) {
+					User userAux = SoftwareCompany.getInstance().searchUserByUsername(username, password);
+					if (userAux != null) {
+						if (userAux.isState()) {
+							userAux.setLast_enter(new Date());
+							MainVisual mainVisual = new MainVisual(userAux);
+							dispose();
+							mainVisual.setVisible(true);
+						} else {
+							JOptionPane.showMessageDialog(null, "Este usuario no esta activo", "Login", JOptionPane.WARNING_MESSAGE);
+							txtPassword.selectAll();
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Login", JOptionPane.ERROR_MESSAGE);
+						txtPassword.selectAll();
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Complete los campos", "Login", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
+			}
+		});
+		/*try {
+			btnEntrar.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					Salir(e);
+				}
+			});
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		*/
+		
+
+		/*
+		
+		
+		btnEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String username = txtUsername.getText();
+				char[] passwordChar = txtPassword.getPassword();
+				String password = "";
+				for (char c : passwordChar) {
+					password += c;
+				}
+				
+				if (!username.equalsIgnoreCase("") && !password.equalsIgnoreCase("")) {
+					User userAux = SoftwareCompany.getInstance().searchUserByUsername(username, password);
+					if (userAux != null) {
+						if (userAux.isState()) {
+							userAux.setLast_enter(new Date());
+							MainVisual mainVisual = new MainVisual(userAux);
+							dispose();
+							mainVisual.setVisible(true);
+						} else {
+							JOptionPane.showMessageDialog(null, "Este usuario no esta activo", "Login", JOptionPane.WARNING_MESSAGE);
+							txtPassword.selectAll();
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Login", JOptionPane.ERROR_MESSAGE);
+						txtPassword.selectAll();
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Complete los campos", "Login", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
+		*/
+		
 		btnEntrar.setBounds(10, 267, 99, 23);
 		panel.add(btnEntrar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				Salir(e);
+			}
+		});
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 			}
 		});
 		btnCancelar.setIcon(new ImageIcon(UserLogin.class.getResource("/img/icons8_delete_sign_16px_1.png")));
