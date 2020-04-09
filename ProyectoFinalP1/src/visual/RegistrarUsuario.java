@@ -32,9 +32,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
-import logico.Cliente;
+
 import logico.Sistema;
 import logico.Usuario;
+import javax.swing.JPasswordField;
 
 public class RegistrarUsuario extends JDialog {
 
@@ -54,9 +55,10 @@ public class RegistrarUsuario extends JDialog {
 	private JComboBox cbxGenero;
 	private JSpinner spnEdad;
 	private boolean flagModifying = false;
-	private Cliente cliente;
+	private Usuario usuario;
 	private JTextField txtUsuario;
-	private JTextField txtContraseña;
+	private JPasswordField txtContrasena;
+	private JComboBox cbxTipo = new JComboBox();
 
 
 	/**
@@ -66,7 +68,7 @@ public class RegistrarUsuario extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public RegistrarUsuario() {
+	public RegistrarUsuario(final Usuario usuarioActivo, Usuario UsuarioModificado) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarUsuario.class.getResource("/img/icons8_gender_neutral_user_16px.png")));
 		setResizable(false);
 		setTitle("Registrar usuario");
@@ -98,22 +100,22 @@ public class RegistrarUsuario extends JDialog {
 			
 			JLabel lblNombres = new JLabel("Nombres:");
 			lblNombres.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblNombres.setBounds(24, 144, 71, 22);
+			lblNombres.setBounds(23, 122, 71, 22);
 			panel.add(lblNombres);
 			
 			JLabel lblApellidos = new JLabel("Apellidos:");
 			lblApellidos.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblApellidos.setBounds(24, 177, 71, 22);
+			lblApellidos.setBounds(23, 155, 71, 22);
 			panel.add(lblApellidos);
 			
 			JLabel lblCelular = new JLabel("Celular:");
 			lblCelular.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblCelular.setBounds(191, 243, 71, 22);
+			lblCelular.setBounds(190, 221, 71, 22);
 			panel.add(lblCelular);
 			
 			JLabel lblDireccion = new JLabel("Direcci\u00F3n:");
 			lblDireccion.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblDireccion.setBounds(24, 210, 71, 22);
+			lblDireccion.setBounds(23, 188, 71, 22);
 			panel.add(lblDireccion);
 			
 			MaskFormatter formatCedula = null;
@@ -135,10 +137,10 @@ public class RegistrarUsuario extends JDialog {
 							return;
 						}
 						String cedula = textCedula.getText();
-						if (!cedula.contains("_")) {
+						/*if (!cedula.contains("_")) {
 							textCedula.setEditable(false);
 							//stateOfCampos(true);
-							cliente = Sistema.getInstance().clienteById(cedula);
+							Usuari = Sistema.getInstance().clienteById(cedula);
 							if (cliente != null) {
 								//completeInfo();
 							} else {
@@ -146,7 +148,7 @@ public class RegistrarUsuario extends JDialog {
 							//	btnGuardar.setEnabled(true);
 							}
 						txtCelular.requestFocus();
-						}
+						}*/
 					}
 				});
 			} catch (Exception e) {
@@ -169,7 +171,7 @@ public class RegistrarUsuario extends JDialog {
 			textNombres = new JTextField();
 			textNombres.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 			textNombres.setBackground(SystemColor.menu);
-			textNombres.setBounds(92, 146, 224, 20);
+			textNombres.setBounds(91, 124, 224, 20);
 			panel.add(textNombres);
 			textNombres.setColumns(10);
 			
@@ -177,46 +179,46 @@ public class RegistrarUsuario extends JDialog {
 			textApellidos.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 			textApellidos.setColumns(10);
 			textApellidos.setBackground(SystemColor.menu);
-			textApellidos.setBounds(92, 179, 224, 20);
+			textApellidos.setBounds(91, 157, 224, 20);
 			panel.add(textApellidos);
 			
 			textDireccion = new JTextField();
 			textDireccion.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 			textDireccion.setColumns(10);
 			textDireccion.setBackground(SystemColor.menu);
-			textDireccion.setBounds(92, 212, 224, 20);
+			textDireccion.setBounds(91, 190, 224, 20);
 			panel.add(textDireccion);
 			
 			
 			txtCelular.setBackground(SystemColor.menu);
-			txtCelular.setBounds(240, 245, 76, 20);
+			txtCelular.setBounds(239, 223, 76, 20);
 			panel.add(txtCelular);
 			
 			
 			//JLABEL
 			JLabel lblGnero = new JLabel("G\u00E9nero:");
 			lblGnero.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblGnero.setBounds(24, 243, 71, 22);
+			lblGnero.setBounds(23, 221, 71, 22);
 			panel.add(lblGnero);
 			
 			JLabel lblEdad = new JLabel("Edad:");
 			lblEdad.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblEdad.setBounds(24, 309, 71, 22);
+			lblEdad.setBounds(23, 287, 71, 22);
 			panel.add(lblEdad);
 			
 			JLabel lblCdula = new JLabel("C\u00E9dula:");
 			lblCdula.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblCdula.setBounds(154, 92, 71, 22);
+			lblCdula.setBounds(153, 70, 71, 22);
 			panel.add(lblCdula);
 			
 			JLabel lblCdigo = new JLabel("C\u00F3digo:");
 			lblCdigo.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblCdigo.setBounds(154, 59, 71, 22);
+			lblCdigo.setBounds(153, 37, 71, 22);
 			panel.add(lblCdigo);
 			
 			JLabel lblCorreo = new JLabel("Correo:");
 			lblCorreo.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-			lblCorreo.setBounds(24, 276, 71, 22);
+			lblCorreo.setBounds(23, 254, 71, 22);
 			panel.add(lblCorreo);
 			
 			//TXT
@@ -224,14 +226,14 @@ public class RegistrarUsuario extends JDialog {
 			textCorreo.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 			textCorreo.setColumns(10);
 			textCorreo.setBackground(SystemColor.menu);
-			textCorreo.setBounds(92, 278, 224, 20);
+			textCorreo.setBounds(91, 256, 224, 20);
 			panel.add(textCorreo);
 			
 			textCodigo = new JTextField();
 			textCodigo.setText("User_1");
 			textCodigo.setEditable(false);
 			textCodigo.setBackground(SystemColor.menu);
-			textCodigo.setBounds(209, 61, 107, 20);
+			textCodigo.setBounds(208, 39, 107, 20);
 			panel.add(textCodigo);
 			textCodigo.setColumns(10);
 			
@@ -240,61 +242,61 @@ public class RegistrarUsuario extends JDialog {
 			cbxGenero.setBackground(SystemColor.menu);
 			cbxGenero.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Masculino", "Femenino"}));
 			cbxGenero.setEditable(true);
-			cbxGenero.setBounds(92, 244, 92, 22);
+			cbxGenero.setBounds(91, 222, 92, 22);
 			panel.add(cbxGenero);
 			
 			//SPN
 			spnEdad = new JSpinner();
 			spnEdad.setBackground(SystemColor.menu);
 			spnEdad.setModel(new SpinnerNumberModel(18, 18, 60, 1));
-			spnEdad.setBounds(92, 311, 76, 20);
+			spnEdad.setBounds(91, 289, 76, 20);
 			panel.add(spnEdad);
 			
 			textCedula.setBackground(SystemColor.menu);
-			textCedula.setBounds(209, 94, 108, 20);
+			textCedula.setBounds(208, 72, 108, 20);
 			panel.add(textCedula);
 			
 			
 			//JLABEL
 			JLabel lblNewLabel_1 = new JLabel("");
 			lblNewLabel_1.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_add_image_64px_1.png")));
-			lblNewLabel_1.setBounds(28, 33, 92, 78);
+			lblNewLabel_1.setBounds(27, 11, 92, 78);
 			panel.add(lblNewLabel_1);
 			
 			
 			
 			JLabel label = new JLabel("");
 			label.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
-			label.setBounds(315, 67, 46, 14);
+			label.setBounds(314, 45, 46, 14);
 			panel.add(label);
 			
 			JLabel label_1 = new JLabel("");
 			label_1.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
-			label_1.setBounds(315, 92, 46, 14);
+			label_1.setBounds(314, 70, 46, 14);
 			panel.add(label_1);
 			
 			JLabel label_2 = new JLabel("");
 			label_2.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
-			label_2.setBounds(315, 152, 46, 14);
+			label_2.setBounds(314, 130, 46, 14);
 			panel.add(label_2);
 			
 			JLabel label_3 = new JLabel("");
 			label_3.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
-			label_3.setBounds(315, 185, 46, 14);
+			label_3.setBounds(314, 163, 46, 14);
 			panel.add(label_3);
 			
 			JLabel label_4 = new JLabel("");
 			label_4.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
-			label_4.setBounds(315, 218, 46, 14);
+			label_4.setBounds(314, 196, 46, 14);
 			panel.add(label_4);
 			
 			JLabel label_5 = new JLabel("");
 			label_5.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
-			label_5.setBounds(315, 251, 46, 14);
+			label_5.setBounds(314, 229, 46, 14);
 			panel.add(label_5);
 			
 			JLabel lblRegistro = new JLabel("Registro\r\n");
-			lblRegistro.setBounds(178, 309, 55, 22);
+			lblRegistro.setBounds(177, 287, 55, 22);
 			panel.add(lblRegistro);
 			lblRegistro.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 			
@@ -302,19 +304,19 @@ public class RegistrarUsuario extends JDialog {
 			txtRegistro = new JTextField();
 			txtRegistro.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 			txtRegistro.setEditable(false);
-			txtRegistro.setBounds(240, 310, 76, 20);
+			txtRegistro.setBounds(239, 288, 76, 20);
 			txtRegistro.setText((new SimpleDateFormat("yyyy/MM/dd")).format(new Date()));
 			panel.add(txtRegistro);
 			txtRegistro.setColumns(10);
 			
 			JLabel label_6 = new JLabel("");
-			label_6.setBounds(315, 284, 46, 14);
+			label_6.setBounds(314, 262, 46, 14);
 			panel.add(label_6);
 			label_6.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_edit_16px.png")));
 			
 			JPanel panel_2 = new JPanel();
 			panel_2.setBorder(new TitledBorder(null, "Datos de usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_2.setBounds(10, 350, 326, 78);
+			panel_2.setBounds(10, 320, 326, 108);
 			panel.add(panel_2);
 			panel_2.setLayout(null);
 			
@@ -335,12 +337,20 @@ public class RegistrarUsuario extends JDialog {
 			lblContrasea.setBounds(10, 45, 71, 22);
 			panel_2.add(lblContrasea);
 			
-			txtContraseña = new JTextField();
-			txtContraseña.setFont(new Font("Times New Roman", Font.PLAIN, 13));
-			txtContraseña.setColumns(10);
-			txtContraseña.setBackground(SystemColor.menu);
-			txtContraseña.setBounds(90, 44, 222, 20);
-			panel_2.add(txtContraseña);
+			txtContrasena = new JPasswordField();
+			txtContrasena.setBackground(SystemColor.menu);
+			txtContrasena.setBounds(90, 47, 222, 20);
+			panel_2.add(txtContrasena);
+			
+			JLabel lblTipo = new JLabel("Tipo:");
+			lblTipo.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+			lblTipo.setBounds(10, 75, 71, 22);
+			panel_2.add(lblTipo);
+			
+		    cbxTipo = new JComboBox();
+			cbxTipo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Administrador", "Invitado"}));
+			cbxTipo.setBounds(90, 78, 222, 22);
+			panel_2.add(cbxTipo);
 			
 			
 		}
@@ -427,7 +437,7 @@ public class RegistrarUsuario extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 				//CAMBIAR PARA USUARIO, PENDIENTE
-				cliente = null;
+				usuario = null;
 				if (checkCampos()) {
 					boolean registrado = false;
 					String codigo = textCodigo.getText();
@@ -439,23 +449,30 @@ public class RegistrarUsuario extends JDialog {
 					String genero = cbxGenero.getSelectedItem().toString();//problemas aqui
 					String correo = textCorreo.getText();
 					int edad = Integer.valueOf(spnEdad.getValue().toString());
+					String usuarios = txtUsuario.getText();
+					char[] passwordChar = ((JPasswordField) txtContrasena).getPassword();
+					String password = "";
+					for (char c : passwordChar) {
+						password += c;
+					}
+					String Tipo = cbxTipo.getSelectedItem().toString();
+
 				
-					if (cliente == null) {
-						cliente = new Cliente(codigo,cedula,nombre,apellidos,direccion,genero,edad,telefono);
-						cliente.setCorreo(correo);
+					if (usuario == null) {
+						usuario = new Usuario(codigo,cedula,nombre,apellidos,direccion,genero,edad,telefono,usuarios,password, Tipo, usuarioActivo.getId());
+						usuario.setCorreo(correo);
 	//storePicture();
-						Sistema.getInstance().insertarCliente(cliente);
+						//Sistema.getInstance().insertarCliente(cliente);
 						registrado = true;
 					} else {
-						cliente.setNombre(nombre);
-						cliente.setApellido(apellidos);
-						cliente.setCorreo(correo);
-						cliente.setCelular(telefono);
-						cliente.setDireccion(direccion);
-						cliente.setEdad(44);
+						//cliente.setNombre(nombre);
+						//cliente.setApellido(apellidos);
+						//cliente.setCorreo(correo);
+						//cliente.setCelular(telefono);
+						//cliente.setDireccion(direccion);
+						//cliente.setEdad(44);
 						//storePicture();
-						registrado = true;
-					}
+						registrado = true;				}
 					
 					if (registrado && !flagModifying) {
 						JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Clientes", JOptionPane.INFORMATION_MESSAGE);
@@ -542,25 +559,4 @@ private void clear() {
 	
 
 }
-
-//FUNCION PARA AJUSTAR IMAGEN
-
-/*
- * 
- private ImageIcon ResizeImage(String ImagePath) {
-        ImageIcon MyImage = new ImageIcon(ImagePath);
-        Image img = MyImage.getImage();
-        Image newImg = img.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon image = new ImageIcon(newImg);
-        return image;
-    }
- * 
- * 
- */
-
-
-
-
-
-
 }

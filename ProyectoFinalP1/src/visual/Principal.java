@@ -28,7 +28,9 @@ import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
+
 import logico.Sistema;
+import logico.Usuario;
 
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -42,6 +44,7 @@ public class Principal extends JFrame {
 	private JPanel contentPane;
 	private ImageIcon imagen;
 	private Icon icono;
+	private Usuario user;
 	private final JMenu mnCerrarSesin = new JMenu("Usuarios");
 	private final JMenuItem mntmNewMenuItem = new JMenuItem("Cerrar sesi\u00F3n");
 	private final JMenuItem mntmRegistrarProyecto = new JMenuItem("Registrar proyecto");
@@ -179,7 +182,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Registrar usuario");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegistrarUsuario RegUsu = new RegistrarUsuario();
+				RegistrarUsuario RegUsu = new RegistrarUsuario(user, null);
 				RegUsu.setModal(true);
 				RegUsu.setVisible(true);
 			}

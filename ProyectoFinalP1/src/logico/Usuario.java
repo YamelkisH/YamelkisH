@@ -16,15 +16,14 @@ public class Usuario extends Persona implements Serializable {
 	private boolean estado;
 	
 	public Usuario(String id, String cedula, String nombre, String apellido, String direccion, String genero, int edad,
-			String celular, String correo, String usuario, String contrasena, String tipo, String codigoDeCreacion,
-			Date ultimaEntrada, boolean estado) {
+			String celular, String usuario, String contrasena, String tipo, String codigoDeCreacion) {
 		super(id, cedula, nombre, apellido, direccion, genero, edad, celular);
 		this.usuario = usuario;
 		this.contrasena = contrasena;
 		this.tipo = tipo;
 		this.codigoDeCreacion = codigoDeCreacion;
-		this.ultimaEntrada = ultimaEntrada;
-		this.estado = estado;
+		this.ultimaEntrada = new Date();
+		this.estado = true;
 	}
 
 	public String getUsuario() {
