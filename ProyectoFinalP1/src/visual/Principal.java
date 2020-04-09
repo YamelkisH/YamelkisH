@@ -3,6 +3,7 @@ package visual;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.awt.Label;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,6 +18,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -27,12 +31,16 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
+import com.toedter.calendar.JDateChooser;
 
+import logico.Contratos;
 import logico.Sistema;
 import logico.Usuario;
 
@@ -40,6 +48,7 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
 import javax.swing.border.MatteBorder;
+import javax.swing.JLabel;
 
 
 
@@ -57,7 +66,7 @@ public class Principal extends JFrame implements Runnable{
 	private final JMenuItem mntmModificarTrabajador = new JMenuItem("Modificar trabajador");
 	private final JMenuItem mntmRegistrarTrabajador = new JMenuItem("Registrar trabajador");
 	private final JPanel panel_2 = new JPanel();
-	private final JPanel panel_3 = new JPanel();
+	private final JPanel panelAcessoRapido = new JPanel();
 	private final JMenuBar menuBar_1 = new JMenuBar();
 	private final JMenu mnBuscar = new JMenu("Buscar");
 	private final JMenuItem mntCliente = new JMenuItem("Cliente");
@@ -84,7 +93,13 @@ public class Principal extends JFrame implements Runnable{
 	private final JPanel panel_proyectosActivos = new JPanel();
 	private final JPanel panel_Ingresos = new JPanel();
 	private final JMenuItem mntmListarUsuario = new JMenuItem("Listar usuario");
-
+	private Thread proyectos;
+	private int hora;
+	private int minutos;
+	private int dia;
+	private int mes;
+	private int year;
+	private final JLabel lblFecha = new JLabel("Fecha:");
 	/**
 	 * Launch the application.
 	 */
@@ -253,19 +268,24 @@ public class Principal extends JFrame implements Runnable{
 		panel_2.add(panel_Ingresos);
 		panel_proyectosActivos.setBounds(18, 21, 365, 179);
 		panel_2.add(panel_proyectosActivos);
-		panel_proyectosActivos.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Proyectos activos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_3.setBackground(SystemColor.menu);
-		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Acceso r\u00E1pido", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_3.setBounds(239, 429, 780, 86);
 		
-		panel.add(panel_3);
-		panel_3.setLayout(null);
+		panel_proyectosActivos.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Proyectos activos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		 graphPie();
+
+		
+		panelAcessoRapido.setBackground(SystemColor.menu);
+		panelAcessoRapido.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Acceso r\u00E1pido", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panelAcessoRapido.setBounds(239, 429, 780, 86);
+		
+
+		panel.add(panelAcessoRapido);
+		panelAcessoRapido.setLayout(null);
 		mnBuscar.setHorizontalAlignment(SwingConstants.LEFT);
 		mnBuscar.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_search_40px.png")));
 		mnBuscar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		menuBar_1.setBackground(SystemColor.menu);
 		menuBar_1.setBounds(270, 28, 203, 50);
-		panel_3.add(menuBar_1);
+		panelAcessoRapido.add(menuBar_1);
 		menuBar_1.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		menuBar_1.setBorderPainted(false);
 		
@@ -309,6 +329,9 @@ public class Principal extends JFrame implements Runnable{
 		mntContratoListar.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_bulleted_list_16px.png")));
 		mntContratoListar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		mnListar.add(mntContratoListar);
+		lblFecha.setBounds(615, 28, 155, 25);
+		panelAcessoRapido.add(lblFecha);
+		lblFecha.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Principal", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -407,8 +430,47 @@ public class Principal extends JFrame implements Runnable{
 	
 	}
 	
+	private int progressCalc(Contratos aux) {
+		JDateChooser fechaInicio = new JDateChooser();
+		JDateChooser fechaFinal = new JDateChooser();
+		JDateChooser fechaActual = new JDateChooser();
+		fechaInicio.setDate(aux.getFechaInicio());
+		fechaFinal.setDate(aux.getFechaFinal());
+		fechaActual.setDate(new Date());
+		int progressDays = Sistema.getInstance().calculoDias(fechaInicio, fechaActual);
+		int totalDays = Sistema.getInstance().calculoDias(fechaInicio, fechaFinal);
+		int porcentage = (int) (((float) progressDays)/((float) totalDays) * 100);
+		if (porcentage >= 100) {
+			porcentage = 100;
+		}
+		return porcentage;
+	}
+
+	@Override
+	public void run() {
+		Thread ct = Thread.currentThread();
+		int time = 0;
+		while(ct == proyectos) {
+			if (time >= 30) {
+				graphPie();
+			}
+			try {
+				Thread.sleep(1000);
+				time = (time == 30) ? 0 : (time + 1);
+				calcularTiempo();
+				if (minutos < 10) {
+					lblFecha.setText(dia+"/"+mes+"/"+year+" "+hora+":0" + minutos);
+				} else {
+					lblFecha.setText(dia+"/"+mes+"/"+year+" "+hora+":" + minutos);
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 	
-	/*public void graphPie() {
+	public void graphPie() {
 		
 		
 		
@@ -430,24 +492,24 @@ public class Principal extends JFrame implements Runnable{
 			}
 			
 		}
-		 */
-		/*// data.setValue(key, value);
-		 data.setValue("Proyectos Terminados", proFin);
+		 
+		 
+		 	data.setValue("Proyectos Terminados", proFin);
 	        data.setValue("Proyectos En Proceso", proInProces);
 	        data.setValue("Proyectos Prorrogados", proProrrogado);
-	        data.setValue("Proyectos Nuevos", nuevo);
+	        data.setValue("Proyectos Nuevo", nuevo);
 	 
 	        
-	         chart = ChartFactory.createPieChart3D(
-	         "Grafica Proyectos Activos", 
+	        JFreeChart chart = ChartFactory.createPieChart3D(
+	         "Grafica Status Proyectos", 
 	         data, 
 	         true, 
 	         true, 
 	         false);
 	       //chart.setBackgroundPaint(new Color(222, 222, 255));
-	      // chart.setBorderPaint(Color.WHITE);*/
+	      // chart.setBorderPaint(Color.WHITE);
 	      
-	      /* PiePlot plot = (PiePlot) chart.getPlot();
+	       PiePlot plot = (PiePlot) chart.getPlot();
 	       plot.setSectionPaint("Proyectos Terminados", new Color( 130, 224, 170 ));
 	       plot.setSectionPaint("Proyectos Prorrogados", new Color( 236, 112, 99 ));
 	       plot.setSectionPaint("Proyectos En Proceso", new Color( 247, 220, 111 ));
@@ -459,13 +521,12 @@ public class Principal extends JFrame implements Runnable{
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				
-			}
 			}
 	       
 
 	        
-	*/
+	}
+	
 	
 	private void guardarDatos() {
 		FileOutputStream system;
@@ -487,9 +548,15 @@ public class Principal extends JFrame implements Runnable{
 	}
 
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
+
+	
+	
+	public void calcularTiempo() {
+        Calendar calendario = new GregorianCalendar();
+        hora =calendario.get(Calendar.HOUR_OF_DAY);
+        minutos = calendario.get(Calendar.MINUTE);
+        dia=calendario.get(Calendar.DAY_OF_MONTH);
+        mes=calendario.get(Calendar.MONTH) + 1;
+        year=calendario.get(Calendar.YEAR);
+    }
 }
