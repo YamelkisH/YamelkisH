@@ -1,6 +1,10 @@
 package logico;
 
-public abstract class Persona {
+import java.io.Serializable;
+
+public abstract class Persona implements Serializable{
+	private static final long serialVersionUID = -6545106401838653375L;
+
 	
 	protected String id;
 	protected String Cedula;
@@ -13,7 +17,7 @@ public abstract class Persona {
 	protected String Correo;
 
 	public Persona(String id, String cedula, String nombre, String apellido, String direccion, String genero, int edad,
-			String celular, String correo) {
+			String celular) {
 		super();
 		this.id = id;
 		this.Cedula = cedula;
@@ -23,7 +27,7 @@ public abstract class Persona {
 		this.Genero = genero;
 		this.edad = edad;
 		this.Celular = celular;
-		this.Correo = correo;
+		this.Correo = "";
 	}
 
 	public String getId() {

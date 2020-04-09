@@ -15,6 +15,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import logico.Cliente;
+import logico.Persona;
 import logico.Sistema;
 
 import javax.swing.UIManager;
@@ -60,6 +61,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.MaskFormatter;
 
 
+import logico.Cliente;
+import logico.Sistema;
+
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
@@ -87,28 +91,18 @@ public class RegistrarCliente extends JDialog {
 	private JTextField txtRegistro;
 	private JComboBox cbxGenero;
 	private JSpinner spnEdad;
-	private Cliente cliente;
 	private boolean flagModifying = false;
+	private Cliente cliente;
 
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			RegistrarCliente dialog = new RegistrarCliente();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+	
 	/**
 	 * Create the dialog.
 	 */
-	public RegistrarCliente() {
-		//this.cliente = cliente;
+	public RegistrarCliente(Cliente aux) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrarCliente.class.getResource("/img/icons8_add_user_male_64px.png")));
 		setResizable(false);
 		setTitle("Registrar cliente");
@@ -158,6 +152,54 @@ public class RegistrarCliente extends JDialog {
 			lblDireccion.setBounds(24, 210, 71, 22);
 			panel.add(lblDireccion);
 			
+			MaskFormatter formatCedula = null;
+			try {
+				formatCedula = new MaskFormatter("###-#######-#");
+				formatCedula.setPlaceholderCharacter('_');
+				textCedula = new JFormattedTextField(formatCedula);				
+				textCedula.setToolTipText("Cedula");
+			} catch (Exception e) {
+				textCedula = new JTextField();
+			}
+			try {
+				textCedula.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyReleased(KeyEvent e) {
+						if (!(e.getKeyChar() == 13 || (e.getKeyChar() >= 48 && e.getKeyChar()  <= 57))) {
+							return;
+						} else if (!textCedula.isEditable()) {
+							return;
+						}
+						String cedula = textCedula.getText();
+						if (!cedula.contains("_")) {
+							textCedula.setEditable(false);
+							//stateOfCampos(true);
+							cliente = Sistema.getInstance().clienteById(cedula);
+							if (cliente != null) {
+								//completeInfo();
+							} else {
+							//	btnEditCedula.setEnabled(true);
+							//	btnGuardar.setEnabled(true);
+							}
+						txtCelular.requestFocus();
+						}
+					}
+				});
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			MaskFormatter formatTelefono = null;
+			try {
+				formatTelefono = new MaskFormatter("(###) ###-####");
+				formatTelefono.setPlaceholderCharacter('_');
+				txtCelular = new JFormattedTextField(formatTelefono);
+				txtCelular.setToolTipText("Tel\u00E9fono o Celular");
+			} catch (Exception e) {
+				txtCelular = new JTextField();
+			}
+			
+			
 			
 			//TXT
 			textNombres = new JTextField();
@@ -181,7 +223,7 @@ public class RegistrarCliente extends JDialog {
 			textDireccion.setBounds(92, 212, 224, 20);
 			panel.add(textDireccion);
 			
-			JFormattedTextField txtCelular = new JFormattedTextField();
+			
 			txtCelular.setBackground(SystemColor.menu);
 			txtCelular.setBounds(240, 245, 76, 20);
 			panel.add(txtCelular);
@@ -230,7 +272,7 @@ public class RegistrarCliente extends JDialog {
 			textCodigo.setColumns(10);
 			
 			//CBX
-			JComboBox cbxGenero = new JComboBox();
+			cbxGenero = new JComboBox();
 			cbxGenero.setBackground(SystemColor.menu);
 			cbxGenero.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Masculino", "Femenino"}));
 			cbxGenero.setEditable(true);
@@ -238,13 +280,12 @@ public class RegistrarCliente extends JDialog {
 			panel.add(cbxGenero);
 			
 			//SPN
-			JSpinner spnEdad = new JSpinner();
+			spnEdad = new JSpinner();
 			spnEdad.setBackground(SystemColor.menu);
 			spnEdad.setModel(new SpinnerNumberModel(18, 18, 60, 1));
 			spnEdad.setBounds(92, 311, 76, 20);
 			panel.add(spnEdad);
 			
-			JFormattedTextField textCedula = new JFormattedTextField();
 			textCedula.setBackground(SystemColor.menu);
 			textCedula.setBounds(209, 94, 108, 20);
 			panel.add(textCedula);
@@ -309,6 +350,7 @@ public class RegistrarCliente extends JDialog {
 			
 			
 		}
+		
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Proyectos", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -429,40 +471,33 @@ public class RegistrarCliente extends JDialog {
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if ((verificarInfo())) {
-				{	boolean registrado = false;
+				cliente = null;
+				if (checkCampos()) {
+					boolean registrado = false;
+					String codigo = textCodigo.getText();
 					String cedula = textCedula.getText();
-					String celular = txtCelular.getText();
+					String telefono = txtCelular.getText();
 					String nombre = textNombres.getText();
-					String apellido = textApellidos.getText();
+					String apellidos = textApellidos.getText();
 					String direccion = textDireccion.getText();
+					String genero = cbxGenero.getSelectedItem().toString();//problemas aqui
 					String correo = textCorreo.getText();
-				    int edad = Integer.parseInt(spnEdad.getValue().toString());
-					String genero = cbxGenero.getSelectedItem().toString();
-					String id = textCodigo.getText();
-					
-					if(cliente == null){
-						cliente = new Cliente(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo);
-
-						//cliente.setMail(correo);
-						//storePicture();
-						Sistema.getInstance().insertarCliente(cliente);					
-						registrado = true;
-						JOptionPane.showMessageDialog(null, "Operación sactisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
-
-			}
-					else {
-						cliente.setNombre(nombre);     
-						cliente.setApellido(apellido);
-						cliente.setCorreo(correo);
-						cliente.setCelular(celular);
-						cliente.setDireccion(direccion);
-						cliente.setEdad(edad);
-					//	storePicture();
-						registrado = true;
+					int edad = Integer.valueOf(spnEdad.getValue().toString());
+				
+					if (cliente == null) {
+						cliente = new Cliente(codigo,cedula,nombre,apellidos,direccion,genero,edad,telefono);
+						cliente.setCorreo(correo);	//storePicture();
 						Sistema.getInstance().insertarCliente(cliente);
-						JOptionPane.showMessageDialog(null, "Operación sactisfactoria", "Información", JOptionPane.INFORMATION_MESSAGE);
+						registrado = true;
+					} else {
+						cliente.setNombre(nombre);
+						cliente.setApellido(apellidos);
+						cliente.setCorreo(correo);
+						cliente.setCelular(telefono);
+						cliente.setDireccion(direccion);
+						cliente.setEdad(44);
+						//storePicture();
+						registrado = true;
 					}
 					
 					if (registrado && !flagModifying) {
@@ -470,25 +505,11 @@ public class RegistrarCliente extends JDialog {
 						clear();
 					} else if (flagModifying) {
 						dispose();
-
-			}
-					
-
-		}}
-				
-				//GUARDAR IMAGEN
-				/*private void storePicture() {
-					if (lblImagen.getIcon() != (new ImageIcon(ClientRegistration.class.getResource("/com/sun/java/swing/plaf/windows/icons/UpFolder.gif")))) {
-						client.setPicture((ImageIcon) lblImagen.getIcon());
-					} else {
-						client.setPicture(null);
 					}
-				}*/
-			
-			}});
-		
-		
-		 
+				}
+			}
+		}
+				);
 
 		btnGuardar.setIcon(new ImageIcon(RegistrarCliente.class.getResource("/img/icons8_checkmark_16px.png")));
 		btnGuardar.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -510,24 +531,33 @@ public class RegistrarCliente extends JDialog {
 		btnLimpiar.setBounds(243, 513, 103, 23);
 		panel_1.add(btnLimpiar);
 		
-		/*if (aux != null) {
-			client = aux;
-			completeInfo();
+		if (aux != null) {
+			cliente = aux;
+			//completeInfo();
 			flagModifying  = true;
-			txtCedula.setText(aux.getId());
-		}*/
-				
+			textCedula.setText(aux.getId());
+		}
+	}
 		
-}
+		
+
 
 	
 	
 	//FUNCIONES
-
+	private boolean checkCampos() {
+		boolean validos = false;
+		if (cbxGenero.getSelectedIndex() > 0 && Integer.parseInt(spnEdad.getValue().toString()) > 0 ) {
+			validos = true;
+		} else {
+			JOptionPane.showMessageDialog(null, "Revise los campos", "Clientes", JOptionPane.INFORMATION_MESSAGE);
+		}
+		return validos;
+	}
 
 	//FUNCION PARA COMPROBAR LOS DATOS
 
-	private boolean verificarInfo() {
+	/*private boolean verificarInfo() {
 		boolean infoCorrecta = false;
 	if(textCedula.getText().contains("_") && !textNombres.getText().equalsIgnoreCase("") && !textApellidos.getText().equalsIgnoreCase("") && !txtCelular.getText().contains("_") && !textDireccion.getText().equalsIgnoreCase("") && cbxGenero.getSelectedIndex() > 0 && Integer.parseInt(spnEdad.getValue().toString()) > 0) {
 		infoCorrecta = true;
@@ -537,7 +567,7 @@ public class RegistrarCliente extends JDialog {
 
 	}
 
-	return infoCorrecta; }
+	return infoCorrecta; }*/
 
 
 
@@ -596,7 +626,7 @@ private void clear() {
 //FUNCION PARA VERIFICAR LA INFO DE LOS CAMPOS
 
 
- private void stateOfCampos(boolean b) {
+ /*private void stateOfCampos(boolean b) {
 		txtCelular.setEditable(b);
 		textNombres.setEditable(b);
 		textApellidos.setEditable(b);
@@ -605,7 +635,7 @@ private void clear() {
 	//	lblImagen.setEnabled(b);
 		cbxGenero.setEnabled(b);
 		spnEdad.setEnabled(b);
-	}
+	}*/
 	
  
 
@@ -613,7 +643,7 @@ private void clear() {
 
 
 private void informacionCompleta() {
-	stateOfCampos(true);
+	//stateOfCampos(true);
 	/*if (client.getPicture() == null) {
 		lblImagen.setIcon(new ImageIcon(ClientRegistration.class.getResource("/com/sun/java/swing/plaf/windows/icons/UpFolder.gif")));
 		lblImagen.setText("<Imagen>");

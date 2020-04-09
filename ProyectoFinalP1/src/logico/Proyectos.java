@@ -1,8 +1,11 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Proyectos {
+public class Proyectos implements Serializable {
+	private static final long serialVersionUID = -6545106401838653375L;
+
 	private String id;
 	private String name;
 	private ArrayList<Trabajadores> trabajadores;

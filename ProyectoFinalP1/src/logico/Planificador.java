@@ -1,9 +1,11 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Planificador extends Trabajadores {
-	
+public class Planificador extends Trabajadores implements Serializable {
+	private static final long serialVersionUID = -6545106401838653375L;
+
 	private int cantidadDias;
 	
 	public Planificador(String id, String cedula, String nombre, String apellido, String direccion, String genero,

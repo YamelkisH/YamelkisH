@@ -170,7 +170,7 @@ public class ListarClientes extends JDialog {
 							index = tableClientes.getSelectedRow();
 							code = tableClientes.getValueAt(index, 0).toString();
 							btnModificar.setEnabled(true);
-							btnEliminar.setEnabled(true);
+							//btnEliminar.setEnabled(true);
 							btnModificar.setText("Modificar " + code);
 							btnEliminar.setText("Eliminar " + code);
 						} else {
@@ -211,7 +211,7 @@ public class ListarClientes extends JDialog {
 							if (!code.equalsIgnoreCase("") && index >= 0) {
 								Cliente Cliente = Sistema.getInstance().clienteById(code);
 								if (Cliente != null) {
-									RegistrarCliente Client= new RegistrarCliente();
+									RegistrarCliente Client= new RegistrarCliente(null);
 									Client.setModal(true);
 									Client.setVisible(true);
 									Clean();

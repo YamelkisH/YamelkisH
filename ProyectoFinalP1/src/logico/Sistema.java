@@ -1,13 +1,21 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.toedter.calendar.JDateChooser;
 
+import logico.Proyectos;
+import logico.Trabajadores;
+import logico.Cliente;
+import logico.Contratos;
+
 //import com.toedter.calendar.JDateChooser;
 
-public class Sistema {
+public class Sistema implements Serializable{
+	private static final long serialVersionUID = -6545106401838653375L;
+
 	private ArrayList<Trabajadores> trabajadores;
 	private ArrayList<Proyectos> proyectos;
 	private ArrayList<Cliente> clientes;
@@ -265,4 +273,37 @@ public class Sistema {
 		}
 		return dias;	
 	}
+
+
+public boolean clienteEsRemovible(String id) {
+	boolean removible = true;
+	for (Contratos contract : contrato) {
+		if (contract.getIdCliente().equalsIgnoreCase(id)) {
+			removible = false;
+			
+		}
+	}
+	return removible;
+}
+
+public void RemoverCliente(Cliente cliente) {
+	clientes.remove(cliente);
+   }
+
+public boolean RemoverTrabajador(String id) {
+	boolean removible = true;
+	for (Proyectos project : proyectos) {
+		for (Trabajadores aux : project.getTrabajadores()) {
+			if (aux.getId().equalsIgnoreCase(id)) {
+				removible = false;
+				
+			}
+		}
+	}
+	return removible;
+}
+
+public void removeWorker(Trabajadores trabajador) {
+	trabajadores.remove(trabajador);
+}
 }

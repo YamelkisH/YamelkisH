@@ -1,8 +1,11 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Jefe extends Trabajadores {
+public class Jefe extends Trabajadores implements Serializable {
+	private static final long serialVersionUID = -6545106401838653375L;
+
 	
 	private int cantidadTrabajadores;
 	private int annosExperiencia;

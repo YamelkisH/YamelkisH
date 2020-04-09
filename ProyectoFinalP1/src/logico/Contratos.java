@@ -1,8 +1,10 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Contratos {
+public class Contratos implements Serializable{
+	private static final long serialVersionUID = -6545106401838653375L;
 	private String id;
 	private Date fechaInicio;
 	private Date fechaEntrega;

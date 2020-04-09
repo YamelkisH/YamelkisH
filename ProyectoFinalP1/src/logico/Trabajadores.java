@@ -1,15 +1,17 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Trabajadores extends Persona {
-	
+public abstract class Trabajadores extends Persona implements Serializable {
+	private static final long serialVersionUID = -6545106401838653375L;
+
 	protected float SalarioHoras;
 	protected ArrayList<String> proyectos;
 	
 	public Trabajadores(String id, String cedula, String nombre, String apellido, String direccion, String genero,
 			int edad, String celular, String correo, float salarioHoras, ArrayList<String> proyectos) {
-		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo);
+		super(id, cedula, nombre, apellido, direccion, genero, edad, celular);
 		
 		SalarioHoras = salarioHoras;
 		this.proyectos = new ArrayList<>();

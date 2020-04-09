@@ -79,7 +79,7 @@ public class ListarUsuarios extends JDialog {
 			}
 			{
 				
-				/*cbxColumnChooser = new JComboBox();
+				cbxColumnChooser = new JComboBox();
 				cbxColumnChooser.addFocusListener(new FocusAdapter() {
 					@Override
 					public void focusGained(FocusEvent arg0) {
@@ -89,7 +89,7 @@ public class ListarUsuarios extends JDialog {
 					public void focusLost(FocusEvent e) {
 					//	validation.setFocusBackground(cbxColumnChooser, false);
 					}
-				});*/
+				});
 				cbxColumnChooser.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (cbxColumnChooser.getSelectedIndex() > 0) {

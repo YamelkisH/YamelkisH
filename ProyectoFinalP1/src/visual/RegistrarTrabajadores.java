@@ -384,6 +384,12 @@ public class RegistrarTrabajadores extends JDialog {
 		btnSalir.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		
 		JButton btnRegistrarTrabajador = new JButton("Registrar ");
+		btnRegistrarTrabajador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
 		btnRegistrarTrabajador.setIcon(new ImageIcon(RegistrarTrabajadores.class.getResource("/img/icons8_checkmark_16px.png")));
 		btnRegistrarTrabajador.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		btnRegistrarTrabajador.setBounds(351, 547, 125, 23);

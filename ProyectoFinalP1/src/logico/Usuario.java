@@ -18,7 +18,7 @@ public class Usuario extends Persona implements Serializable {
 	public Usuario(String id, String cedula, String nombre, String apellido, String direccion, String genero, int edad,
 			String celular, String correo, String usuario, String contrasena, String tipo, String codigoDeCreacion,
 			Date ultimaEntrada, boolean estado) {
-		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo);
+		super(id, cedula, nombre, apellido, direccion, genero, edad, celular);
 		this.usuario = usuario;
 		this.contrasena = contrasena;
 		this.tipo = tipo;

@@ -115,6 +115,13 @@ public class Principal extends JFrame {
 		mnNewMenu_1.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		mnNewMenu_1.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_client_company_48px_1.png")));
 		menuBar.add(mnNewMenu_1);
+		mntmRegistrarTrabajador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistrarTrabajadores RegTra = new RegistrarTrabajadores();
+				RegTra.setModal(true);
+				RegTra.setVisible(true);
+			}
+		});
 		mntmRegistrarTrabajador.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_add_user_female_16px.png")));
 		mntmRegistrarTrabajador.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		
@@ -128,6 +135,13 @@ public class Principal extends JFrame {
 		mnNewMenu_2.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		mnNewMenu_2.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_user_group_man_woman_48px.png")));
 		menuBar.add(mnNewMenu_2);
+		mntmRegistrarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistrarCliente RegCli = new RegistrarCliente(null);
+				RegCli.setModal(true);
+				RegCli.setVisible(true);
+			}
+		});
 		mntmRegistrarCliente.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_add_user_male_16px_1.png")));
 		mntmRegistrarCliente.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		
@@ -141,6 +155,13 @@ public class Principal extends JFrame {
 		mnNewMenu_4.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		mnNewMenu_4.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_virtual_machine2_48px.png")));
 		menuBar.add(mnNewMenu_4);
+		mntmRegistrarProyecto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistrarProyecto RegPro = new RegistrarProyecto();
+				RegPro.setModal(true);
+				RegPro.setVisible(true);
+			}
+		});
 		mntmRegistrarProyecto.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_add_16px_1.png")));
 		mntmRegistrarProyecto.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		
@@ -156,6 +177,13 @@ public class Principal extends JFrame {
 		menuBar.add(mnCerrarSesin);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Registrar usuario");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistrarUsuario RegUsu = new RegistrarUsuario();
+				RegUsu.setModal(true);
+				RegUsu.setVisible(true);
+			}
+		});
 		mntmNewMenuItem_1.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_add_user_male_24px.png")));
 		mntmNewMenuItem_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		mnCerrarSesin.add(mntmNewMenuItem_1);
@@ -257,9 +285,23 @@ public class Principal extends JFrame {
 		mnTrabajadores.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_client_company_48px_1.png")));
 		
 		TrabajadoresMenuBar.add(mnTrabajadores);
+		mntReg.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistrarTrabajadores RegTra = new RegistrarTrabajadores();
+				RegTra.setModal(true);
+				RegTra.setVisible(true);
+			}
+		});
 		mntReg.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_add_16px_1.png")));
 		
 		mnTrabajadores.add(mntReg);
+		mntListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarTrabajadores LisTra = new ListarTrabajadores();
+				LisTra.setModal(true);
+				LisTra.setVisible(true);
+			}
+		});
 		mntListar.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_bulleted_list_16px.png")));
 		
 		mnTrabajadores.add(mntListar);
@@ -270,9 +312,23 @@ public class Principal extends JFrame {
 		mnClientes.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		
 		ClientesMenuBar.add(mnClientes);
+		mntRegCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistrarCliente RegCli = new RegistrarCliente(null);
+				RegCli.setModal(true);
+				RegCli.setVisible(true);
+			}
+		});
 		mntRegCliente.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_add_16px_1.png")));
 		
 		mnClientes.add(mntRegCliente);
+		mtnListarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarClientes LisCli = new ListarClientes();
+				LisCli.setModal(true);
+				LisCli.setVisible(true);
+			}
+		});
 		mtnListarCliente.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_bulleted_list_16px.png")));
 		
 		mnClientes.add(mtnListarCliente);
@@ -284,9 +340,23 @@ public class Principal extends JFrame {
 		menuBarProyectos.add(mnNewMenu_3);
 		mnNewMenu_3.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_group_of_projects_48px.png")));
 		mnNewMenu_3.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistrarProyecto RegPro = new RegistrarProyecto();
+				RegPro.setModal(true);
+				RegPro.setVisible(true);
+			}
+		});
 		mntmNewMenuItem_3.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_add_16px_1.png")));
 		
 		mnNewMenu_3.add(mntmNewMenuItem_3);
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarProyectos LisPro = new ListarProyectos();
+				LisPro.setModal(true);
+				LisPro.setVisible(true);
+			}
+		});
 		mntmNewMenuItem_4.setIcon(new ImageIcon(Principal.class.getResource("/img/icons8_bulleted_list_16px.png")));
 		mntmNewMenuItem_4.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		
