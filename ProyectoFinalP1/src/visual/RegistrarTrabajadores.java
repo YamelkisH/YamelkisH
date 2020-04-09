@@ -424,6 +424,7 @@ public class RegistrarTrabajadores extends JDialog {
 					String genero = cbxGenero.getSelectedItem().toString(); 
 					String celular = txtCelular.getText().toString(); 
 					String correo = textCorreo.getText();
+					String especialidad = cbxEspecialidad.getSelectedItem().toString();
 				
 				
 					int edad = Integer.parseInt(spnEdad.getValue().toString());
