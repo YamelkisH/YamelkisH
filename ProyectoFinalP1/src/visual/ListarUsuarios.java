@@ -199,7 +199,7 @@ public class ListarUsuarios extends JDialog {
 					tableUsuarios.getColumnModel().getColumn(2).setPreferredWidth(250);
 					tableUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					tableUsuarios.setRowSorter(sorter);
-					//loadtable();
+					loadtable();
 					scrollPane.setViewportView(tableUsuarios);
 				}
 			}
@@ -211,12 +211,12 @@ public class ListarUsuarios extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnActivar = new JButton("Activar");
-				/*btnActivar.addActionListener(new ActionListener() {
+				btnActivar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						if (!code.equalsIgnoreCase("") && index >= 0) {
-							Usuario Usuario = Sistema.getInstance().UsuarioByCode(code);
+							Usuario Usuario = Sistema.getInstance().usuarioById(code);
 							if (Usuario != null) {
-								if (Usuario.getTipo().equalsIgnoreCase("ADMINISTRADOR") && !Sistema.getInstance().atTwoAnAdmin() && Usuario.isEstado()) {
+								if (Usuario.getTipo().equalsIgnoreCase("ADMINISTRADOR") && Usuario.isEstado()) {
 									JOptionPane.showMessageDialog(null, "Su sistema no pude quedar sin un administrador", "Usuarios", JOptionPane.ERROR_MESSAGE);
 									return;
 								}
@@ -225,26 +225,26 @@ public class ListarUsuarios extends JDialog {
 							}
 						}
 					}
-				});*/
+				});
 				btnActivar.setFont(new Font("SansSerif", Font.PLAIN, 14));
 				btnActivar.setEnabled(false);
 				buttonPane.add(btnActivar);
 			}
 			{
 				btnModificar = new JButton("Modificar");
-				/*btnModificar.addActionListener(new ActionListener() {
+				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						if (!code.equalsIgnoreCase("") && index >= 0) {
-							Usuario Usuario = Sistema.getInstance().UsuarioByCode(code);
+							Usuario Usuario = Sistema.getInstance().usuarioById(code);
 							if (Usuario != null) {
-								UsuarioRegistration UsuarioRegistration = new UsuarioRegistration(null, Usuario);
+								RegistrarUsuario UsuarioRegistration = new RegistrarUsuario(null, Usuario);
 								UsuarioRegistration.setModal(true);
 								UsuarioRegistration.setVisible(true);
 								normalState();
 							}
 						}
 					}
-				});*/
+				});
 				btnModificar.setEnabled(false);
 				btnModificar.setFont(new Font("SansSerif", Font.PLAIN, 14));
 				btnModificar.setActionCommand("OK");
@@ -275,13 +275,13 @@ public class ListarUsuarios extends JDialog {
 	    sorter.setRowFilter(filter);
 	}
 	
-	/*private void loadtable() {
+	private void loadtable() {
 		model.setRowCount(0);
 		rows = new Object[model.getColumnCount()];
-		for (Usuario aux : Sistema.getInstance().getUsuario()) {
+		for (Usuario aux : Sistema.getInstance().getUsuarios()) {
 			addRow(aux);
 		}
-	}*/
+	}
 	
 	private void addRow(Usuario aux) {
 		rows[0] = aux.getId();
@@ -306,6 +306,6 @@ public class ListarUsuarios extends JDialog {
 		btnModificar.setText("Modificar");
 		btnActivar.setText("Activar");
 		tableUsuarios.clearSelection();
-		//loadtable();
+		loadtable();
 	}
 }

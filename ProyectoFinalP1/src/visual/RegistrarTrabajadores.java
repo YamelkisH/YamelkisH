@@ -332,12 +332,14 @@ public class RegistrarTrabajadores extends JDialog {
 		panel_2.add(lblAosDeExperiencia);
 		
 		JSpinner spnExperiencia = new JSpinner();
+		spnExperiencia.setEnabled(false);
 		spnExperiencia.setBackground(SystemColor.menu);
 		spnExperiencia.setModel(new SpinnerNumberModel(1, 1, 35, 1));
 		spnExperiencia.setBounds(217, 57, 39, 20);
 		panel_2.add(spnExperiencia);
 		
 		JSpinner spnDependientes = new JSpinner();
+		spnDependientes.setEnabled(false);
 		spnDependientes.setBackground(SystemColor.menu);
 		spnDependientes.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spnDependientes.setBounds(57, 57, 39, 20);
@@ -433,7 +435,7 @@ public class RegistrarTrabajadores extends JDialog {
 						if (Integer.parseInt(spnExperiencia.getValue().toString()) >= 0) {
 							int experiencia = Integer.parseInt(spnExperiencia.getValue().toString());
 
-								trabajador = new Jefe(id, cedula, nombres, apellidos, direccion, genero, edad, celular, correo, salarioHoras);
+							//	trabajador = new Jefe(id, cedula, nombres, apellidos, direccion, genero, edad, celular, correo, salarioHoras);
 						} else {
 							JOptionPane.showMessageDialog(null, "Revise los años de experencia del jefe de proyecto", "Trabajadores", JOptionPane.ERROR_MESSAGE);
 							return;

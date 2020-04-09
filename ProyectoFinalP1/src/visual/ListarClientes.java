@@ -172,7 +172,7 @@ public class ListarClientes extends JDialog {
 							btnModificar.setEnabled(true);
 							//btnEliminar.setEnabled(true);
 							btnModificar.setText("Modificar " + code);
-							btnEliminar.setText("Eliminar " + code);
+							//btnEliminar.setText("Eliminar " + code);
 						} else {
 							index = -1;
 							code = "";

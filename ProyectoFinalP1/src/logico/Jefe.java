@@ -1,21 +1,17 @@
 package logico;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Jefe extends Trabajadores implements Serializable {
 	
-	
-
 	private static final long serialVersionUID = 1L;
 
 	
 	private int cantidadTrabajadores;
 	private int annosExperiencia;
 
-	
 	public Jefe(String id, String cedula, String nombre, String apellido, String direccion, String genero, int edad,
-			String celular, String correo, float salarioHoras) {
+			String celular, String correo, float salarioHoras,int cantidadTrabajadores, int annosExperiencia) {
 		super(id, cedula, nombre, apellido, direccion, genero, edad, celular, correo, salarioHoras);
 		this.cantidadTrabajadores = cantidadTrabajadores;
 		this.annosExperiencia = annosExperiencia;
@@ -42,11 +38,6 @@ public class Jefe extends Trabajadores implements Serializable {
 		this.annosExperiencia = annosExperiencia;
 	}
 
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
 	
 	
 /*	public Jefe(String id, String cedula, String nombre, String apellido, String direccion, String genero,
