@@ -408,14 +408,12 @@ public class Principal extends JFrame implements Runnable{
 	}
 	
 	
-	public void graphPie() {
+	/*public void graphPie() {
 		
 		
 		
 		 DefaultPieDataset data = new DefaultPieDataset();
-		// data.setValue("terminados", 20);
-		 
-		 /*int proFin=0;
+		 int proFin=0;
 		 int proInProces=0;
 		 int proProrrogado=0;
 		 int nuevo=0;
@@ -431,25 +429,25 @@ public class Principal extends JFrame implements Runnable{
 				nuevo++;
 			}
 			
-		}*/
-		 
-		/* data.setValue(key, value);
+		}
+		 */
+		/*// data.setValue(key, value);
 		 data.setValue("Proyectos Terminados", proFin);
 	        data.setValue("Proyectos En Proceso", proInProces);
 	        data.setValue("Proyectos Prorrogados", proProrrogado);
-	        data.setValue("Proyectos Nuevo", nuevo);
+	        data.setValue("Proyectos Nuevos", nuevo);
 	 
 	        
 	         chart = ChartFactory.createPieChart3D(
-	         "Grafica Status Proyectos", 
+	         "Grafica Proyectos Activos", 
 	         data, 
 	         true, 
 	         true, 
 	         false);
 	       //chart.setBackgroundPaint(new Color(222, 222, 255));
-	      // chart.setBorderPaint(Color.WHITE);
+	      // chart.setBorderPaint(Color.WHITE);*/
 	      
-	       PiePlot plot = (PiePlot) chart.getPlot();
+	      /* PiePlot plot = (PiePlot) chart.getPlot();
 	       plot.setSectionPaint("Proyectos Terminados", new Color( 130, 224, 170 ));
 	       plot.setSectionPaint("Proyectos Prorrogados", new Color( 236, 112, 99 ));
 	       plot.setSectionPaint("Proyectos En Proceso", new Color( 247, 220, 111 ));
@@ -461,11 +459,13 @@ public class Principal extends JFrame implements Runnable{
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				
+			}
 			}
 	       
-*/
+
 	        
-	}
+	*/
 	
 	private void guardarDatos() {
 		FileOutputStream system;

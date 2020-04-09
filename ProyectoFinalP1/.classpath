@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="lib/jcalendar-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/jfreechart-1.0.19.jar"/>
 	<classpathentry kind="lib" path="lib/iText.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart-1.0.19-demo.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
