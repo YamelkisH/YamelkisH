@@ -520,8 +520,6 @@ public class Principal extends JFrame implements Runnable{
 	
 	public void graphPie() {
 		
-		
-		
 		 DefaultPieDataset data = new DefaultPieDataset();
 		 int proFin=0;
 		 int proInProces=0;

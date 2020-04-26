@@ -106,89 +106,7 @@ public class RegistrarProyecto extends JDialog {
 		btnRegistrarTrabajador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				/*if (!txtQueryCodClient.getText().equalsIgnoreCase("") && Sistema.getInstance().calcDays(dateBegin, dateEnd)>1 ) {
-	    			String clientId=txtQueryCodClient.getText();
-	    			if(Sistema.getInstance().clientById(clientId) != null && (Sistema.getInstance().clientById(clientId)).getCant_projects() <= 4) {
-	    			String codPro=txtCodigoProyecto.getText();
-	    			String dateSigContract=txtDateOriginContract.getText();
-	    			String namePRo=txtNombreProyecto.getText();
-	    			String tipoPro=comboBoxTipoProyecto.getSelectedItem().toString();
-	    			String langujae=comboBoxLenguaje.getSelectedItem().toString();*
-	    			
-	    			//String beginD=dateBegin.getDateFormatString();
-	    			//String dateFinish=dateEnd.getDateFormatString();
-	    			
-	    			String CodContra=("CONT-"+(Sistema.codContract+1));
-	    			System.out.println("cont"+CodContra);
-	    			
-	    			
-	    			String strDateBegin= dateFormat.format(dateBegin.getDate());
-	    			
-	    			Date dateFinish=dateEnd.getDate();
-	    			String sigDate=txtDateOriginContract.getText();
-	    			String state;
-	 
-	    			if (strDateBegin.equalsIgnoreCase(sigDate)) {
-	    				 state="En Proceso";
-						
-					}else {
-						 state="Nuevo";
-					}
-	    			
-	    			
-	    			
-	    			Project pro1=new Project(codPro, namePRo,tipoPro, langujae,state);
-	    			Worker worker=null;
-	    			float price=calcAmountOfMoney(Sistema.getInstance().calcDays(dateBegin, dateEnd));
-	    			for (int i = 0; i < DLMWorkersSelected.size(); i++) {
-	    				String[] split=DLMWorkersSelected.getElementAt(i).toString().split(" ");
-	    				//System.out.println("Split"+split[0]);
-	    				worker=Sistema.getInstance().searchWorkerByCode(split[0]);
-	    				pro1.inserWorker(worker);
-	    				worker.insertProject(txtCodigoProyecto.getText());
-	    				
-					}
-	    			Contract c1=new Contract(CodContra, dateBegin.getDate(), dateFinish, clientId, pro1, price,sigDate);
-	    			c1.setCopyPrice(price);
-	    			c1.setId(CodContra);
-	    			
-	    			Client aux=Sistema.getInstance().clientById(clientId);
-	    			int cantProClient=aux.getCant_projects()+1;
-	    			aux.setCant_projects(cantProClient);
-	    			
-					
-	    			JOptionPane.showMessageDialog(null, "Contrato Registrado", "Exito", JOptionPane.INFORMATION_MESSAGE);
-					Sistema.getInstance().insertProject(pro1);
-					Sistema.getInstance().insertContract(c1);
-					
-					clear();
-					dispose();
-					ProjectRegistration registration = new ProjectRegistration();
-					registration.setModal(true);
-					registration.setSize(630, 450);
-					registration.setResizable(false);
-					registration.setLocationRelativeTo(null);
-					registration.setVisible(true);
-					
-					
-					
-					
-					Sistema.codProjects++;
-				}else {
-					JOptionPane.showMessageDialog(null, "No puede tener mas de 5 proyectos activos", "Error", JOptionPane.ERROR_MESSAGE);
-
-				}
-	    			
-	    		}else if(Sistema.getInstance().calcDays(dateBegin, dateEnd)<=1) {
-					JOptionPane.showMessageDialog(null, "Los proyectos deben tener minimo 1 día de duración", "Error", JOptionPane.ERROR_MESSAGE);
-
-				}
-	    		
-	    		
-	    		else {
-					JOptionPane.showMessageDialog(null, "Revise sus datos", "Error", JOptionPane.ERROR_MESSAGE);
-
-				}*/
+				
 	    	}
 	    });				
 		
@@ -586,14 +504,7 @@ public class RegistrarProyecto extends JDialog {
 		float amount=0;
 		float percent=0;
 		
-		/*for (int i = 0; i < DLMWorkersSelected.size(); i++) {
-			String[] codSplit=DLMWorkersSelected.getElementAt(i).toString().split(" ");
-			aux=Sistema.getInstance().searchWorkerByCode(codSplit[0]).getSalary()*8*days;
-			amount+=aux;
-			aux=0;
-		}
-		percent=(float) (amount*0.25);
-		amount+=percent;*/
+		
 		return amount;
 		
 	}

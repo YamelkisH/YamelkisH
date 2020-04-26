@@ -176,8 +176,8 @@ public class RegistrarCliente extends JDialog {
 							//stateOfCampos(true);
 							cliente = Sistema.getInstance().clienteById(cedula);
 							if (cliente != null) {
-								//completeInfo();
-							} else {
+								informacionCompleta();
+								} else {
 							//	btnEditCedula.setEnabled(true);
 							//	btnGuardar.setEnabled(true);
 							}
@@ -480,7 +480,7 @@ public class RegistrarCliente extends JDialog {
 					String nombre = textNombres.getText();
 					String apellidos = textApellidos.getText();
 					String direccion = textDireccion.getText();
-					String genero = cbxGenero.getSelectedItem().toString();//problemas aqui
+					String genero = cbxGenero.getSelectedItem().toString();
 					String correo = textCorreo.getText();
 					int edad = Integer.valueOf(spnEdad.getValue().toString());
 				
@@ -489,16 +489,8 @@ public class RegistrarCliente extends JDialog {
 						cliente.setCorreo(correo);	
 						Sistema.getInstance().insertarCliente(cliente);
 						registrado = true;
-					} else {
-						cliente.setNombre(nombre);
-						cliente.setApellido(apellidos);
-						cliente.setCorreo(correo);
-						cliente.setCelular(telefono);
-						cliente.setDireccion(direccion);
-						cliente.setEdad(44);
-						
-						registrado = true;
-					}
+						clear();
+					} 
 					
 					if (registrado && !flagModifying) {
 						JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Clientes", JOptionPane.INFORMATION_MESSAGE);
@@ -517,7 +509,6 @@ public class RegistrarCliente extends JDialog {
 		btnGuardar.setBounds(356, 513, 103, 23);
 		panel_1.add(btnGuardar);
 	
-//BTN LIMPIAR
 		
 		JButton btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.addActionListener(new ActionListener() {
@@ -533,7 +524,7 @@ public class RegistrarCliente extends JDialog {
 		
 		if (aux != null) {
 			cliente = aux;
-			//completeInfo();
+			informacionCompleta();			
 			flagModifying  = true;
 			textCedula.setText(aux.getId());
 		}

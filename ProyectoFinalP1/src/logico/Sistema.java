@@ -315,7 +315,7 @@ public void RemoverCliente(Cliente cliente) {
 	clientes.remove(cliente);
    }
 
-public boolean RemoverTrabajador(String id) {
+public boolean TrabajadorEsRemovible(String id) {
 	boolean removible = true;
 	for (Proyectos project : proyectos) {
 		for (Trabajadores aux : project.getTrabajadores()) {

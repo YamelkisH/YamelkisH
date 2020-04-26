@@ -171,9 +171,9 @@ public class ListarClientes extends JDialog {
 							index = tableClientes.getSelectedRow();
 							code = tableClientes.getValueAt(index, 0).toString();
 							btnModificar.setEnabled(true);
-							//btnEliminar.setEnabled(true);
+							btnEliminar.setEnabled(true);
 							btnModificar.setText("Modificar " + code);
-							//btnEliminar.setText("Eliminar " + code);
+							btnEliminar.setText("Eliminar " + code);
 						} else {
 							index = -1;
 							code = "";
@@ -230,7 +230,6 @@ public class ListarClientes extends JDialog {
 								if (eliminar) {
 									if (JOptionPane.showConfirmDialog(null, "Seguro que desea eliminar el cliente " + code + "?", "Clientes", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 										Sistema.getInstance().RemoverCliente(client);
-										//normalState();
 									}
 								} else {
 									JOptionPane.showMessageDialog(null, "Este cliente no puede ser eliminado", "Clientes", JOptionPane.ERROR_MESSAGE);
